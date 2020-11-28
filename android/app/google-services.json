@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "844705801849",
+    "firebase_url": "https://demandsupply-56c34.firebaseio.com",
+    "project_id": "demandsupply-56c34",
+    "storage_bucket": "demandsupply-56c34.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844705801849:android:fb7eafc9fb0e81303ad6a8",
+        "android_client_info": {
+          "package_name": "com.example.demand_supply"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844705801849-d78vkrqrr1aobfbi53vqnfvmt0d09q1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.demand_supply",
+            "certificate_hash": "d81c35f866d74b5152327e62d615f561a3fa845b"
+          }
+        },
+        {
+          "client_id": "844705801849-ljaqriqev9n9meb7231o6p0uqhm5tb0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXybeskO0rfHuw7HkwGcGdsOr4AdgnH60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844705801849-ljaqriqev9n9meb7231o6p0uqhm5tb0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
