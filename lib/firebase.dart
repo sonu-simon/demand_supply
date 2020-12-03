@@ -40,8 +40,6 @@ setupFirebaseAuth(BuildContext context) {
     } else {
       print('User is signed in!');
       firebaseProvider.mUserLoginState(true);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
   });
 }
@@ -74,6 +72,7 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
               content: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: new OutlineInputBorder(
                       borderRadius: const BorderRadius.all(
@@ -96,11 +95,21 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
                 ),
                 FlatButton(
                   onPressed: () {
-                    Navigator.pop(context, smsCode);
                     PhoneAuthCredential phoneAuthCredential =
                         PhoneAuthProvider.credential(
                             verificationId: verificationId, smsCode: smsCode);
-                    auth.signInWithCredential(phoneAuthCredential);
+                    auth.signInWithCredential(phoneAuthCredential).then((_) {
+                      if (auth.currentUser != null) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      }
+                    });
+                    if (auth.currentUser != null) {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    }
                   },
                   child: Text(
                     'SUBMIT',

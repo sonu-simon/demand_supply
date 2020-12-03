@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Container(
               // color: Colors.red,
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.28,
               child: StaggeredGridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 3,

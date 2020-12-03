@@ -8,6 +8,7 @@ class ProfilePage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            //picture
             Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
@@ -37,6 +38,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 60,
             ),
+            //name
             Text(
               "Sonu Simon",
               style: TextStyle(
@@ -48,6 +50,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
+            //location/details
             Text(
               "Thrissur Railway Station, India",
               style: TextStyle(
@@ -96,6 +99,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
+            //details
             ExpansionTile(
               title: Text("Details"),
               children: [
