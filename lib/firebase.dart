@@ -1,5 +1,6 @@
 import 'providerData.dart';
-import 'screens/loginScreen.dart';
+import 'screens/homepage.dart';
+import 'screens/loginPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -35,9 +36,12 @@ setupFirebaseAuth(BuildContext context) {
     if (user == null) {
       print('User is currently signed out!');
       firebaseProvider.mUserLoginState(false);
+      Navigator.canPop(context);
     } else {
       print('User is signed in!');
       firebaseProvider.mUserLoginState(true);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
   });
 }
