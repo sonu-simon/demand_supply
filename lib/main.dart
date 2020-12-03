@@ -1,9 +1,13 @@
 import 'package:demand_supply/firebase.dart';
-import 'package:demand_supply/homepage.dart';
+import 'package:demand_supply/providerData.dart';
+import 'package:demand_supply/screens/loginScreen.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (_) => FirebaseProvider(), child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -15,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initializeFirebaseApp();
+    initializeFirebaseApp(context);
   }
 
   @override
@@ -24,7 +28,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: LoginScreen(),
     );
   }
 }
