@@ -2,6 +2,7 @@ import 'package:demand_supply/firebase.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/loginPage.dart';
 import 'package:demand_supply/screens/productpage.dart';
+import 'package:demand_supply/screens/recentPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProductScreen(),
+      home: RecentPage(),
     );
   }
 }
@@ -45,3 +46,17 @@ List<NetworkImage> productimages = [
   NetworkImage(
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'),
 ];
+
+class Post {
+  String name;
+  Image picture;
+  List<NetworkImage> pictures;
+  DateTime time;
+  String category;
+  String phone;
+  String whatsapp;
+  bool verified;
+  String description;
+}
+
+List<Post> recentpost = [];
