@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                          "https://media-exp1.licdn.com/dms/image/C4D03AQGdgnVP8VxJZw/profile-displayphoto-shrink_800_800/0?e=1612396800&v=beta&t=I_GCuCz7icQzw0miZqVKQGw8PQoqhQ3BHBBV4j2zXfc"),
+                          "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"),
                       fit: BoxFit.cover)),
               child: Container(
                 width: double.infinity,
@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "https://media-exp1.licdn.com/dms/image/C4D03AQGdgnVP8VxJZw/profile-displayphoto-shrink_800_800/0?e=1612396800&v=beta&t=I_GCuCz7icQzw0miZqVKQGw8PQoqhQ3BHBBV4j2zXfc"),
+                            "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"),
                         radius: 60.0,
                       ),
                     ),
@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
               height: 60,
             ),
             Text(
-              "Sonu Simon",
+              "XYZ",
               style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.blueGrey,
@@ -60,7 +60,7 @@ class ProfilePage extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "CEO Google",
+              "Profile Designation",
               style: TextStyle(
                   fontSize: 15.0,
                   color: Colors.black45,

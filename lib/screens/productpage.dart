@@ -1,4 +1,5 @@
 import 'package:demand_supply/main.dart';
+import 'package:demand_supply/models/post.dart';
 import 'package:demand_supply/screens/homePage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  String adcategory = "Trial";
+  Post selectedPost = posts[0];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,7 @@ class _ProductScreenState extends State<ProductScreen> {
           leading: IconButton(
               icon: Icon(Icons.arrow_back_ios_outlined),
               onPressed: () => Navigator.pop(context)),
-          title: Text("Product name"),
+          title: Text(selectedPost.title),
         ),
         body: Container(
           height: MediaQuery.of(context).size.height * 1,
@@ -33,11 +34,11 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: Card(
                     elevation: 5,
                     shadowColor: Colors.grey,
-                    child: new Container(
-                        child: new SizedBox(
+                    child: Container(
+                        child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width * 0.93,
-                      child: new GSCarousel(
+                      child: GSCarousel(
                         images: productimages,
 
                         indicatorSize: const Size.square(8.0),
@@ -54,10 +55,10 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
                 //text
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 18),
                   child: Text(
-                    "Product Name",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
+                    selectedPost.title,
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w400),
                   ),
                 ),
                 //
@@ -75,6 +76,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             icon: Icon(Icons.message),
                             onPressed: () {
                               print("WhatsApp");
+                              print('${selectedPost.user.whatsappNumber}');
                             }),
                       ),
                     ),
@@ -91,6 +93,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             ),
                             onPressed: () {
                               print("Calling...");
+                              print('${selectedPost.user.phoneNumber}');
                             }),
                       ),
                     ),
@@ -124,7 +127,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     height: MediaQuery.of(context).size.height * 0.07,
                     child: Center(
                       child: Text(
-                        "Category:$adcategory",
+                        "Category:${selectedPost.category}",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),

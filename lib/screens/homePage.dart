@@ -1,4 +1,4 @@
-import 'package:demand_supply/profilePage.dart';
+import 'package:demand_supply/screens/profilePage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
