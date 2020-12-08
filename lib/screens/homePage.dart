@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import 'package:demand_supply/screens/profilePage.dart';
-=======
-import 'package:demand_supply/profilePage.dart';
 import 'package:demand_supply/screens/recentPage.dart';
->>>>>>> 8879c17b7f07170fe3c0b049d64e6919f67e8774
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-import 'loginPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
