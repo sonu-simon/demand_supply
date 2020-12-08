@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RecentPage(),
+      home: HomePage(),
     );
   }
 }
