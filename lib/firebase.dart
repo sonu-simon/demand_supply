@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'providerData.dart';
 import 'screens/homepage.dart';
 import 'screens/loginPage.dart';
@@ -7,6 +9,8 @@ import 'package:provider/provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Firebase initialization
 
@@ -24,6 +28,7 @@ Future initializeFirebaseApp(BuildContext context) {
 // FirebaseAUTH
 
 FirebaseAuth auth;
+String userID;
 
 setupFirebaseAuth(BuildContext context) {
   auth = FirebaseAuth.instance;
@@ -36,6 +41,7 @@ setupFirebaseAuth(BuildContext context) {
     if (user == null) {
       print('User is currently signed out!');
       firebaseProvider.mUserLoginState(false);
+      userID = user.uid;
       Navigator.canPop(context);
     } else {
       print('User is signed in!');
@@ -125,4 +131,21 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
       print('codeAutoRetrieval timed out');
     },
   );
+}
+
+Future uploadimage(String userID, String postID, File _image) async {
+  String _imgSrc;
+  if (_image != null) {
+    StorageReference ref = FirebaseStorage.instance.ref();
+    StorageTaskSnapshot addImg =
+        await ref.child("$userID/$postID").putFile(_image).onComplete;
+    if (addImg.error == null) {
+      print("added to Firebase Storage");
+      _imgSrc = await addImg.ref.getDownloadURL();
+      print(_imgSrc);
+    } else {
+      print('Error from image repo ${addImg.error.toString()}');
+      throw ('This file is not an image');
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:demand_supply/providerData.dart';
+import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,6 +83,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       onLongPress: () => authSignOut(),
                       child: Text(
                         "Generate OTP",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      elevation: 7.0,
+                      color: Colors.cyan,
+                    ),
+                    SizedBox(
+                      height: height * 0.005,
+                    ),
+                    RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage())),
+                      onLongPress: () => authSignOut(),
+                      child: Text(
+                        "NEXT",
                         style: TextStyle(color: Colors.white),
                       ),
                       elevation: 7.0,

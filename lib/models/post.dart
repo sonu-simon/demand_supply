@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:demand_supply/models/userProfile.dart';
 
 class Post {
+  String id;
   String title;
   DateTime postDate;
   String description;
