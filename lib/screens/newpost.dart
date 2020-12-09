@@ -1,8 +1,4 @@
-import 'dart:io';
-
-import 'package:demand_supply/firebase.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -10,178 +6,195 @@ class NewPost extends StatefulWidget {
 }
 
 class _NewPostState extends State<NewPost> {
-  File _image;
-
-  void openGallery() async {
-    final picker = ImagePicker();
-    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      print('in .then()');
-      _image = File(pickedFile.path);
-    });
-  }
-
+  String Phonenumber = "+91 9846195666";
+  List<Image> post_images = [];
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('New Post'),
+        backgroundColor: Colors.white,
+        leading: Icon(
+          Icons.arrow_back,
+          color: Colors.blue,
+        ),
+        title: Text(
+          "NewPost",
+          style: TextStyle(color: Colors.blue),
+        ),
+        actions: [
+          RaisedButton(
+            color: Colors.white,
+            hoverColor: Colors.white,
+            splashColor: Colors.white,
+            elevation: 0,
+            onPressed: () {},
+            child: Text(
+              "POST",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          )
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //image part
-              Container(
-                height: MediaQuery.of(context).size.height / 3,
-                child: Scaffold(
-                  body: Center(
-                    child: _image != null
-                        ? Container(
-                            height: MediaQuery.of(context).size.height / 4,
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            child: Image.file(
-                              _image,
-                              fit: BoxFit.fill,
-                            ),
-                          )
-                        : Container(
-                            color: Colors.grey,
-                            height: MediaQuery.of(context).size.height / 4,
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            child: Center(child: Text("No image selected")),
-                          ),
-                  ),
-                  floatingActionButton: FloatingActionButton(
-                    child: Icon(Icons.photo_album_outlined),
-                    onPressed: openGallery,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 15,
                 ),
-              ),
-              //textboxes
-              Container(
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+                //title
+                TextField(
+                  style: TextStyle(fontSize: 30, color: Colors.black87),
+                  autofocus: true,
+                  maxLines: 1,
+                  maxLength: 50,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0)),
+                      focusColor: Colors.black,
+                      border: InputBorder.none,
+                      helperText:
+                          "This is what other users will see along with pictures",
+                      hintText: "Title",
+                      hintStyle: TextStyle(fontSize: 30)),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                //Description
+                TextField(
+                  style: TextStyle(fontSize: 15, color: Colors.black87),
+                  autofocus: true,
+                  maxLines: 4,
+                  maxLength: 170,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0)),
+                      helperText: "Give a brief Description",
+                      hintText: "Description",
+                      hintStyle: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                //phone&whatsapp
+                TextField(
+                  style: TextStyle(fontSize: 20, color: Colors.black87),
+                  autofocus: true,
+                  maxLines: 1,
+                  maxLength: 10,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0)),
+                      focusColor: Colors.black,
+                      border: InputBorder.none,
+                      helperText: "phone number to be given for contacting you",
+                      hintText: Phonenumber,
+                      hintStyle: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                //locality
+                TextField(
+                  style: TextStyle(fontSize: 20, color: Colors.black87),
+                  autofocus: true,
+                  maxLines: 1,
+                  maxLength: 50,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0)),
+                      focusColor: Colors.black,
+                      border: InputBorder.none,
+                      helperText:
+                          "The locality will help people near to you reach you easier",
+                      hintText: "Locality",
+                      hintStyle: TextStyle(fontSize: 20)),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                //images
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     children: [
-                      //title
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 1.0, horizontal: 14),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          validator: (value) {
-                            if (value == null)
-                              return 'Phone number cannot be empty';
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                  const Radius.circular(20),
-                                ),
-                              ),
-                              filled: true,
-                              hintStyle: new TextStyle(color: Colors.grey[800]),
-                              hintText: "Title",
-                              fillColor: Colors.white70),
-                          onChanged: (value) {},
+                      Container(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: count,
+                              itemBuilder: (BuildContext context, int index) {
+                                if (count == 1) {
+                                  return Card(
+                                    child: InkWell(
+                                      onTap: () {
+                                        //image kayataanulla code
+                                        //add image to post_image
+                                        setState(() {
+                                          count++;
+                                        });
+                                        print("Njengi");
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.15,
+                                        child: Image(
+                                          image: AssetImage(
+                                              "asset/image/nill.jpg"),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  return Card(
+                                    child: InkWell(
+                                      onTap: () {
+                                        //image kayataanulla code
+                                        //add image to post_image
+                                        setState(() {
+                                          count++;
+                                        });
+                                        print("Njengi");
+                                      },
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                          child: post_images[index]),
+                                    ),
+                                  );
+                                }
+                              })),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          "Add images for your post",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black54),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 14),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          validator: (value) {
-                            if (value == null)
-                              return 'Phone number cannot be empty';
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                  const Radius.circular(20),
-                                ),
-                              ),
-                              filled: true,
-                              hintStyle: new TextStyle(color: Colors.grey[800]),
-                              hintText: "Description",
-                              fillColor: Colors.white70),
-                          onChanged: (value) {},
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 14),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          validator: (value) {
-                            if (value == null)
-                              return 'Phone number cannot be empty';
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                  const Radius.circular(20),
-                                ),
-                              ),
-                              filled: true,
-                              hintStyle: new TextStyle(color: Colors.grey[800]),
-                              hintText: "Locality",
-                              fillColor: Colors.white70),
-                          onChanged: (value) {},
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 14),
-                        child: TextFormField(
-                          keyboardType: TextInputType.phone,
-                          validator: (value) {
-                            if (value == null)
-                              return 'Phone number cannot be empty';
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                  const Radius.circular(20),
-                                ),
-                              ),
-                              filled: true,
-                              hintStyle: new TextStyle(color: Colors.grey[800]),
-                              hintText: "10 digit phone number",
-                              fillColor: Colors.white70),
-                          onChanged: (value) {},
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  RaisedButton(
-                    onPressed: () {
-                      uploadimage(userID, 'postID', _image);
-                    },
-                    color: Colors.red,
-                    child: Text("Cancel"),
-                  ),
-                  RaisedButton(
-                    onPressed: () => Navigator.pop(context),
-                    color: Colors.green,
-                    child: Text("Post"),
-                  ),
-                ],
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

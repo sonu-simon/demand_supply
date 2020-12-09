@@ -21,7 +21,6 @@ class _RecentPageState extends State<RecentPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // new_post(context);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => NewPost()));
         },

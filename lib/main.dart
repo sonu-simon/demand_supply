@@ -3,6 +3,7 @@ import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/homePage.dart';
 import 'package:demand_supply/screens/imagepicker.dart';
 import 'package:demand_supply/screens/loginPage.dart';
+import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/productpage.dart';
 import 'package:demand_supply/screens/recentPage.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: NewPost(),
     );
   }
 }
