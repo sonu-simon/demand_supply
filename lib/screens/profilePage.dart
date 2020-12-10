@@ -49,7 +49,7 @@ class ProfilePage extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Thrissur Railway Station, India",
+              "Locality",
               style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.black45,

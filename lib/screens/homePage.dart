@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   InkWell(
                     child: category(
-                      Icons.ac_unit_outlined,
+                      "asset/icon/daily_needs.png",
                       Colors.greenAccent,
                       "Daily Needs",
                     ),
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     },
                     child: category(
-                        Icons.ac_unit_outlined, Colors.greenAccent, "Medicine"),
+                        "asset/icon/med.png", Colors.greenAccent, "Medicine"),
                   ),
                   InkWell(
                     onTap: () => {
@@ -122,8 +122,18 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(builder: (context) => RecentPage()),
                       )
                     },
-                    child: category(Icons.ac_unit_outlined, Colors.greenAccent,
-                        "Counseling"),
+                    child: category("asset/icon/counseling.png",
+                        Colors.greenAccent, "Counseling"),
+                  ),
+                  InkWell(
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RecentPage()),
+                      )
+                    },
+                    child: category("asset/icon/buysell.png",
+                        Colors.greenAccent, "Buy/Sell"),
                   ),
                   InkWell(
                     onTap: () => {
@@ -133,17 +143,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     },
                     child: category(
-                        Icons.ac_unit_outlined, Colors.greenAccent, "Buy/Sell"),
-                  ),
-                  InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RecentPage()),
-                      )
-                    },
-                    child: category(
-                        Icons.ac_unit_outlined, Colors.greenAccent, "Travel"),
+                        "asset/icon/travel.png", Colors.greenAccent, "Travel"),
                   ),
                   InkWell(
                       onTap: () => {
@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                             )
                           },
                       child: category(
-                          Icons.ac_unit_outlined, Colors.greenAccent, "Other")),
+                          "asset/icon/other.png", Colors.greenAccent, "Other")),
                 ],
                 staggeredTiles: [
                   StaggeredTile.extent(1, 100),
@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Material category(IconData cicon, MaterialAccentColor ccolor, String ctext) {
+Material category(String cicon, MaterialAccentColor ccolor, String ctext) {
   return Material(
     color: Colors.white,
     elevation: 10,
@@ -222,7 +222,13 @@ Material category(IconData cicon, MaterialAccentColor ccolor, String ctext) {
           children: [
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               //icon
-              Icon(cicon),
+              Tab(
+                icon: Image.asset(
+                  cicon,
+                  width: 50.0,
+                  height: 50.0,
+                ),
+              ),
               //text
               Text(ctext),
             ])
