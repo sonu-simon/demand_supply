@@ -1,10 +1,8 @@
 import 'package:demand_supply/main.dart';
 import 'package:demand_supply/models/post.dart';
-import 'package:demand_supply/screens/homePage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gscarousel/gscarousel.dart';
-import 'package:demand_supply/models/post.dart';
 
 class ProductScreen extends StatefulWidget {
   @override
@@ -12,7 +10,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  var selectedPost = posts[0];
+  var selectedPost = demoPost;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

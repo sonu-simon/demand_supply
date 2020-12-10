@@ -27,6 +27,6 @@ List<User> users = [
       name: 'userName',
       phoneNumber: '+91' + '9061254110',
       whatsappNumber: '+91' + '9061254110',
-      proPicUrl: null,
+      proPicUrl: 'https://www.linkedin.com/feed/',
       location: 'Dufai')
 ];

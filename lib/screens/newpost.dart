@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:demand_supply/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:demand_supply/models/post.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -169,13 +170,16 @@ class _NewPostState extends State<NewPost> {
                 children: [
                   RaisedButton(
                     onPressed: () {
-                      uploadimage(userID, 'postID', _image);
+                      //navigator.pop();
                     },
                     color: Colors.red,
                     child: Text("Cancel"),
                   ),
                   RaisedButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      uploadimage(userID, 'postID', _image);
+                      postToFirebase(demoPost, context);
+                    },
                     color: Colors.green,
                     child: Text("Post"),
                   ),

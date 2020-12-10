@@ -1,11 +1,7 @@
-import 'dart:io';
-
-import 'package:demand_supply/screens/imagepicker.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/productpage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class RecentPage extends StatefulWidget {
   @override

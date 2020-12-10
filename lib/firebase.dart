@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'models/post.dart';
 import 'providerData.dart';
 import 'screens/homepage.dart';
-import 'screens/loginPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -148,4 +148,31 @@ Future uploadimage(String userID, String postID, File _image) async {
       throw ('This file is not an image');
     }
   }
+}
+
+postToFirebase(Post post, BuildContext context) {
+  FirebaseFirestore.instance
+      .collection(FirebaseAuth.instance.currentUser.uid)
+      .doc('posts')
+      .collection('posts')
+      .doc(post.id)
+      .set({
+    'id': post.id,
+    'category': post.category,
+    'description': post.description,
+    'imageUrls': post.imageUrls,
+    'isVerified': post.isVerified,
+    'postDate': post.postDate,
+    'uEmailId': post.uEmailId,
+    'uLocation': post.uLocation,
+    'uName': post.uName,
+    'uPhoneNumber': post.uPhoneNumber,
+    'uProPicUrl': post.uProPicUrl,
+    'uWhatsappNumber': post.uWhatsappNumber,
+  });
+
+  Scaffold.of(context).showSnackBar(SnackBar(
+    content: Text("Upload complete"),
+    duration: Duration(seconds: 2),
+  ));
 }
