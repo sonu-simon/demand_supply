@@ -1,4 +1,4 @@
-import 'package:demand_supply/firebase.dart';
+import 'package:demand_supply/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/loginPage.dart';
 

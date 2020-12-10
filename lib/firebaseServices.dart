@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'models/post.dart';
+import 'package:demand_supply/firebaseData.dart';
+
 import 'providerData.dart';
 import 'screens/homepage.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,6 @@ import 'package:provider/provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Firebase initialization
 
@@ -20,6 +19,7 @@ Future initializeFirebaseApp(BuildContext context) {
 
   Firebase.initializeApp().then((_) {
     print('Firebase gets initialized');
+    retrieveListOfLocalities();
     firebaseProvider.mFirebaseState(true);
     setupFirebaseAuth(context);
   });
@@ -41,10 +41,11 @@ setupFirebaseAuth(BuildContext context) {
     if (user == null) {
       print('User is currently signed out!');
       firebaseProvider.mUserLoginState(false);
-      userID = user.uid;
+
       Navigator.canPop(context);
     } else {
       print('User is signed in!');
+      userID = user.uid;
       firebaseProvider.mUserLoginState(true);
     }
   });
@@ -131,48 +132,4 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
       print('codeAutoRetrieval timed out');
     },
   );
-}
-
-Future uploadimage(String userID, String postID, File _image) async {
-  String _imgSrc;
-  if (_image != null) {
-    StorageReference ref = FirebaseStorage.instance.ref();
-    StorageTaskSnapshot addImg =
-        await ref.child("$userID/$postID").putFile(_image).onComplete;
-    if (addImg.error == null) {
-      print("added to Firebase Storage");
-      _imgSrc = await addImg.ref.getDownloadURL();
-      print(_imgSrc);
-    } else {
-      print('Error from image repo ${addImg.error.toString()}');
-      throw ('This file is not an image');
-    }
-  }
-}
-
-postToFirebase(Post post, BuildContext context) {
-  FirebaseFirestore.instance
-      .collection(FirebaseAuth.instance.currentUser.uid)
-      .doc('posts')
-      .collection('posts')
-      .doc(post.id)
-      .set({
-    'id': post.id,
-    'category': post.category,
-    'description': post.description,
-    'imageUrls': post.imageUrls,
-    'isVerified': post.isVerified,
-    'postDate': post.postDate,
-    'uEmailId': post.uEmailId,
-    'uLocation': post.uLocation,
-    'uName': post.uName,
-    'uPhoneNumber': post.uPhoneNumber,
-    'uProPicUrl': post.uProPicUrl,
-    'uWhatsappNumber': post.uWhatsappNumber,
-  });
-
-  Scaffold.of(context).showSnackBar(SnackBar(
-    content: Text("Upload complete"),
-    duration: Duration(seconds: 2),
-  ));
 }

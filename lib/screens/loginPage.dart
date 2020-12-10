@@ -3,7 +3,7 @@ import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../firebase.dart';
+import '../firebaseServices.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

@@ -9,7 +9,7 @@ class Post {
   String description;
   List<String> imageUrls;
   bool isVerified;
-  User user;
+  UserProfile userProfile;
   String category;
 
   String uUserID;
@@ -26,15 +26,15 @@ class Post {
       this.description,
       this.imageUrls,
       this.isVerified,
-      this.user,
+      this.userProfile,
       this.category}) {
-    uUserID = user.userID;
-    uName = user.name;
-    uProPicUrl = user.proPicUrl;
-    uPhoneNumber = user.phoneNumber;
-    uLocation = user.location;
-    uWhatsappNumber = user.whatsappNumber;
-    uEmailId = user.emailId;
+    uUserID = userProfile.userID;
+    uName = userProfile.name;
+    uProPicUrl = userProfile.proPicUrl;
+    uPhoneNumber = userProfile.phoneNumber;
+    uLocation = userProfile.location;
+    uWhatsappNumber = userProfile.whatsappNumber;
+    uEmailId = userProfile.emailId;
   }
 }
 
@@ -49,5 +49,5 @@ Post demoPost = Post(
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg',
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'
     ],
-    user: users[0],
+    userProfile: users[0],
     category: 'The NULL category');

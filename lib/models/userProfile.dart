@@ -1,6 +1,6 @@
 import 'package:demand_supply/models/post.dart';
 
-class User {
+class UserProfile {
   String userID;
   String name;
   String proPicUrl;
@@ -10,7 +10,7 @@ class User {
   String emailId;
   List<Post> posts;
 
-  User({
+  UserProfile({
     this.userID,
     this.name,
     this.proPicUrl,
@@ -21,8 +21,8 @@ class User {
   });
 }
 
-List<User> users = [
-  User(
+List<UserProfile> users = [
+  UserProfile(
       userID: 'userID',
       name: 'userName',
       phoneNumber: '+91' + '9061254110',

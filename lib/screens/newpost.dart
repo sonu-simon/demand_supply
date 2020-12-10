@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:demand_supply/models/post.dart';
 
-import '../firebase.dart';
+import '../firebaseData.dart';
+import '../firebaseServices.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -11,7 +12,6 @@ class NewPost extends StatefulWidget {
 }
 
 class _NewPostState extends State<NewPost> {
-  String Phonenumber = "+91 9846195666";
   List<Image> post_images = [];
   int count = 1;
   @override
@@ -108,7 +108,7 @@ class _NewPostState extends State<NewPost> {
                           border: InputBorder.none,
                           helperText:
                               "phone number to be given for contacting you",
-                          hintText: Phonenumber,
+                          hintText: 'enter phone number',
                           hintStyle: TextStyle(fontSize: 20)),
                     ),
                     SizedBox(
@@ -234,8 +234,39 @@ class _NewPostState extends State<NewPost> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            uploadimage(userID, 'postID', null);
-                            postToFirebase(demoPost, context);
+                            uploadimage(userID, 'postID', null).then((_) {
+                              postToFirebase(demoPost, context);
+                            });
+                            List localities = [
+                              "Birsinghpur",
+                              "Adampur",
+                              "Adampur",
+                              "Ahirauli",
+                              "Ahmadpur",
+                              "Airla",
+                              "Aitha",
+                              "Ajawan",
+                              "Akhari",
+                              "Akhileshpur",
+                              "Alamnagar",
+                              "Alauddinpur",
+                              "Allopur",
+                              "Amar Patti",
+                              "Amauli",
+                              "Amaulia",
+                              "Amini",
+                              "Amripur",
+                              "Amwa",
+                              "Anantpur",
+                              "Appi",
+                              "Araji Newada",
+                              "Arajiline",
+                              "Arazi Chandrawati",
+                              "Arjunpur"
+                            ];
+                            localities.forEach((locality) {
+                              addLocalityToFirestore(locality);
+                            });
                           },
                           color: Colors.green,
                           child: Text("Post"),

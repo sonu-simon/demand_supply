@@ -75,7 +75,8 @@ class _ProductScreenState extends State<ProductScreen> {
                             icon: Icon(Icons.message),
                             onPressed: () {
                               print("WhatsApp");
-                              print('${selectedPost.user.whatsappNumber}');
+                              print(
+                                  '${selectedPost.userProfile.whatsappNumber}');
                             }),
                       ),
                     ),
@@ -92,7 +93,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             ),
                             onPressed: () {
                               print("Calling...");
-                              print('${selectedPost.user.phoneNumber}');
+                              print('${selectedPost.userProfile.phoneNumber}');
                             }),
                       ),
                     ),
