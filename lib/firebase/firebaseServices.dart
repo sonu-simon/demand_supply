@@ -1,15 +1,16 @@
 import 'dart:io';
 
-import 'package:demand_supply/firebaseData.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 
-import 'providerData.dart';
-import 'screens/homepage.dart';
+import '../providerData.dart';
+import '../screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../data.dart';
 
 // Firebase initialization
 
@@ -19,7 +20,6 @@ Future initializeFirebaseApp(BuildContext context) {
 
   Firebase.initializeApp().then((_) {
     print('Firebase gets initialized');
-    retrieveListOfLocalities();
     firebaseProvider.mFirebaseState(true);
     setupFirebaseAuth(context);
   });
@@ -28,7 +28,6 @@ Future initializeFirebaseApp(BuildContext context) {
 // FirebaseAUTH
 
 FirebaseAuth auth;
-String userID;
 
 setupFirebaseAuth(BuildContext context) {
   auth = FirebaseAuth.instance;
@@ -45,7 +44,7 @@ setupFirebaseAuth(BuildContext context) {
       Navigator.canPop(context);
     } else {
       print('User is signed in!');
-      userID = user.uid;
+      currentUserID = user.uid;
       firebaseProvider.mUserLoginState(true);
     }
   });

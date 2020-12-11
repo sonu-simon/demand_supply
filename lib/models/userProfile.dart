@@ -1,4 +1,5 @@
-import 'package:demand_supply/models/post.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 
 class UserProfile {
   String userID;
@@ -8,17 +9,29 @@ class UserProfile {
   String location;
   String whatsappNumber;
   String emailId;
-  List<Post> posts;
+  List<String> posts;
 
   UserProfile({
-    this.userID,
-    this.name,
-    this.proPicUrl,
-    this.phoneNumber,
-    this.location,
+    @required this.userID,
+    @required this.name,
+    @required this.proPicUrl,
+    @required this.phoneNumber,
+    @required this.location,
     this.whatsappNumber,
     this.emailId,
   });
+
+  updateUserProfile(UserProfile userProfile, BuildContext context) {
+    userID = userProfile.userID;
+    name = userProfile.name;
+    proPicUrl = userProfile.proPicUrl;
+    phoneNumber = userProfile.phoneNumber;
+    location = userProfile.location;
+    whatsappNumber = userProfile.whatsappNumber;
+    emailId = userProfile.emailId;
+
+    updateUserInFirebase(userProfile, context);
+  }
 }
 
 List<UserProfile> users = [

@@ -21,13 +21,21 @@ class Post {
   String uEmailId;
 
   Post(
-      {this.title,
+      {this.id,
+      this.title,
       this.postDate,
       this.description,
       this.imageUrls,
       this.isVerified,
       this.userProfile,
-      this.category}) {
+      this.category,
+      this.uUserID,
+      this.uName,
+      this.uProPicUrl,
+      this.uPhoneNumber,
+      this.uLocation,
+      this.uWhatsappNumber,
+      this.uEmailId}) {
     uUserID = userProfile.userID;
     uName = userProfile.name;
     uProPicUrl = userProfile.proPicUrl;

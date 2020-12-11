@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:demand_supply/models/post.dart';
 
-import '../firebaseData.dart';
-import '../firebaseServices.dart';
+import '../firebase/firebaseData.dart';
+import '../firebase/firebaseServices.dart';
+import '../data.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -234,7 +235,8 @@ class _NewPostState extends State<NewPost> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            uploadimage(userID, 'postID', null).then((_) {
+                            uploadimage(currentUserID, 'postID', null)
+                                .then((_) {
                               postToFirebase(demoPost, context);
                             });
                             List localities = [

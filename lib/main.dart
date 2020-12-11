@@ -1,4 +1,4 @@
-import 'package:demand_supply/firebaseServices.dart';
+import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/loginPage.dart';
 
@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-      create: (_) => FirebaseProvider(), child: MyApp()));
+    create: (_) => FirebaseProvider(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -45,17 +47,3 @@ List<NetworkImage> productimages = [
   NetworkImage(
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'),
 ];
-
-// class Post {
-//   String name;
-//   Image picture;
-//   List<NetworkImage> pictures;
-//   DateTime time;
-//   String category;
-//   String phone;
-//   String whatsapp;
-//   bool verified;
-//   String description;
-// }
-
-// List<Post> recentpost = [];

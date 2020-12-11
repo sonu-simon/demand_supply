@@ -3,7 +3,8 @@ import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../firebaseServices.dart';
+import '../firebase/firebaseData.dart';
+import '../firebase/firebaseServices.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -93,8 +94,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage())),
+                      onPressed: () {
+                        retrieveListOfLocalities();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      },
                       onLongPress: () => authSignOut(),
                       child: Text(
                         "NEXT",
