@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:demand_supply/models/post.dart';
 
 import '../firebase/firebaseData.dart';
-import '../firebase/firebaseServices.dart';
 import '../data.dart';
 
 class NewPost extends StatefulWidget {
@@ -15,6 +14,13 @@ class NewPost extends StatefulWidget {
 class _NewPostState extends State<NewPost> {
   List<Image> post_images = [];
   int count = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    retrieveListOfLocalities();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,8 +114,8 @@ class _NewPostState extends State<NewPost> {
                           focusColor: Colors.black,
                           border: InputBorder.none,
                           helperText:
-                              "phone number to be given for contacting you",
-                          hintText: 'enter phone number',
+                              "Phone number to be given for contacting you",
+                          hintText: 'Enter phone number',
                           hintStyle: TextStyle(fontSize: 20)),
                     ),
                     SizedBox(
@@ -117,38 +123,19 @@ class _NewPostState extends State<NewPost> {
                     ),
                     //locality
                     DropdownSearch<String>(
-                      showSearchBox: true,
-                      hint: "Select your Locality",
-                      showSelectedItem: true,
-                      showClearButton: true,
-                      items: [
-                        "Birsinghpur",
-                        "Adampur",
-                        "Adampur",
-                        "Ahirauli",
-                        "Ahmadpur",
-                        "Airla",
-                        "Aitha",
-                        "Ajawan",
-                        "Akhari",
-                        "Akhileshpur",
-                        "Alamnagar",
-                        "Alauddinpur",
-                        "Allopur",
-                        "Amar Patti",
-                        "Amauli",
-                        "Amaulia",
-                        "Amini",
-                        "Amripur",
-                        "Amwa",
-                        "Anantpur",
-                        "Appi",
-                        "Araji Newada",
-                        "Arajiline",
-                        "Arazi Chandrawati",
-                        "Arjunpur"
-                      ],
-                    ),
+                        showSearchBox: true,
+                        searchBoxDecoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(10)),
+                            // border: InputBorder.none,
+                            helperText: 'Target Location for your Ad'),
+                        hint: "Select your Locality",
+                        autoFocusSearchBox: true,
+                        showSelectedItem: true,
+                        showClearButton: true,
+                        items: listOfLocalities),
                     SizedBox(
                       height: 25,
                     ),
@@ -223,58 +210,6 @@ class _NewPostState extends State<NewPost> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        RaisedButton(
-                          onPressed: () {
-                            //navigator.pop();
-                          },
-                          color: Colors.red,
-                          child: Text("Cancel"),
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            uploadimage(currentUserID, 'postID', null)
-                                .then((_) {
-                              postToFirebase(demoPost, context);
-                            });
-                            List localities = [
-                              "Birsinghpur",
-                              "Adampur",
-                              "Adampur",
-                              "Ahirauli",
-                              "Ahmadpur",
-                              "Airla",
-                              "Aitha",
-                              "Ajawan",
-                              "Akhari",
-                              "Akhileshpur",
-                              "Alamnagar",
-                              "Alauddinpur",
-                              "Allopur",
-                              "Amar Patti",
-                              "Amauli",
-                              "Amaulia",
-                              "Amini",
-                              "Amripur",
-                              "Amwa",
-                              "Anantpur",
-                              "Appi",
-                              "Araji Newada",
-                              "Arajiline",
-                              "Arazi Chandrawati",
-                              "Arjunpur"
-                            ];
-                            localities.forEach((locality) {
-                              addLocalityToFirestore(locality);
-                            });
-                          },
-                          color: Colors.green,
-                          child: Text("Post"),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),

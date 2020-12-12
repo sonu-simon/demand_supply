@@ -96,10 +96,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       onPressed: () {
-                        retrieveListOfLocalities();
                         userToFirebase(demoUser, context);
                         checkIfUserProfileExists(
-                            'lLqaFarvzPeQRg1HIzGIwb5vqsxg1');
+                            'lLqaFarvzPeQRg1HIzGIwb5vqxg1');
                         Navigator.push(
                             context,
                             MaterialPageRoute(

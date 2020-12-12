@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/screens/signup/signupPage.dart';
 
 import '../providerData.dart';
 import '../screens/homepage.dart';
@@ -104,18 +105,23 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
                     PhoneAuthCredential phoneAuthCredential =
                         PhoneAuthProvider.credential(
                             verificationId: verificationId, smsCode: smsCode);
-                    auth.signInWithCredential(phoneAuthCredential).then((_) {
+                    auth
+                        .signInWithCredential(phoneAuthCredential)
+                        .then((_) async {
                       if (auth.currentUser != null) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                        if (await checkIfUserProfileExists(
+                            auth.currentUser.uid))
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        else
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage()));
                       }
                     });
-                    if (auth.currentUser != null) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    }
                   },
                   child: Text(
                     'SUBMIT',

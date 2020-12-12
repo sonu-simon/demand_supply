@@ -81,11 +81,12 @@ addLocalityToFirestore(String locality) {
 }
 
 retrieveListOfLocalities() async {
-  DocumentSnapshot listOfLocalities = await FirebaseFirestore.instance
+  DocumentSnapshot listOfLocalitiesSnapshot = await FirebaseFirestore.instance
       .collection('listOfLocalities')
       .doc('localityList')
       .get();
-  print(listOfLocalities.data().values);
+  listOfLocalities = List.from(listOfLocalitiesSnapshot.data()['localities']);
+  print(listOfLocalities);
 }
 
 updateUserInFirebase(UserProfile userProfile, BuildContext context) {
@@ -156,7 +157,7 @@ retrieveUserProfileFromFirebase(String qUserID) {
   });
 }
 
-checkIfUserProfileExists(String qUserID) async {
+Future<bool> checkIfUserProfileExists(String qUserID) async {
   bool exists;
   await FirebaseFirestore.instance
       .collection('users')
