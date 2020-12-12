@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/models/userProfile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ postToFirebase(Post post, BuildContext context) {
   FirebaseFirestore.instance
       .collection('posts')
       .doc('postsByLocality')
-      .collection(post.uLocation)
+      .collection(post.uLocality)
       .doc(post.id)
       .set({
     'id': post.id,
@@ -41,7 +41,7 @@ postToFirebase(Post post, BuildContext context) {
     'isVerified': post.isVerified,
     'postDate': post.postDate,
     'uEmailId': post.uEmailId,
-    'uLocation': post.uLocation,
+    'uLocation': post.uLocality,
     'uName': post.uName,
     'uPhoneNumber': post.uPhoneNumber,
     'uProPicUrl': post.uProPicUrl,
@@ -57,18 +57,18 @@ postToFirebase(Post post, BuildContext context) {
 userToFirebase(UserProfile userProfile, BuildContext context) {
   FirebaseFirestore.instance.collection('users').doc(userProfile.userID).set({
     'userID': userProfile.userID,
-    'category': userProfile.name,
-    'description': userProfile.proPicUrl,
-    'imageUrls': userProfile.phoneNumber,
-    'isVerified': userProfile.location,
-    'postDate': userProfile.whatsappNumber,
-    'uEmailId': userProfile.emailId,
+    'name': userProfile.name,
+    'proPicUrl': userProfile.proPicUrl,
+    'phoneNumber': userProfile.phoneNumber,
+    'location': userProfile.locality,
+    'whatsappNumber': userProfile.whatsappNumber,
+    'emailId': userProfile.emailId,
   });
 
-  Scaffold.of(context).showSnackBar(SnackBar(
-    content: Text("User Profile created!"),
-    duration: Duration(seconds: 2),
-  ));
+  // Scaffold.of(context).showSnackBar(SnackBar(
+  //   content: Text("User Profile created!"),
+  //   duration: Duration(seconds: 2),
+  // ));
 }
 
 addLocalityToFirestore(String locality) {
@@ -97,7 +97,7 @@ updateUserInFirebase(UserProfile userProfile, BuildContext context) {
     'category': userProfile.name,
     'description': userProfile.proPicUrl,
     'imageUrls': userProfile.phoneNumber,
-    'isVerified': userProfile.location,
+    'isVerified': userProfile.locality,
     'postDate': userProfile.whatsappNumber,
     'uEmailId': userProfile.emailId,
   });
@@ -128,7 +128,7 @@ retrievePostsFromFirebaseByLocality(String uLocation) {
         uPhoneNumber: post.data()['uPhoneNumber'],
         uWhatsappNumber: post.data()['uWhatsappNumber'],
         uProPicUrl: post.data()['uProPicUrl'],
-        uLocation: post.data()['uLocation'],
+        uLocality: post.data()['uLocation'],
         uEmailId: post.data()['uEmailId'],
       );
 
@@ -148,10 +148,26 @@ retrieveUserProfileFromFirebase(String qUserID) {
         name: userFromFirebase.data()['name'],
         proPicUrl: userFromFirebase.data()['proPicUrl'],
         phoneNumber: userFromFirebase.data()['phoneNumber'],
-        location: userFromFirebase.data()['location'],
+        locality: userFromFirebase.data()['location'],
         whatsappNumber: userFromFirebase.data()['whatsappNumber'],
         emailId: userFromFirebase.data()['emailID']);
 
     currentUser = toCurrentUser;
   });
+}
+
+checkIfUserProfileExists(String qUserID) async {
+  bool exists;
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(qUserID)
+      .get()
+      .then((userDoc) {
+    if (userDoc.exists)
+      exists = true;
+    else
+      exists = false;
+  });
+  print('userExists? = $exists');
+  return exists;
 }

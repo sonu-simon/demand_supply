@@ -16,7 +16,7 @@ class Post {
   String uName;
   String uProPicUrl;
   String uPhoneNumber;
-  String uLocation;
+  String uLocality;
   String uWhatsappNumber;
   String uEmailId;
 
@@ -33,14 +33,14 @@ class Post {
       this.uName,
       this.uProPicUrl,
       this.uPhoneNumber,
-      this.uLocation,
+      this.uLocality,
       this.uWhatsappNumber,
       this.uEmailId}) {
     uUserID = userProfile.userID;
     uName = userProfile.name;
     uProPicUrl = userProfile.proPicUrl;
     uPhoneNumber = userProfile.phoneNumber;
-    uLocation = userProfile.location;
+    uLocality = userProfile.locality;
     uWhatsappNumber = userProfile.whatsappNumber;
     uEmailId = userProfile.emailId;
   }
@@ -57,5 +57,5 @@ Post demoPost = Post(
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg',
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'
     ],
-    userProfile: users[0],
+    userProfile: demoUser,
     category: 'The NULL category');

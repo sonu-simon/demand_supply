@@ -1,3 +1,4 @@
+import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(30)),
                       onPressed: () {
                         retrieveListOfLocalities();
+                        userToFirebase(demoUser, context);
+                        checkIfUserProfileExists(
+                            'lLqaFarvzPeQRg1HIzGIwb5vqsxg1');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
