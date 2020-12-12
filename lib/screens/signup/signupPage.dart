@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String username = "";
-  String whatsappnum = "";
-  String emailid = "";
+  String username;
+  String whatsappnum;
+  String emailid;
 
   @override
   Widget build(BuildContext context) {
@@ -132,8 +132,8 @@ class SignUpPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_formKey.currentState.validate()) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => PhotoPage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddUserProPic()));
           }
         },
         backgroundColor: Colors.white,

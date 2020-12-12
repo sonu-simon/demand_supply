@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PhotoPage extends StatelessWidget {
+class AddUserProPic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,10 +62,7 @@ class PhotoPage extends StatelessWidget {
             ],
           ))),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PhotoPage()));
-        },
+        onPressed: () {},
         backgroundColor: Colors.white,
         child: Center(
           child: Icon(

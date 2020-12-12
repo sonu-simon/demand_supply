@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/signup/signupPage.dart';
 
@@ -15,11 +13,11 @@ import '../data.dart';
 
 // Firebase initialization
 
-Future initializeFirebaseApp(BuildContext context) {
+Future initializeFirebaseApp(BuildContext context) async {
   final firebaseProvider =
       Provider.of<FirebaseProvider>(context, listen: false);
 
-  Firebase.initializeApp().then((_) {
+  await Firebase.initializeApp().then((_) {
     print('Firebase gets initialized');
     firebaseProvider.mFirebaseState(true);
     setupFirebaseAuth(context);

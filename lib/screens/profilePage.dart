@@ -180,14 +180,14 @@ class ProfilePage extends StatelessWidget {
                   leading: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      return del_post_dialogue(context);
+                      return deletePostDialog(context);
                     },
                   ),
                   title: Text("Post Title"),
                   trailing: IconButton(
                     icon: Icon(Icons.message_outlined),
                     onPressed: () {
-                      return edit_post_dialogue(context);
+                      return editPostDialog(context);
                     },
                   ),
                 ),
@@ -214,7 +214,7 @@ class ProfilePage extends StatelessWidget {
     ));
   }
 
-  Future edit_post_dialogue(BuildContext context) {
+  Future editPostDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -235,7 +235,7 @@ class ProfilePage extends StatelessWidget {
             ));
   }
 
-  Future del_post_dialogue(BuildContext context) {
+  Future deletePostDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
