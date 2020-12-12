@@ -2,6 +2,7 @@ import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:demand_supply/main.dart';
 import 'package:provider/provider.dart';
 
 import '../firebase/firebaseData.dart';
@@ -73,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onChanged: (value) {
                           //Process the input phone number
                           phoneNumber = '+91' + value;
+                          myprofile.phonenum = phoneNumber;
                         },
                       ),
                     ),

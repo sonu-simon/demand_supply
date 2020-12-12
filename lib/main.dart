@@ -1,6 +1,7 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
-import 'package:demand_supply/screens/signup/addpropic.dart';
+// import 'package:demand_supply/screens/signup/addpropic.dart';
+import 'package:demand_supply/screens/signup/adduserpropic.dart';
 
 import 'package:flutter/material.dart';
 
@@ -47,3 +48,13 @@ List<NetworkImage> productimages = [
   NetworkImage(
       'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'),
 ];
+
+class Userprofile {
+  String name;
+  String phonenum;
+  String whatsappnum;
+  String emailid;
+  Image propic;
+}
+
+Userprofile myprofile;

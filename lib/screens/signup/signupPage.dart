@@ -1,5 +1,6 @@
-import 'package:demand_supply/screens/signup/addpropic.dart';
+import 'package:demand_supply/screens/signup/adduserpropic.dart';
 import 'package:flutter/material.dart';
+import 'package:demand_supply/main.dart';
 
 class SignUpPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -80,6 +81,7 @@ class SignUpPage extends StatelessWidget {
                           },
                           onChanged: ((String newValue) {
                             username = newValue;
+                            myprofile.name = newValue;
                           }),
                         ),
                         SizedBox(
@@ -100,6 +102,7 @@ class SignUpPage extends StatelessWidget {
                           initialValue: "",
                           onChanged: ((String newValue) {
                             whatsappnum = newValue;
+                            myprofile.whatsappnum = newValue;
                           }),
                         ),
                         SizedBox(
@@ -120,6 +123,7 @@ class SignUpPage extends StatelessWidget {
                           initialValue: "",
                           onChanged: ((String newValue) {
                             emailid = newValue;
+                            myprofile.emailid = newValue;
                           }),
                         ),
                       ],

@@ -1,9 +1,11 @@
 import 'dart:io';
 
-import 'package:demand_supply/main.dart';
-import 'package:demand_supply/screens/homePage.dart';
+// import 'package:demand_supply/models/userProfile.dart';
 import 'package:flutter/material.dart';
+import 'package:demand_supply/main.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../homePage.dart';
 
 class AddUserProPic extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class AddUserProPic extends StatefulWidget {
 }
 
 class _AddUserProPicState extends State<AddUserProPic> {
+  Image image;
   File _image;
 
   void openGallery() async {
@@ -30,7 +33,7 @@ class _AddUserProPicState extends State<AddUserProPic> {
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
               child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -64,45 +67,63 @@ class _AddUserProPicState extends State<AddUserProPic> {
               ),
               //image
               Center(
-                child: Image.asset(
-                  "asset/bg/photo.jpg",
-                  scale: 2.5,
+                child: Container(
+                  child: _image == null
+                      ? Image.asset(
+                          "asset/bg/photo.jpg",
+                          scale: 2,
+                        )
+                      : Stack(
+                          children: [
+                            Image.asset(
+                              "asset/bg/photo.jpg",
+                              scale: 2,
+                            ),
+                            Image.asset(
+                              "asset/bg/photo.jpg",
+                              scale: 2,
+                            ),
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              child: Center(
+                                child: Container(
+                                  child: CircleAvatar(
+                                    minRadius: 40,
+                                    maxRadius: 150,
+                                    backgroundColor: Colors.black,
+                                    backgroundImage: FileImage(_image),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
               InkWell(
-                onTap: openGallery,
-                onLongPress: () {
+                onTap: () {
+                  print("NJENGI");
                   setState(() {
-                    _image = null;
+                    openGallery();
+                    if (_image == null) {
+                      image = null;
+                    } else {
+                      print("MAARI");
+                      image = Image(image: FileImage(_image));
+                    }
                   });
                 },
-                child: _image == null
-                    ? Container(
-                        height: MediaQuery.of(context).size.height / 3,
-                        width: MediaQuery.of(context).size.width / 3,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.scaleDown,
-                            scale: 1,
-                            image: NetworkImage(
-                                "https://www.freeiconspng.com/uploads/add-new-plus-user-icon--icon-search-engine-32.png"),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        height: MediaQuery.of(context).size.height / 2.5,
-                        width: MediaQuery.of(context).size.width / 2.5,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: FileImage(_image),
-                          ),
-                        ),
-                      ),
+                child: Icon(
+                  Icons.camera,
+                  size: 100,
+                  color: Colors.blue,
+                ),
               )
             ],
           ))),
