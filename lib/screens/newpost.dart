@@ -139,26 +139,6 @@ class _NewPostState extends State<NewPost> {
                 SizedBox(
                   height: 25,
                 ),
-                // //phone&whatsapp
-                // TextFormField(
-                //   style: TextStyle(fontSize: 20, color: Colors.black87),
-                //   autofocus: true,
-                //   maxLines: 1,
-                //   maxLength: 10,
-                //   keyboardType: TextInputType.phone,
-                //   decoration: InputDecoration(
-                //       focusedBorder: OutlineInputBorder(
-                //           borderSide:
-                //               BorderSide(color: Colors.grey, width: 1.0)),
-                //       focusColor: Colors.black,
-                //       border: InputBorder.none,
-                //       helperText: "Phone number to be given for contacting you",
-                //       hintText: 'Enter phone number',
-                //       hintStyle: TextStyle(fontSize: 20)),
-                // ),
-                // SizedBox(
-                //   height: 25,
-                // ),
 
                 //locality
                 DropdownSearch<String>(

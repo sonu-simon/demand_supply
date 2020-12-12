@@ -2,6 +2,11 @@ import 'package:demand_supply/screens/signup/addpropic.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String username = "";
+  String whatsappnum = "";
+  String emailid = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +52,8 @@ class SignUpPage extends StatelessWidget {
                 scale: 2,
               ),
               Form(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.always,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
@@ -64,6 +70,17 @@ class SignUpPage extends StatelessWidget {
                                   borderSide: BorderSide(color: Colors.blue)),
                               hintText: "Name",
                               hintStyle: TextStyle(fontSize: 20)),
+                          initialValue: "",
+                          validator: (String value) {
+                            value = value.trim();
+                            if (value.isEmpty) {
+                              return 'Name is Required';
+                            }
+                            return null;
+                          },
+                          onChanged: ((String newValue) {
+                            username = newValue;
+                          }),
                         ),
                         SizedBox(
                           height: 10,
@@ -80,6 +97,10 @@ class SignUpPage extends StatelessWidget {
                                   borderSide: BorderSide(color: Colors.blue)),
                               hintText: "WhatsApp Number",
                               hintStyle: TextStyle(fontSize: 20)),
+                          initialValue: "",
+                          onChanged: ((String newValue) {
+                            whatsappnum = newValue;
+                          }),
                         ),
                         SizedBox(
                           height: 10,
@@ -96,6 +117,10 @@ class SignUpPage extends StatelessWidget {
                                   borderSide: BorderSide(color: Colors.blue)),
                               hintText: "Email",
                               hintStyle: TextStyle(fontSize: 20)),
+                          initialValue: "",
+                          onChanged: ((String newValue) {
+                            emailid = newValue;
+                          }),
                         ),
                       ],
                     ),
@@ -106,8 +131,10 @@ class SignUpPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PhotoPage()));
+          if (_formKey.currentState.validate()) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => PhotoPage()));
+          }
         },
         backgroundColor: Colors.white,
         child: Center(
