@@ -7,7 +7,7 @@ class Post {
   String title;
   DateTime postDate;
   String description;
-  List<String> imageUrls;
+  String imageUrl;
   bool isVerified;
   UserProfile userProfile;
   String category;
@@ -25,7 +25,7 @@ class Post {
       this.title,
       this.postDate,
       this.description,
-      this.imageUrls,
+      this.imageUrl,
       this.isVerified,
       this.userProfile,
       this.category,
@@ -50,12 +50,7 @@ Post demoPost = Post(
     title: 'Title goes here',
     postDate: DateTime.now(),
     description: 'The product description goes here...',
-    imageUrls: [
-      'https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg',
-      'https://www.blibli.com/friends/assets/banner2.jpg',
-      'https://www.static-src.com/siva/asset//06_2017/microsite-banner--1200x460.jpg',
-      'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg',
-      'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'
-    ],
+    imageUrl:
+        'https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg',
     userProfile: demoUser,
     category: 'The NULL category');
