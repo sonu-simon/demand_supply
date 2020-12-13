@@ -74,6 +74,7 @@ postToFirebase(Post post) {
 }
 
 userToFirebase(UserProfile userProfile) {
+  print('userID here ${userProfile.userID}');
   FirebaseFirestore.instance.collection('users').doc(userProfile.userID).set({
     'userID': userProfile.userID,
     'name': userProfile.name,
@@ -84,6 +85,8 @@ userToFirebase(UserProfile userProfile) {
     'emailId': userProfile.emailId,
     'posts': userProfile.posts
   });
+
+  print('user added to firebase');
 
   // Scaffold.of(context).showSnackBar(SnackBar(
   //   content: Text("User Profile created!"),
@@ -173,7 +176,7 @@ retrieveUserProfileFromFirebase(String qUserID) {
         whatsappNumber: userFromFirebase.data()['whatsappNumber'],
         emailId: userFromFirebase.data()['emailID']);
 
-    currentUser = toCurrentUser;
+    myProfile = toCurrentUser;
   });
 }
 

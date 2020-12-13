@@ -6,4 +6,4 @@ String currentUserID;
 List<Post> postsInLocality = [];
 List<String> listOfLocalities = [];
 
-UserProfile currentUser;
+UserProfile myProfile;

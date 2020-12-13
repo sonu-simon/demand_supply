@@ -1,3 +1,5 @@
+import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/profilePage.dart';
 import 'package:demand_supply/screens/recentPage.dart';
 import 'package:flip_card/flip_card.dart';
@@ -10,6 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    retrieveUserProfileFromFirebase(currentUserID);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

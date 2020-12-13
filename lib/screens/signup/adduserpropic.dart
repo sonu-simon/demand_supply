@@ -135,10 +135,10 @@ class _AddUserProPicState extends State<AddUserProPic> {
           ))),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          UserProfile myProfile;
+          UserProfile signupProfile;
           uploadUserProPicImage(currentUserID, _image).then((_imgSrc) {
             print('_imgSrc: $_imgSrc');
-            myProfile = UserProfile(
+            signupProfile = UserProfile(
                 userID: currentUserID,
                 name: widget.uName,
                 proPicUrl: _imgSrc,
@@ -147,10 +147,11 @@ class _AddUserProPicState extends State<AddUserProPic> {
                 whatsappNumber: widget.uWhatsappNumber,
                 emailId: widget.uEmailId,
                 posts: []);
+            print(signupProfile.userID);
+            userToFirebase(signupProfile);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           });
-          userToFirebase(myProfile);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
         },
         backgroundColor: Colors.white,
         child: Center(
