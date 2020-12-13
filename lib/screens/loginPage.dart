@@ -1,12 +1,12 @@
-import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
-import 'package:demand_supply/main.dart';
 import 'package:provider/provider.dart';
 
 import '../firebase/firebaseData.dart';
 import '../firebase/firebaseServices.dart';
+
+String uPhoneNumber;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,8 +14,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String phoneNumber;
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -73,8 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fillColor: Colors.white70),
                         onChanged: (value) {
                           //Process the input phone number
-                          phoneNumber = '+91' + value;
-                          myprofile.phonenum = phoneNumber;
+                          uPhoneNumber = '+91' + value;
                         },
                       ),
                     ),
@@ -82,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       onPressed: () =>
-                          loginWithPhoneNumber(phoneNumber, context),
+                          loginWithPhoneNumber(uPhoneNumber, context),
                       onLongPress: () => authSignOut(),
                       child: Text(
                         "Generate OTP",
@@ -98,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       onPressed: () {
-                        userToFirebase(demoUser, context);
                         checkIfUserProfileExists(
                             'lLqaFarvzPeQRg1HIzGIwb5vqxg1');
                         Navigator.push(

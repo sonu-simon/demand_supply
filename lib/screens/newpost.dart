@@ -1,12 +1,8 @@
 import 'dart:io';
 
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
-
-import '../firebase/firebaseData.dart';
-import '../data.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -28,7 +24,6 @@ class _NewPostState extends State<NewPost> {
   @override
   void initState() {
     super.initState();
-    retrieveListOfLocalities();
   }
 
   @override
@@ -136,25 +131,6 @@ class _NewPostState extends State<NewPost> {
                       hintText: "Description",
                       hintStyle: TextStyle(fontSize: 20)),
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-
-                //locality
-                DropdownSearch<String>(
-                    showSearchBox: true,
-                    searchBoxDecoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(10)),
-                        // border: InputBorder.none,
-                        helperText: 'Target Location for your Ad'),
-                    hint: "Select your Locality",
-                    autoFocusSearchBox: true,
-                    showSelectedItem: true,
-                    showClearButton: true,
-                    items: listOfLocalities),
                 SizedBox(
                   height: 25,
                 ),

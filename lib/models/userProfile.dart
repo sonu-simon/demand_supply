@@ -11,15 +11,15 @@ class UserProfile {
   String emailId;
   List<String> posts;
 
-  UserProfile({
-    @required this.userID,
-    @required this.name,
-    @required this.proPicUrl,
-    @required this.phoneNumber,
-    @required this.locality,
-    this.whatsappNumber,
-    this.emailId,
-  });
+  UserProfile(
+      {@required this.userID,
+      @required this.name,
+      @required this.proPicUrl,
+      @required this.phoneNumber,
+      @required this.locality,
+      this.whatsappNumber,
+      this.emailId,
+      this.posts});
 
   updateUserProfile(UserProfile userProfile, BuildContext context) {
     userID = userProfile.userID;
@@ -30,7 +30,7 @@ class UserProfile {
     whatsappNumber = userProfile.whatsappNumber;
     emailId = userProfile.emailId;
 
-    updateUserInFirebase(userProfile, context);
+    updateUserInFirebase(userProfile);
   }
 }
 

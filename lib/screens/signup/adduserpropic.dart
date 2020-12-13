@@ -1,13 +1,23 @@
 import 'dart:io';
 
-// import 'package:demand_supply/models/userProfile.dart';
+import 'package:demand_supply/data.dart';
+import 'package:demand_supply/models/userProfile.dart';
+import 'package:demand_supply/screens/loginPage.dart';
 import 'package:flutter/material.dart';
-import 'package:demand_supply/main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 
 import '../homePage.dart';
 
 class AddUserProPic extends StatefulWidget {
+  final String uName;
+  final String uWhatsappNumber;
+  final String uEmailId;
+  final String uLocality;
+
+  AddUserProPic(
+      {this.uName, this.uWhatsappNumber, this.uEmailId, this.uLocality});
+
   @override
   _AddUserProPicState createState() => _AddUserProPicState();
 }
@@ -15,6 +25,7 @@ class AddUserProPic extends StatefulWidget {
 class _AddUserProPicState extends State<AddUserProPic> {
   Image image;
   File _image;
+  String userProPicUrl;
 
   void openGallery() async {
     final picker = ImagePicker();
@@ -79,10 +90,6 @@ class _AddUserProPicState extends State<AddUserProPic> {
                               "asset/bg/photo.jpg",
                               scale: 2,
                             ),
-                            Image.asset(
-                              "asset/bg/photo.jpg",
-                              scale: 2,
-                            ),
                             Positioned(
                               top: 0,
                               left: 0,
@@ -108,9 +115,8 @@ class _AddUserProPicState extends State<AddUserProPic> {
               ),
               InkWell(
                 onTap: () {
-                  print("NJENGI");
+                  openGallery();
                   setState(() {
-                    openGallery();
                     if (_image == null) {
                       image = null;
                     } else {
@@ -129,9 +135,22 @@ class _AddUserProPicState extends State<AddUserProPic> {
           ))),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          UserProfile myProfile;
+          uploadUserProPicImage(currentUserID, _image).then((_imgSrc) {
+            print('_imgSrc: $_imgSrc');
+            myProfile = UserProfile(
+                userID: currentUserID,
+                name: widget.uName,
+                proPicUrl: _imgSrc,
+                phoneNumber: uPhoneNumber,
+                locality: widget.uLocality,
+                whatsappNumber: widget.uWhatsappNumber,
+                emailId: widget.uEmailId,
+                posts: []);
+          });
+          userToFirebase(myProfile);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
-          myprofile.propic = Image(image: FileImage(_image));
         },
         backgroundColor: Colors.white,
         child: Center(

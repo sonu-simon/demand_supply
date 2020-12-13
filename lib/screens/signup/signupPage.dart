@@ -1,12 +1,28 @@
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/signup/adduserpropic.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:demand_supply/main.dart';
 
-class SignUpPage extends StatelessWidget {
+import '../../data.dart';
+
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String username;
-  String whatsappnum;
-  String emailid;
+
+  String uName;
+  String uWhatsappNumber;
+  String uEmailId;
+  String uLocality;
+
+  @override
+  void initState() {
+    super.initState();
+    retrieveListOfLocalities();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +96,7 @@ class SignUpPage extends StatelessWidget {
                             return null;
                           },
                           onChanged: ((String newValue) {
-                            username = newValue;
-                            myprofile.name = newValue;
+                            uName = newValue;
                           }),
                         ),
                         SizedBox(
@@ -101,10 +116,28 @@ class SignUpPage extends StatelessWidget {
                               hintStyle: TextStyle(fontSize: 20)),
                           initialValue: "",
                           onChanged: ((String newValue) {
-                            whatsappnum = newValue;
-                            myprofile.whatsappnum = newValue;
+                            uWhatsappNumber = newValue;
                           }),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        //locality
+                        DropdownSearch<String>(
+                            showSearchBox: true,
+                            onChanged: (locality) => uLocality = locality,
+                            searchBoxDecoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1),
+                                    borderRadius: BorderRadius.circular(10)),
+                                // border: InputBorder.none,
+                                helperText: 'Target Location for your Ad'),
+                            hint: "Select your Locality",
+                            autoFocusSearchBox: true,
+                            showSelectedItem: true,
+                            showClearButton: true,
+                            items: listOfLocalities),
                         SizedBox(
                           height: 10,
                         ),
@@ -122,8 +155,7 @@ class SignUpPage extends StatelessWidget {
                               hintStyle: TextStyle(fontSize: 20)),
                           initialValue: "",
                           onChanged: ((String newValue) {
-                            emailid = newValue;
-                            myprofile.emailid = newValue;
+                            uEmailId = newValue;
                           }),
                         ),
                       ],
@@ -136,8 +168,15 @@ class SignUpPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_formKey.currentState.validate()) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddUserProPic()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddUserProPic(
+                          uEmailId: uEmailId,
+                          uName: uName,
+                          uWhatsappNumber: uWhatsappNumber,
+                          uLocality: uLocality,
+                        )));
           }
         },
         backgroundColor: Colors.white,
