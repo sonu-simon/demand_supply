@@ -151,7 +151,7 @@ Future retrievePostsFromFirebaseByLocalityFilterByCategory(
         postDate: post.data()['postDate'],
         category: post.data()['category'],
         description: post.data()['description'],
-        imageUrl: post.data()['imageUrls'],
+        imageUrl: post.data()['imageUrl'],
         isVerified: post.data()['isVerified'],
         uName: post.data()['uName'],
         uPhoneNumber: post.data()['uPhoneNumber'],
@@ -164,7 +164,7 @@ Future retrievePostsFromFirebaseByLocalityFilterByCategory(
 
       postsInLocalityFilterByCategory.add(postToAddList);
     });
-    print(postsInLocalityFilterByCategory);
+    return print(postsInLocalityFilterByCategory);
   });
 }
 
