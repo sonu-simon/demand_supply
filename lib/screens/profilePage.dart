@@ -1,6 +1,26 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:ui';
 
-class ProfilePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  File _image;
+
+  void openGallery() async {
+    final picker = ImagePicker();
+    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      print('in .then()');
+      _image = File(pickedFile.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,30 +30,63 @@ class ProfilePage extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"),
-                      fit: BoxFit.cover)),
-              child: Container(
-                width: double.infinity,
-                height: 200,
+                  image: DecorationImage(image: propic(), fit: BoxFit.cover)),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                 child: Container(
-                  alignment: Alignment(0.0, 2.5),
+                  width: double.infinity,
+                  height: 200,
                   child: Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"),
-                        radius: 60.0,
+                    alignment: Alignment(0.0, 2.5),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      scrollable: true,
+                                      content: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              ListTile(
+                                                title: Text(
+                                                    "View Profile Picture"),
+                                                onTap: () {},
+                                              ),
+                                              ListTile(
+                                                title: Text(
+                                                    "Change Profile Picture"),
+                                                onTap: () {
+                                                  openGallery();
+                                                },
+                                              )
+                                            ],
+                                          )),
+                                    );
+                                  });
+                            },
+                            child: _image == null
+                                ? CircleAvatar(
+                                    radius: 60.0,
+                                    backgroundImage: NetworkImage(
+                                        "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"))
+                                : CircleAvatar(
+                                    radius: 60.0,
+                                    backgroundImage: FileImage(_image),
+                                  )),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
+
             SizedBox(
               height: 60,
             ),
@@ -212,6 +265,11 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  NetworkImage propic() {
+    return NetworkImage(
+        "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png");
   }
 
   Future editPostDialog(BuildContext context) {

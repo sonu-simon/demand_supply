@@ -60,9 +60,6 @@ class _NewPostState extends State<NewPost> {
         ],
       ),
       body: Form(
-        onChanged: () {
-          print("Maari");
-        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: SingleChildScrollView(
@@ -118,6 +115,9 @@ class _NewPostState extends State<NewPost> {
                       helperText: "Title for your Ad",
                       hintText: "Title",
                       hintStyle: TextStyle(fontSize: 30)),
+                  onChanged: ((String value) {
+                    print(value);
+                  }),
                 ),
                 SizedBox(
                   height: 25,
@@ -135,6 +135,9 @@ class _NewPostState extends State<NewPost> {
                       helperText: "Give a brief Description",
                       hintText: "Description",
                       hintStyle: TextStyle(fontSize: 20)),
+                  onChanged: ((String value) {
+                    print(value);
+                  }),
                 ),
                 SizedBox(
                   height: 25,
@@ -142,19 +145,22 @@ class _NewPostState extends State<NewPost> {
 
                 //locality
                 DropdownSearch<String>(
-                    showSearchBox: true,
-                    searchBoxDecoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(10)),
-                        // border: InputBorder.none,
-                        helperText: 'Target Location for your Ad'),
-                    hint: "Select your Locality",
-                    autoFocusSearchBox: true,
-                    showSelectedItem: true,
-                    showClearButton: true,
-                    items: listOfLocalities),
+                  showSearchBox: true,
+                  searchBoxDecoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                        borderRadius: BorderRadius.circular(10)),
+                    // border: InputBorder.none,
+                  ),
+                  hint: "Category",
+                  autoFocusSearchBox: true,
+                  showSelectedItem: true,
+                  showClearButton: true,
+                  items: listofCategories,
+                  onChanged: ((String value) {
+                    print(value);
+                  }),
+                ),
                 SizedBox(
                   height: 25,
                 ),
