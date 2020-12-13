@@ -20,7 +20,12 @@ class _PostsByCategoryState extends State<PostsByCategory> {
     super.initState();
 
     retrievePostsFromFirebaseByLocalityFilterByCategory(
-        uLocality: widget.qLocality, category: widget.qCategory);
+            uLocality: widget.qLocality, category: widget.qCategory)
+        .then((value) {
+      setState(() {
+        print('after retrieval setState()');
+      });
+    });
   }
 
   @override
@@ -28,6 +33,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Posts in ${widget.qCategory}"),
+        actions: [Icon(Icons.location_pin), Text(myProfile.locality)],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -58,7 +64,8 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                             Center(
                               child: Image(
                                 image: NetworkImage(
-                                    'https://www.blibli.com/friends/assets/banner2.jpg'),
+                                    postsInLocalityFilterByCategory[index]
+                                        .imageUrl),
                                 alignment: Alignment.center,
                                 repeat: ImageRepeat.noRepeat,
                               ),
@@ -74,7 +81,8 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                       child: Padding(
                                     padding: const EdgeInsets.all(3.0),
                                     child: Text(
-                                      "Product Name",
+                                      postsInLocalityFilterByCategory[index]
+                                          .title,
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600),

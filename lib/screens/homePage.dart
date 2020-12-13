@@ -13,9 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    await retrieveUserProfileFromFirebase(currentUserID);
+    retrieveUserProfileFromFirebase(currentUserID);
   }
 
   @override
