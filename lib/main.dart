@@ -1,6 +1,7 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:custom_progress_dialog/custom_progress_dialog.dart';
+import 'package:demand_supply/screens/loginPage.dart';
 import 'package:demand_supply/screens/profile/profilePage.dart';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProfilePage(),
+      home: LoginScreen(),
     );
   }
 }
