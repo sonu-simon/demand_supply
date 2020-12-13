@@ -1,7 +1,7 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/profilePage.dart';
-import 'package:demand_supply/screens/recentPage.dart';
+import 'package:demand_supply/screens/postsByCategroyPage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -97,27 +97,31 @@ class _HomePageState extends State<HomePage> {
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 3,
                 crossAxisSpacing: 12,
-                mainAxisSpacing: 22,
+                mainAxisSpacing: 24,
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
                 children: [
                   InkWell(
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PostsByCategory(qCategory: 'Daily Needs')),
+                      )
+                    },
                     child: category(
                       "asset/icon/iconliving.png",
                       Colors.greenAccent,
                       "Daily Needs",
                     ),
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RecentPage()),
-                      )
-                    },
                   ),
                   InkWell(
                     onTap: () => {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecentPage()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PostsByCategory(qCategory: 'Medicine')),
                       )
                     },
                     child: category("asset/icon/iconlivingmeds.png",
@@ -127,7 +131,9 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecentPage()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PostsByCategory(qCategory: 'Counseling')),
                       )
                     },
                     child: category("asset/icon/iconlivingcounsel.png",
@@ -137,7 +143,9 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecentPage()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PostsByCategory(qCategory: 'Buy/Sell')),
                       )
                     },
                     child: category("asset/icon/iconlivingbuysell.png",
@@ -147,7 +155,9 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecentPage()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PostsByCategory(qCategory: 'Travel')),
                       )
                     },
                     child: category("asset/icon/iconlivingtravel.png",
@@ -158,7 +168,8 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RecentPage()),
+                                  builder: (context) =>
+                                      PostsByCategory(qCategory: 'Other')),
                             )
                           },
                       child: category("asset/icon/iconlivingother.png",

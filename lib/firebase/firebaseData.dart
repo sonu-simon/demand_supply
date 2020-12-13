@@ -133,11 +133,12 @@ updateUserInFirebase(UserProfile userProfile) {
 }
 
 Future retrievePostsFromFirebaseByLocalityFilterByCategory(
-    String uLocation, String category) async {
+    {String uLocality, String category}) async {
+  postsInLocalityFilterByCategory = [];
   await FirebaseFirestore.instance
       .collection('posts')
       .doc('postsByLocality')
-      .collection(uLocation)
+      .collection(uLocality)
       .where('category', isEqualTo: category)
       .get()
       .then((QuerySnapshot querySnapshot) {

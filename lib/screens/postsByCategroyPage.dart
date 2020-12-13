@@ -1,19 +1,33 @@
+import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/productpage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
-class RecentPage extends StatefulWidget {
+class PostsByCategory extends StatefulWidget {
+  final String qLocality = myProfile.locality;
+  final String qCategory;
+
+  PostsByCategory({this.qCategory});
   @override
-  _RecentPageState createState() => _RecentPageState();
+  _PostsByCategoryState createState() => _PostsByCategoryState();
 }
 
-class _RecentPageState extends State<RecentPage> {
+class _PostsByCategoryState extends State<PostsByCategory> {
+  @override
+  void initState() {
+    super.initState();
+
+    retrievePostsFromFirebaseByLocalityFilterByCategory(
+        uLocality: widget.qLocality, category: widget.qCategory);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Demands and Supplies Near You"),
+        title: Text("Posts in ${widget.qCategory}"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -26,7 +40,7 @@ class _RecentPageState extends State<RecentPage> {
       body: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: 10,
+          itemCount: postsInLocalityFilterByCategory.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
