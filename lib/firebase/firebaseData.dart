@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demand_supply/models/userProfile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 
 import '../models/post.dart';
 import '../data.dart';
@@ -45,7 +44,7 @@ Future<String> uploadUserProPicImage(String userID, File _image) async {
   return _imgSrc;
 }
 
-postToFirebase(Post post, BuildContext context) {
+postToFirebase(Post post) {
   FirebaseFirestore.instance
       .collection('posts')
       .doc('postsByLocality')
@@ -60,6 +59,7 @@ postToFirebase(Post post, BuildContext context) {
     'isVerified': post.isVerified,
     'postDate': post.postDate,
     'uEmailId': post.uEmailId,
+    'uUserID': post.uUserID,
     'uLocation': post.uLocality,
     'uName': post.uName,
     'uPhoneNumber': post.uPhoneNumber,
@@ -67,13 +67,13 @@ postToFirebase(Post post, BuildContext context) {
     'uWhatsappNumber': post.uWhatsappNumber,
   });
 
-  Scaffold.of(context).showSnackBar(SnackBar(
-    content: Text("Upload complete"),
-    duration: Duration(seconds: 2),
-  ));
+  // Scaffold.of(context).showSnackBar(SnackBar(
+  //   content: Text("Upload complete"),
+  //   duration: Duration(seconds: 2),
+  // ));
 }
 
-userToFirebase(UserProfile userProfile, BuildContext context) {
+userToFirebase(UserProfile userProfile) {
   FirebaseFirestore.instance.collection('users').doc(userProfile.userID).set({
     'userID': userProfile.userID,
     'name': userProfile.name,
@@ -82,6 +82,7 @@ userToFirebase(UserProfile userProfile, BuildContext context) {
     'location': userProfile.locality,
     'whatsappNumber': userProfile.whatsappNumber,
     'emailId': userProfile.emailId,
+    'posts': userProfile.posts
   });
 
   // Scaffold.of(context).showSnackBar(SnackBar(
@@ -108,7 +109,7 @@ retrieveListOfLocalities() async {
   print(listOfLocalities);
 }
 
-updateUserInFirebase(UserProfile userProfile, BuildContext context) {
+updateUserInFirebase(UserProfile userProfile) {
   FirebaseFirestore.instance
       .collection('users')
       .doc(userProfile.userID)
@@ -122,10 +123,10 @@ updateUserInFirebase(UserProfile userProfile, BuildContext context) {
     'uEmailId': userProfile.emailId,
   });
 
-  Scaffold.of(context).showSnackBar(SnackBar(
-    content: Text("User Profile updated!"),
-    duration: Duration(seconds: 2),
-  ));
+  // Scaffold.of(context).showSnackBar(SnackBar(
+  //   content: Text("User Profile updated!"),
+  //   duration: Duration(seconds: 2),
+  // ));
 }
 
 retrievePostsFromFirebaseByLocality(String uLocation) {
