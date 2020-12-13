@@ -55,9 +55,6 @@ class _NewPostState extends State<NewPost> {
         ],
       ),
       body: Form(
-        onChanged: () {
-          print("Maari");
-        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: SingleChildScrollView(
@@ -113,6 +110,9 @@ class _NewPostState extends State<NewPost> {
                       helperText: "Title for your Ad",
                       hintText: "Title",
                       hintStyle: TextStyle(fontSize: 30)),
+                  onChanged: ((String value) {
+                    print(value);
+                  }),
                 ),
                 SizedBox(
                   height: 25,
@@ -130,6 +130,9 @@ class _NewPostState extends State<NewPost> {
                       helperText: "Give a brief Description",
                       hintText: "Description",
                       hintStyle: TextStyle(fontSize: 20)),
+                  onChanged: ((String value) {
+                    print(value);
+                  }),
                 ),
                 SizedBox(
                   height: 25,
