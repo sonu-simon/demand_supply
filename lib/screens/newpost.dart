@@ -1,8 +1,14 @@
 import 'dart:io';
 
+import 'package:demand_supply/models/post.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
+
+import '../data.dart';
+import '../firebase/firebaseData.dart';
+import 'homePage.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -11,6 +17,9 @@ class NewPost extends StatefulWidget {
 
 class _NewPostState extends State<NewPost> {
   File _image;
+  String title;
+  String description;
+  String category;
 
   void openGallery() async {
     final picker = ImagePicker();
@@ -46,7 +55,27 @@ class _NewPostState extends State<NewPost> {
             hoverColor: Colors.white,
             splashColor: Colors.white,
             elevation: 0,
-            onPressed: () {},
+            onPressed: () {
+              Post newPost;
+              String tempPostId =
+                  currentUserID + '_' + DateTime.now().toString();
+              uploadPostImage(currentUserID, tempPostId, _image)
+                  .then((_imgSrc) {
+                print('_imgSrc: $_imgSrc');
+                newPost = Post(
+                    id: tempPostId,
+                    title: title,
+                    category: category,
+                    imageUrl: _imgSrc,
+                    postDate: DateTime.now().toString(),
+                    description: description,
+                    userProfile: myProfile);
+                postToFirebase(newPost);
+                print('new post completed');
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              });
+            },
             child: Text(
               "POST",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -110,8 +139,8 @@ class _NewPostState extends State<NewPost> {
                       helperText: "Title for your Ad",
                       hintText: "Title",
                       hintStyle: TextStyle(fontSize: 30)),
-                  onChanged: ((String value) {
-                    print(value);
+                  onChanged: ((value) {
+                    title = value;
                   }),
                 ),
                 SizedBox(
@@ -130,8 +159,29 @@ class _NewPostState extends State<NewPost> {
                       helperText: "Give a brief Description",
                       hintText: "Description",
                       hintStyle: TextStyle(fontSize: 20)),
-                  onChanged: ((String value) {
-                    print(value);
+                  onChanged: ((value) {
+                    description = value;
+                  }),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                //category
+                DropdownSearch<String>(
+                  showSearchBox: true,
+                  searchBoxDecoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                        borderRadius: BorderRadius.circular(10)),
+                    // border: InputBorder.none,
+                  ),
+                  hint: "Category",
+                  autoFocusSearchBox: true,
+                  showSelectedItem: true,
+                  showClearButton: true,
+                  items: listofCategories,
+                  onChanged: ((value) {
+                    category = value;
                   }),
                 ),
                 SizedBox(

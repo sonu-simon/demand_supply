@@ -1,11 +1,12 @@
 import 'dart:core';
 
 import 'package:demand_supply/models/userProfile.dart';
+import 'package:flutter/cupertino.dart';
 
 class Post {
   String id;
   String title;
-  DateTime postDate;
+  String postDate;
   String description;
   String imageUrl;
   bool isVerified;
@@ -21,14 +22,14 @@ class Post {
   String uEmailId;
 
   Post(
-      {this.id,
-      this.title,
-      this.postDate,
-      this.description,
-      this.imageUrl,
+      {@required this.id,
+      @required this.title,
+      @required this.postDate,
+      @required this.description,
+      @required this.imageUrl,
       this.isVerified,
       this.userProfile,
-      this.category,
+      @required this.category,
       this.uUserID,
       this.uName,
       this.uProPicUrl,
@@ -36,21 +37,23 @@ class Post {
       this.uLocality,
       this.uWhatsappNumber,
       this.uEmailId}) {
-    uUserID = userProfile.userID;
-    uName = userProfile.name;
-    uProPicUrl = userProfile.proPicUrl;
-    uPhoneNumber = userProfile.phoneNumber;
-    uLocality = userProfile.locality;
-    uWhatsappNumber = userProfile.whatsappNumber;
-    uEmailId = userProfile.emailId;
+    if (userProfile != null) {
+      uUserID = userProfile.userID;
+      uName = userProfile.name;
+      uProPicUrl = userProfile.proPicUrl;
+      uPhoneNumber = userProfile.phoneNumber;
+      uLocality = userProfile.locality;
+      uWhatsappNumber = userProfile.whatsappNumber;
+      uEmailId = userProfile.emailId;
+    }
   }
 }
 
-Post demoPost = Post(
-    title: 'Title goes here',
-    postDate: DateTime.now(),
-    description: 'The product description goes here...',
-    imageUrl:
-        'https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg',
-    userProfile: demoUser,
-    category: 'The NULL category');
+// Post demoPost = Post(
+//     title: 'Title goes here',
+//     postDate: DateTime.now().toString(),
+//     description: 'The product description goes here...',
+//     imageUrl:
+//         'https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg',
+//     userProfile: demoUser,
+//     category: 'The NULL category');

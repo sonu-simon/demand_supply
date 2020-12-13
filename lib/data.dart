@@ -3,7 +3,7 @@ import 'package:demand_supply/models/userProfile.dart';
 import 'models/post.dart';
 
 String currentUserID;
-List<Post> postsInLocality = [];
+List<Post> postsInLocalityFilterByCategory = [];
 List<String> listOfLocalities = [];
 List<String> listofCategories = [
   "Daily Needs",

@@ -10,7 +10,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  var selectedPost = demoPost;
+  var selectedPost;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

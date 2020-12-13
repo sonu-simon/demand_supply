@@ -132,13 +132,17 @@ updateUserInFirebase(UserProfile userProfile) {
   // ));
 }
 
-retrievePostsFromFirebaseByLocality(String uLocation) {
-  FirebaseFirestore.instance
+Future retrievePostsFromFirebaseByLocalityFilterByCategory(
+    String uLocation, String category) async {
+  await FirebaseFirestore.instance
       .collection('posts')
       .doc('postsByLocality')
       .collection(uLocation)
+      .where('category', isEqualTo: category)
       .get()
       .then((QuerySnapshot querySnapshot) {
+    print(
+        'entered .then() retrievePostsFromFirebaseByLocalityFilterByCategory()');
     querySnapshot.docs.forEach((post) {
       Post postToAddList = Post(
         id: post.data()['id'],
@@ -154,15 +158,17 @@ retrievePostsFromFirebaseByLocality(String uLocation) {
         uProPicUrl: post.data()['uProPicUrl'],
         uLocality: post.data()['uLocation'],
         uEmailId: post.data()['uEmailId'],
+        uUserID: post.data()['uUserID'],
       );
 
-      postsInLocality.add(postToAddList);
+      postsInLocalityFilterByCategory.add(postToAddList);
     });
+    print(postsInLocalityFilterByCategory);
   });
 }
 
-retrieveUserProfileFromFirebase(String qUserID) {
-  FirebaseFirestore.instance
+Future retrieveUserProfileFromFirebase(String qUserID) async {
+  await FirebaseFirestore.instance
       .collection('users')
       .doc(qUserID)
       .get()
@@ -177,6 +183,7 @@ retrieveUserProfileFromFirebase(String qUserID) {
         emailId: userFromFirebase.data()['emailID']);
 
     myProfile = toCurrentUser;
+    print('myProfile.userID: ${myProfile.userID}');
   });
 }
 
