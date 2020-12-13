@@ -1,6 +1,8 @@
+import 'package:custom_progress_dialog/custom_progress_dialog.dart';
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
-import 'package:demand_supply/screens/profilePage.dart';
+import 'package:demand_supply/screens/newpost.dart';
+import 'package:demand_supply/screens/profile/profilePage.dart';
 import 'package:demand_supply/screens/postsByCategroyPage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ProgressDialog _progressDialog = ProgressDialog();
   @override
   void initState() {
     super.initState();
+    _progressDialog.showProgressDialog(context,
+        textToBeDisplayed: "Gathering Files");
     retrieveUserProfileFromFirebase(currentUserID);
+    _progressDialog.dismissProgressDialog(context);
   }
 
   @override
@@ -24,7 +30,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("DEMAND&SUPPLY"),
         centerTitle: true,
-        actions: [Icon(Icons.people)],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
+            },
+          )
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -185,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -196,28 +210,35 @@ class _HomePageState extends State<HomePage> {
           height: MediaQuery.of(context).size.height * 0.061,
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [],
           ),
         ),
       ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: FloatingActionButton(
-            child: Icon(
-              Icons.arrow_upward,
-              color: Colors.white,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: FloatingActionButton(
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return NewPost();
+                      });
+                },
+              ),
             ),
-            onPressed: () {
-              showModalBottomSheet<void>(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return ProfilePage();
-                  });
-            },
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -57,7 +58,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                               ListTile(
                                                 title: Text(
                                                     "View Profile Picture"),
-                                                onTap: () {},
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ViewProPic()));
+                                                },
                                               ),
                                               ListTile(
                                                 title: Text(
