@@ -230,12 +230,14 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  showModalBottomSheet<void>(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return NewPost();
-                      });
+                  // showModalBottomSheet<void>(
+                  //     isScrollControlled: true,
+                  //     context: context,
+                  //     builder: (BuildContext context) {
+                  //       return NewPost();
+                  //     });
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewPost()));
                 },
               ),
             ),

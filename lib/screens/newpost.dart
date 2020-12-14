@@ -148,7 +148,7 @@ class _NewPostState extends State<NewPost> {
                 ),
                 //Description
                 TextFormField(
-                  style: TextStyle(fontSize: 15, color: Colors.black87),
+                  style: TextStyle(fontSize: 18, color: Colors.black87),
                   autofocus: true,
                   maxLines: 4,
                   maxLength: 170,
@@ -168,7 +168,8 @@ class _NewPostState extends State<NewPost> {
                 ),
                 //category
                 DropdownSearch<String>(
-                  showSearchBox: true,
+                  showSearchBox: false,
+                  maxHeight: 340,
                   searchBoxDecoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey, width: 1),
@@ -178,7 +179,7 @@ class _NewPostState extends State<NewPost> {
                   hint: "Category",
                   autoFocusSearchBox: true,
                   showSelectedItem: true,
-                  showClearButton: true,
+                  showClearButton: false,
                   items: listofCategories,
                   onChanged: ((value) {
                     category = value;

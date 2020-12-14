@@ -50,6 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           fontSize: MediaQuery.of(context).size.height * 0.06,
                           letterSpacing: 4),
                     ),
+                    SizedBox(height: 10),
                     Text(
                       "Enter details for creating your free account",
                       maxLines: 2,

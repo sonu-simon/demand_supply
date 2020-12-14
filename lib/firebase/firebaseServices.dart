@@ -60,7 +60,16 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
     phoneNumber: phoneNumber,
     verificationCompleted: (PhoneAuthCredential credential) async {
       //only on ANDROID ____ Sign the user in with auto-generated credential
-      await auth.signInWithCredential(credential);
+      await auth.signInWithCredential(credential).then((_) async {
+        // if (auth.currentUser != null) {
+        //   if (await checkIfUserProfileExists(auth.currentUser.uid))
+        //     Navigator.pushReplacement(
+        //         context, MaterialPageRoute(builder: (context) => HomePage()));
+        //   else
+        //     Navigator.pushReplacement(
+        //         context, MaterialPageRoute(builder: (context) => SignUpPage()));
+        // }
+      });
     },
     verificationFailed: (FirebaseAuthException e) {
       print('The following error occurred: $e');
