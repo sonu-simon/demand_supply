@@ -42,10 +42,10 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
         child: Container(
           height: height,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: height * 0.16,
+                height: height * 0.05,
               ),
               Text(
                 "Enter OTP received on your phone",
@@ -56,11 +56,14 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
                 ),
               ),
               SizedBox(
-                height: height * 0.05,
+                height: height * 0.04,
               ),
               Image.asset(
-                "asset/image/demand_icon.png",
+                "asset/bg/g.png",
                 scale: 2,
+              ),
+              SizedBox(
+                height: height * 0.05,
               ),
               Padding(
                 padding:

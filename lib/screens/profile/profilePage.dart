@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:demand_supply/data.dart';
 import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -20,6 +22,12 @@ class _ProfilePageState extends State<ProfilePage> {
       print('in .then()');
       _image = File(pickedFile.path);
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -46,46 +54,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                             onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      scrollable: true,
-                                      content: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              ListTile(
-                                                title: Text(
-                                                    "View Profile Picture"),
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ViewProPic()));
-                                                },
-                                              ),
-                                              ListTile(
-                                                title: Text(
-                                                    "Change Profile Picture"),
-                                                onTap: () {
-                                                  openGallery();
-                                                },
-                                              )
-                                            ],
-                                          )),
-                                    );
-                                  });
+                              buildShowDialog(context);
                             },
-                            child: _image == null
+                            child: myProfile.proPicUrl == null
                                 ? CircleAvatar(
                                     radius: 60.0,
                                     backgroundImage: NetworkImage(
                                         "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"))
                                 : CircleAvatar(
                                     radius: 60.0,
-                                    backgroundImage: FileImage(_image),
+                                    backgroundImage:
+                                        NetworkImage(myProfile.proPicUrl),
                                   )),
                       ),
                     ),
@@ -98,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 60,
             ),
             Text(
-              "XYZ",
+              myProfile.name,
               style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.blueGrey,
@@ -109,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 10,
             ),
             Text(
-              "Locality",
+              myProfile.locality,
               style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.black45,
@@ -136,8 +115,13 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 IconButton(
                     icon: Icon(Icons.message),
-                    onPressed: () {
-                      print("WhatsApp");
+                    onPressed: () async {
+                      var phone = myProfile.phoneNumber;
+                      var whatsappUrl = "whatsapp://send?phone=$phone";
+                      await canLaunch(whatsappUrl)
+                          ? launch(whatsappUrl)
+                          : print(
+                              "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
                     }),
                 IconButton(
                     icon: Icon(
@@ -145,7 +129,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.green,
                     ),
                     onPressed: () {
-                      print("Calling...");
+                      var phone = myProfile.phoneNumber;
+                      launch("tel://$phone");
                     }),
                 Icon(
                   Icons.assignment_turned_in_outlined,
@@ -220,9 +205,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Phone Number"),
-                        Text("Locality"),
-                        Text("Email ID"),
+                        Text(myProfile.phoneNumber),
+                        Text(myProfile.locality),
+                        Text(myProfile.emailId),
                       ],
                     ),
                   ),
@@ -236,42 +221,66 @@ class _ProfilePageState extends State<ProfilePage> {
             ExpansionTile(
               title: Text("Your Posts"),
               children: [
-                ListTile(
-                  leading: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      return deletePostDialog(context);
-                    },
-                  ),
-                  title: Text("Post Title"),
-                  trailing: IconButton(
-                    icon: Icon(Icons.message_outlined),
-                    onPressed: () {
-                      return editPostDialog(context);
-                    },
-                  ),
-                ),
-                ListTile(
-                  leading: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      print("Saanam Kalanju");
-                    },
-                  ),
-                  title: Text("Post Title 2"),
-                  trailing: IconButton(
-                    icon: Icon(Icons.message_outlined),
-                    onPressed: () {
-                      print("ChangeForm");
-                    },
-                  ),
-                ),
+                myProfile.posts == null
+                    ? ListTile(
+                        tileColor: Colors.grey,
+                        title: Text("No posts Yet"),
+                      )
+                    : ListView.builder(
+                        itemCount: myProfile.posts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            leading: IconButton(
+                              icon: Icon(Icons.delete_forever_outlined),
+                              onPressed: () {
+                                return deletePostDialog(context);
+                              },
+                            ),
+                            title: Text(" "),
+                            trailing: IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () {
+                                  return editPostDialog(context);
+                                }),
+                          );
+                        })
               ],
             )
           ],
         ),
       ),
     ));
+  }
+
+  Future buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            scrollable: true,
+            content: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text("View Profile Picture"),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewProPic()));
+                      },
+                    ),
+                    ListTile(
+                      title: Text("Change Profile Picture"),
+                      onTap: () {
+                        openGallery();
+                      },
+                    )
+                  ],
+                )),
+          );
+        });
   }
 
   NetworkImage propic() {

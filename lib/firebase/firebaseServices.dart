@@ -1,5 +1,5 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
-import 'package:demand_supply/screens/login/enterOtpPage.dart';
+import 'package:demand_supply/screens/login/otpPage.dart';
 import 'package:demand_supply/screens/signup/signupPage.dart';
 
 import '../providerData.dart';
