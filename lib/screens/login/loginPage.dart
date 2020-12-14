@@ -3,8 +3,8 @@ import 'package:demand_supply/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../firebase/firebaseData.dart';
-import '../firebase/firebaseServices.dart';
+import '../../firebase/firebaseData.dart';
+import '../../firebase/firebaseServices.dart';
 
 String uPhoneNumber;
 
@@ -133,7 +133,15 @@ class _LoginScreenState extends State<LoginScreen> {
           )
         : Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                children: [
+                  CircularProgressIndicator(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Estabilishing connection with backend!'),
+                  )
+                ],
+              ),
             ),
           );
   }

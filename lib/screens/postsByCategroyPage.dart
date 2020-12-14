@@ -110,19 +110,21 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                             height: MediaQuery.of(context).size.height / 4,
                             width: MediaQuery.of(context).size.width * 0.8,
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    "Description:",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(top: 8),
+                                //   child: Text(
+                                //     "Description:",
+                                //     style: TextStyle(fontSize: 16),
+                                //   ),
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                      horizontal: 8.0, vertical: 8.0),
                                   child: Text(
-                                    "Some of the main reasons include the addition of a flagship Snapgragon 865 processor, yes finally Samsung have given us one of their devices with a Snapgragon processor in the UK! An awesome triple lens camera system which is versatile and takes great images/video even in low light. Also the amazing 6.5 120hz super amoled screen adds to the superfast feeling of the phone, with bright vibrant colours and decent outdoor brightness. The battery life is superb and I get almost 7 hours of screen on time with medium/heavy use, I wish it came with a superfast 25w charger but you have to buy that separate. The software skin",
+                                    postsInLocalityFilterByCategory[index]
+                                        .description,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
                                     style: TextStyle(fontSize: 16),

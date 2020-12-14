@@ -1,4 +1,5 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/screens/login/enterOtpPage.dart';
 import 'package:demand_supply/screens/signup/signupPage.dart';
 
 import '../providerData.dart';
@@ -64,73 +65,13 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
     verificationFailed: (FirebaseAuthException e) {
       print('The following error occurred: $e');
     },
-
     codeSent: (String verificationId, int resendToken) {
-      //Update UI - to show allow input from the user - SMS Code
-      String smsCode;
-      return showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Enter your OTP'),
-              content: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                  onChanged: (value) => smsCode = value,
-                ),
-              ),
-              contentPadding: EdgeInsets.all(10.0),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'CANCEL',
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () {
-                    PhoneAuthCredential phoneAuthCredential =
-                        PhoneAuthProvider.credential(
-                            verificationId: verificationId, smsCode: smsCode);
-                    auth
-                        .signInWithCredential(phoneAuthCredential)
-                        .then((_) async {
-                      if (auth.currentUser != null) {
-                        if (await checkIfUserProfileExists(
-                            auth.currentUser.uid))
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
-                        else
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpPage()));
-                      }
-                    });
-                  },
-                  child: Text(
-                    'SUBMIT',
-                  ),
-                ),
-              ],
-            );
-          });
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EnterOtpScreen(
+                  verificationId: verificationId, resendToken: resendToken)));
     },
-
-    // codeSent: ,
     codeAutoRetrievalTimeout: (String verificationId) {
       print('codeAutoRetrieval timed out');
     },

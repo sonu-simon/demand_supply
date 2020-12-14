@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/models/userProfile.dart';
-import 'package:demand_supply/screens/loginPage.dart';
+import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
