@@ -5,6 +5,7 @@ import 'package:demand_supply/screens/homePage.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:demand_supply/screens/signup/signupPage.dart';
 import 'package:demand_supply/screens/signup/userlocation.dart';
+import 'package:demand_supply/screens/trial/1.dart';
 
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: UserLocation(),
+      home: LoginScreen(),
     );
   }
 }
