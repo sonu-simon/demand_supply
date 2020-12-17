@@ -1,9 +1,6 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/signup/adduserpropic.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-
-import '../../data.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -122,61 +119,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             uWhatsappNumber = newValue;
                           }),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //district
-                        DropdownSearch<String>(
-                            showSearchBox: true,
-                            onChanged: (locality) => uLocality = locality,
-                            searchBoxDecoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 1),
-                                    borderRadius: BorderRadius.circular(10)),
-                                // border: InputBorder.none,
-                                helperText: 'Select your district'),
-                            hint: "Select your district",
-                            autoFocusSearchBox: true,
-                            showSelectedItem: true,
-                            showClearButton: true,
-                            items: listOfDistricts),
-                        SizedBox(
-                          height: 10,
-                        ), //locality
-                        DropdownSearch<String>(
-                            showSearchBox: true,
-                            onChanged: (locality) => uLocality = locality,
-                            searchBoxDecoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 1),
-                                    borderRadius: BorderRadius.circular(10)),
-                                // border: InputBorder.none,
-                                helperText: 'Select your locality'),
-                            hint: "Select your Locality",
-                            autoFocusSearchBox: true,
-                            showSelectedItem: true,
-                            showClearButton: true,
-                            items: listOfLocalities),
-                        SizedBox(
-                          height: 10,
-                        ), //policeStation
-                        DropdownSearch<String>(
-                            showSearchBox: true,
-                            onChanged: (locality) => uLocality = locality,
-                            searchBoxDecoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 1),
-                                    borderRadius: BorderRadius.circular(10)),
-                                // border: InputBorder.none,
-                                helperText: 'Police Station'),
-                            hint: "Police Station",
-                            autoFocusSearchBox: true,
-                            showSelectedItem: true,
-                            showClearButton: true,
-                            items: listOfPoliceStaions),
                         SizedBox(
                           height: 10,
                         ),

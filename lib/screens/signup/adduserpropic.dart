@@ -14,9 +14,16 @@ class AddUserProPic extends StatefulWidget {
   final String uWhatsappNumber;
   final String uEmailId;
   final String uLocality;
+  final String uDistrict;
+  final String uPoliceStation;
 
   AddUserProPic(
-      {this.uName, this.uWhatsappNumber, this.uEmailId, this.uLocality});
+      {this.uName,
+      this.uWhatsappNumber,
+      this.uEmailId,
+      this.uLocality,
+      this.uDistrict,
+      this.uPoliceStation});
 
   @override
   _AddUserProPicState createState() => _AddUserProPicState();
@@ -144,7 +151,7 @@ class _AddUserProPicState extends State<AddUserProPic> {
                 proPicUrl: _imgSrc,
                 phoneNumber: uPhoneNumber,
                 locality: widget.uLocality,
-                district: widget.uLocality,
+                district: widget.uDistrict,
                 policeStation: widget.uLocality,
                 whatsappNumber: widget.uWhatsappNumber,
                 emailId: widget.uEmailId,

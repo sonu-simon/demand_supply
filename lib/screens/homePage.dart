@@ -4,6 +4,8 @@ import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/profile/profilePage.dart';
 import 'package:demand_supply/screens/postsByCategroyPage.dart';
+import 'package:demand_supply/screens/searchPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -32,10 +34,10 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.search),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => SearchPageScreen()));
             },
           )
         ],
@@ -50,16 +52,37 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blue,
               ),
             ),
+            //Advanced Search
             ListTile(
-              title: Text('Item 1'),
+              title: Text('Advanced search'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchPageScreen()));
+              },
+            ),
+            //My Profile
+            ListTile(
+              title: Text('My Profile'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
+            ),
+            //Setings
+            ListTile(
+              title: Text('Settings'),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
+            //SignOut
             ListTile(
-              title: Text('Item 2'),
+              title: Text('Sign Out'),
               onTap: () {
+                FirebaseAuth.instance.signOut();
                 // Update the state of the app.
                 // ...
               },
