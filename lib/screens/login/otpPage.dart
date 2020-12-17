@@ -1,15 +1,18 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/firebase/firebaseServices.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/signup/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:demand_supply/screens/homePage.dart';
+import 'package:flutter/services.dart';
 
 String _smsCode;
 codeSentFunction(String verificationId, int resendToken, BuildContext context) {
   PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
       verificationId: verificationId, smsCode: _smsCode);
+
   auth.signInWithCredential(phoneAuthCredential).then((_) async {
     if (auth.currentUser != null) {
       if (await checkIfUserProfileExists(auth.currentUser.uid))
@@ -19,6 +22,13 @@ codeSentFunction(String verificationId, int resendToken, BuildContext context) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
     }
+  }).catchError((error) {
+    print('caught error: ${error.code} - ${error.message}');
+    if (error.code == 'invalid-verification-code')
+      showErrorDialog(context,
+          'The OTP entered is invalid. Please enter the OTP received on your device');
+    else
+      showErrorDialog(context, error.message);
   });
 }
 

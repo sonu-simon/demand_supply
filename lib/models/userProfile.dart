@@ -7,6 +7,8 @@ class UserProfile {
   String proPicUrl;
   String phoneNumber;
   String locality;
+  String district;
+  String policeStation;
   String whatsappNumber;
   String emailId;
   List<String> posts;
@@ -17,6 +19,8 @@ class UserProfile {
       @required this.proPicUrl,
       @required this.phoneNumber,
       @required this.locality,
+      @required this.district,
+      @required this.policeStation,
       this.whatsappNumber,
       this.emailId,
       this.posts});
@@ -27,6 +31,8 @@ class UserProfile {
     proPicUrl = userProfile.proPicUrl;
     phoneNumber = userProfile.phoneNumber;
     locality = userProfile.locality;
+    district = userProfile.district;
+    policeStation = userProfile.policeStation;
     whatsappNumber = userProfile.whatsappNumber;
     emailId = userProfile.emailId;
 
@@ -35,9 +41,12 @@ class UserProfile {
 }
 
 UserProfile demoUser = UserProfile(
-    userID: 'lLqaFarvzPeQRg1HIzGIwb5vqxg1',
-    name: 'userName',
-    phoneNumber: '+91' + '9061254110',
-    whatsappNumber: '+91' + '9061254110',
-    proPicUrl: 'https://www.linkedin.com/feed/',
-    locality: 'Dufai');
+  userID: 'lLqaFarvzPeQRg1HIzGIwb5vqxg1',
+  name: 'userName',
+  phoneNumber: '+91' + '9061254110',
+  whatsappNumber: '+91' + '9061254110',
+  proPicUrl: 'https://www.linkedin.com/feed/',
+  locality: 'Dufai',
+  district: 'DSV',
+  policeStation: 'NDZ',
+);

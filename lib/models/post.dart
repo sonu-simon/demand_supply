@@ -18,6 +18,8 @@ class Post {
   String uProPicUrl;
   String uPhoneNumber;
   String uLocality;
+  String uDistrict;
+  String uPoliceStation;
   String uWhatsappNumber;
   String uEmailId;
 
@@ -35,6 +37,8 @@ class Post {
       this.uProPicUrl,
       this.uPhoneNumber,
       this.uLocality,
+      this.uDistrict,
+      this.uPoliceStation,
       this.uWhatsappNumber,
       this.uEmailId}) {
     if (userProfile != null) {
@@ -43,6 +47,8 @@ class Post {
       uProPicUrl = userProfile.proPicUrl;
       uPhoneNumber = userProfile.phoneNumber;
       uLocality = userProfile.locality;
+      uDistrict = userProfile.district;
+      uPoliceStation = userProfile.policeStation;
       uWhatsappNumber = userProfile.whatsappNumber;
       uEmailId = userProfile.emailId;
     }

@@ -144,6 +144,8 @@ class _AddUserProPicState extends State<AddUserProPic> {
                 proPicUrl: _imgSrc,
                 phoneNumber: uPhoneNumber,
                 locality: widget.uLocality,
+                district: widget.uLocality,
+                policeStation: widget.uLocality,
                 whatsappNumber: widget.uWhatsappNumber,
                 emailId: widget.uEmailId,
                 posts: []);

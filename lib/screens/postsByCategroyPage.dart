@@ -6,7 +6,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
 class PostsByCategory extends StatefulWidget {
-  final String qLocality = myProfile.locality;
+  final String qDistrict = myProfile.district;
   final String qCategory;
 
   PostsByCategory({this.qCategory});
@@ -19,8 +19,8 @@ class _PostsByCategoryState extends State<PostsByCategory> {
   void initState() {
     super.initState();
 
-    retrievePostsFromFirebaseByLocalityFilterByCategory(
-            uLocality: widget.qLocality, category: widget.qCategory)
+    retrievePostsFromFirebaseByDistrictFilterByCategory(
+            uDistrict: widget.qDistrict, category: widget.qCategory)
         .then((value) {
       setState(() {
         print('after retrieval setState()');
@@ -49,14 +49,14 @@ class _PostsByCategoryState extends State<PostsByCategory> {
         splashColor: Colors.cyan,
         child: Icon(Icons.add),
       ),
-      body: postsInLocalityFilterByCategory.isEmpty
+      body: postsInDistrictFilterByCategory.isEmpty
           ? Center(
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: postsInLocalityFilterByCategory.length,
+              itemCount: postsInDistrictFilterByCategory.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -74,7 +74,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                 Center(
                                   child: Image(
                                     image: NetworkImage(
-                                        postsInLocalityFilterByCategory[index]
+                                        postsInDistrictFilterByCategory[index]
                                             .imageUrl),
                                     alignment: Alignment.center,
                                     repeat: ImageRepeat.noRepeat,
@@ -91,7 +91,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                           child: Padding(
                                         padding: const EdgeInsets.all(3.0),
                                         child: Text(
-                                          postsInLocalityFilterByCategory[index]
+                                          postsInDistrictFilterByCategory[index]
                                               .title,
                                           style: TextStyle(
                                               fontSize: 20,
@@ -123,7 +123,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 8.0),
                                   child: Text(
-                                    postsInLocalityFilterByCategory[index]
+                                    postsInDistrictFilterByCategory[index]
                                         .description,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,

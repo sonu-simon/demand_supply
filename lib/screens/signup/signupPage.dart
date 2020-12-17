@@ -17,6 +17,8 @@ class _SignUpPageState extends State<SignUpPage> {
   String uWhatsappNumber;
   String uEmailId;
   String uLocality;
+  String uDistrict;
+  String uPoliceStation;
 
   @override
   void initState() {
@@ -123,7 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        //locality
+                        //district
                         DropdownSearch<String>(
                             showSearchBox: true,
                             onChanged: (locality) => uLocality = locality,
@@ -133,12 +135,48 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey, width: 1),
                                     borderRadius: BorderRadius.circular(10)),
                                 // border: InputBorder.none,
-                                helperText: 'Target Location for your Ad'),
+                                helperText: 'Select your district'),
+                            hint: "Select your district",
+                            autoFocusSearchBox: true,
+                            showSelectedItem: true,
+                            showClearButton: true,
+                            items: listOfDistricts),
+                        SizedBox(
+                          height: 10,
+                        ), //locality
+                        DropdownSearch<String>(
+                            showSearchBox: true,
+                            onChanged: (locality) => uLocality = locality,
+                            searchBoxDecoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1),
+                                    borderRadius: BorderRadius.circular(10)),
+                                // border: InputBorder.none,
+                                helperText: 'Select your locality'),
                             hint: "Select your Locality",
                             autoFocusSearchBox: true,
                             showSelectedItem: true,
                             showClearButton: true,
                             items: listOfLocalities),
+                        SizedBox(
+                          height: 10,
+                        ), //policeStation
+                        DropdownSearch<String>(
+                            showSearchBox: true,
+                            onChanged: (locality) => uLocality = locality,
+                            searchBoxDecoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1),
+                                    borderRadius: BorderRadius.circular(10)),
+                                // border: InputBorder.none,
+                                helperText: 'Police Station'),
+                            hint: "Police Station",
+                            autoFocusSearchBox: true,
+                            showSelectedItem: true,
+                            showClearButton: true,
+                            items: listOfPoliceStaions),
                         SizedBox(
                           height: 10,
                         ),

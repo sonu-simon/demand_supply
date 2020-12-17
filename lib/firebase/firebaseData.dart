@@ -46,9 +46,9 @@ Future<String> uploadUserProPicImage(String userID, File _image) async {
 
 postToFirebase(Post post) {
   FirebaseFirestore.instance
+      .collection('postsByDistrict')
+      .doc(post.uDistrict)
       .collection('posts')
-      .doc('postsByLocality')
-      .collection(post.uLocality)
       .doc(post.id)
       .set({
     'id': post.id,
@@ -60,7 +60,9 @@ postToFirebase(Post post) {
     'postDate': post.postDate,
     'uEmailId': post.uEmailId,
     'uUserID': post.uUserID,
-    'uLocation': post.uLocality,
+    'uLocality': post.uLocality,
+    'uDistrict': post.uDistrict,
+    'uPoliceStation': post.uPoliceStation,
     'uName': post.uName,
     'uPhoneNumber': post.uPhoneNumber,
     'uProPicUrl': post.uProPicUrl,
@@ -80,7 +82,9 @@ userToFirebase(UserProfile userProfile) {
     'name': userProfile.name,
     'proPicUrl': userProfile.proPicUrl,
     'phoneNumber': userProfile.phoneNumber,
-    'location': userProfile.locality,
+    'locality': userProfile.locality,
+    'district': userProfile.locality,
+    'policeStation': userProfile.policeStation,
     'whatsappNumber': userProfile.whatsappNumber,
     'emailId': userProfile.emailId,
     'posts': userProfile.posts
@@ -121,7 +125,9 @@ updateUserInFirebase(UserProfile userProfile) {
     'category': userProfile.name,
     'description': userProfile.proPicUrl,
     'imageUrls': userProfile.phoneNumber,
-    'isVerified': userProfile.locality,
+    'locality': userProfile.locality,
+    'district': userProfile.district,
+    'policeStation': userProfile.policeStation,
     'postDate': userProfile.whatsappNumber,
     'uEmailId': userProfile.emailId,
   });
@@ -132,13 +138,13 @@ updateUserInFirebase(UserProfile userProfile) {
   // ));
 }
 
-Future retrievePostsFromFirebaseByLocalityFilterByCategory(
-    {String uLocality, String category}) async {
-  postsInLocalityFilterByCategory = [];
+Future retrievePostsFromFirebaseByDistrictFilterByCategory(
+    {String uDistrict, String category}) async {
+  postsInDistrictFilterByCategory = [];
   await FirebaseFirestore.instance
+      .collection('postsByDistrict')
+      .doc(uDistrict)
       .collection('posts')
-      .doc('postsByLocality')
-      .collection(uLocality)
       .where('category', isEqualTo: category)
       .get()
       .then((QuerySnapshot querySnapshot) {
@@ -158,13 +164,15 @@ Future retrievePostsFromFirebaseByLocalityFilterByCategory(
         uWhatsappNumber: post.data()['uWhatsappNumber'],
         uProPicUrl: post.data()['uProPicUrl'],
         uLocality: post.data()['uLocation'],
+        uDistrict: post.data()['uDistrict'],
+        uPoliceStation: post.data()['uPoliceStation'],
         uEmailId: post.data()['uEmailId'],
         uUserID: post.data()['uUserID'],
       );
 
-      postsInLocalityFilterByCategory.add(postToAddList);
+      postsInDistrictFilterByCategory.add(postToAddList);
     });
-    return print(postsInLocalityFilterByCategory);
+    return print(postsInDistrictFilterByCategory);
   });
 }
 
@@ -180,6 +188,8 @@ Future retrieveUserProfileFromFirebase(String qUserID) async {
         proPicUrl: userFromFirebase.data()['proPicUrl'],
         phoneNumber: userFromFirebase.data()['phoneNumber'],
         locality: userFromFirebase.data()['location'],
+        district: userFromFirebase.data()['district'],
+        policeStation: userFromFirebase.data()['policeStation'],
         whatsappNumber: userFromFirebase.data()['whatsappNumber'],
         emailId: userFromFirebase.data()['emailID']);
 
