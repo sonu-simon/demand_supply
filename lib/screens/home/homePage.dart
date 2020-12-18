@@ -1,14 +1,16 @@
-import 'package:custom_progress_dialog/custom_progress_dialog.dart';
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/providerData.dart';
+import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/newpost.dart';
-import 'package:demand_supply/screens/profile/profilePage.dart';
 import 'package:demand_supply/screens/postsByCategroyPage.dart';
 import 'package:demand_supply/screens/searchPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,14 +18,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ProgressDialog _progressDialog = ProgressDialog();
   @override
   void initState() {
     super.initState();
-    _progressDialog.showProgressDialog(context,
-        textToBeDisplayed: "Gathering Files");
-    retrieveUserProfileFromFirebase(currentUserID);
-    _progressDialog.dismissProgressDialog(context);
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      showLoading(context, true);
+      print('should have displayed by now');
+      retrieveUserProfileFromFirebase(currentUserID)
+          .then((_) => showLoading(context, false));
+
+      // arsProgressDialog.dismiss();
+    });
   }
 
   @override
@@ -42,54 +48,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            //Advanced Search
-            ListTile(
-              title: Text('Advanced search'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SearchPageScreen()));
-              },
-            ),
-            //My Profile
-            ListTile(
-              title: Text('My Profile'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
-              },
-            ),
-            //Setings
-            ListTile(
-              title: Text('Settings'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            //SignOut
-            ListTile(
-              title: Text('Sign Out'),
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                // Update the state of the app.
-                // ...
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerHomePage(),
       //grids and ol
       body: Column(
         children: [

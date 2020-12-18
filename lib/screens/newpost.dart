@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:demand_supply/models/post.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../data.dart';
 import '../firebase/firebaseData.dart';
-import 'homePage.dart';
+import 'home/homePage.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -56,6 +57,7 @@ class _NewPostState extends State<NewPost> {
             splashColor: Colors.white,
             elevation: 0,
             onPressed: () {
+              showLoading(context, true);
               Post newPost;
               String tempPostId =
                   currentUserID + '_' + DateTime.now().toString();
@@ -70,10 +72,11 @@ class _NewPostState extends State<NewPost> {
                     postDate: DateTime.now().toString(),
                     description: description,
                     userProfile: myProfile);
-                postToFirebase(newPost);
+                postToFirebase(newPost, context);
                 print('new post completed');
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                // showLoading(context, false);
+                showCompletedDialog(
+                    context, '    New post created successfully!');
               });
             },
             child: Text(

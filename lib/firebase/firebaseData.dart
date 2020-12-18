@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demand_supply/models/userProfile.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../models/post.dart';
 import '../data.dart';
@@ -44,9 +46,9 @@ Future<String> uploadUserProPicImage(String userID, File _image) async {
   return _imgSrc;
 }
 
-postToFirebase(Post post) {
+postToFirebase(Post post, BuildContext context) {
   FirebaseFirestore.instance
-      .collection('postsByDistrict')
+      .collection('posts')
       .doc(post.uDistrict)
       .collection('posts')
       .doc(post.id)
@@ -68,14 +70,9 @@ postToFirebase(Post post) {
     'uProPicUrl': post.uProPicUrl,
     'uWhatsappNumber': post.uWhatsappNumber,
   });
-
-  // Scaffold.of(context).showSnackBar(SnackBar(
-  //   content: Text("Upload complete"),
-  //   duration: Duration(seconds: 2),
-  // ));
 }
 
-userToFirebase(UserProfile userProfile) {
+userToFirebase(UserProfile userProfile, BuildContext context) {
   print('userID here ${userProfile.userID}');
   FirebaseFirestore.instance.collection('users').doc(userProfile.userID).set({
     'userID': userProfile.userID,
@@ -91,11 +88,6 @@ userToFirebase(UserProfile userProfile) {
   });
 
   print('user added to firebase');
-
-  // Scaffold.of(context).showSnackBar(SnackBar(
-  //   content: Text("User Profile created!"),
-  //   duration: Duration(seconds: 2),
-  // ));
 }
 
 addLocalityToFirestore(String locality) {
@@ -142,7 +134,7 @@ Future retrievePostsFromFirebaseByDistrictFilterByCategory(
     {String uDistrict, String category}) async {
   postsInDistrictFilterByCategory = [];
   await FirebaseFirestore.instance
-      .collection('postsByDistrict')
+      .collection('posts')
       .doc(uDistrict)
       .collection('posts')
       .where('category', isEqualTo: category)
@@ -187,7 +179,7 @@ Future retrieveUserProfileFromFirebase(String qUserID) async {
         name: userFromFirebase.data()['name'],
         proPicUrl: userFromFirebase.data()['proPicUrl'],
         phoneNumber: userFromFirebase.data()['phoneNumber'],
-        locality: userFromFirebase.data()['location'],
+        locality: userFromFirebase.data()['locality'],
         district: userFromFirebase.data()['district'],
         policeStation: userFromFirebase.data()['policeStation'],
         whatsappNumber: userFromFirebase.data()['whatsappNumber'],
@@ -212,4 +204,14 @@ Future<bool> checkIfUserProfileExists(String qUserID) async {
   });
   print('userExists? = $exists');
   return exists;
+}
+
+advancedSearchInPosts(String qTitle) {
+  FirebaseFirestore.instance
+      .collectionGroup('posts')
+      .where('title', isEqualTo: 'new post')
+      .get()
+      .then((querySnapshot) {
+    print('do something here');
+  });
 }

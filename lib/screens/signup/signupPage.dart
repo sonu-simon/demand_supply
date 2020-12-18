@@ -1,5 +1,6 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/signup/adduserpropic.dart';
+import 'package:demand_supply/screens/signup/userLocationPage.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -104,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.black87),
-                          autofocus: true,
+                          autofocus: false,
                           maxLines: 1,
                           maxLength: 10,
                           keyboardType: TextInputType.phone,
@@ -124,7 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.black87),
-                          autofocus: true,
+                          autofocus: false,
                           maxLines: 1,
                           maxLength: 50,
                           keyboardType: TextInputType.emailAddress,
@@ -152,11 +153,10 @@ class _SignUpPageState extends State<SignUpPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => AddUserProPic(
+                    builder: (context) => UserLocationPage(
                           uEmailId: uEmailId,
                           uName: uName,
                           uWhatsappNumber: uWhatsappNumber,
-                          uLocality: uLocality,
                         )));
           }
         },

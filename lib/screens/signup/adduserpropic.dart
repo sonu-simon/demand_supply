@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/models/userProfile.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
 
-import '../homePage.dart';
+import '../home/homePage.dart';
 
 class AddUserProPic extends StatefulWidget {
   final String uName;
@@ -86,36 +87,22 @@ class _AddUserProPicState extends State<AddUserProPic> {
               //image
               Center(
                 child: Container(
-                  child: _image == null
-                      ? Image.asset(
-                          "asset/bg/photo.jpg",
-                          scale: 2,
-                        )
-                      : Stack(
-                          children: [
-                            Image.asset(
-                              "asset/bg/photo.jpg",
-                              scale: 2,
-                            ),
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              child: Center(
-                                child: Container(
-                                  child: CircleAvatar(
-                                    minRadius: 40,
-                                    maxRadius: 150,
-                                    backgroundColor: Colors.black,
-                                    backgroundImage: FileImage(_image),
-                                  ),
-                                ),
+                    child: _image == null
+                        ? Image.asset(
+                            "asset/bg/photo.jpg",
+                            scale: 2,
+                          )
+                        : Center(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 24),
+                              child: CircleAvatar(
+                                minRadius: 40,
+                                maxRadius: 150,
+                                backgroundColor: Colors.black,
+                                backgroundImage: FileImage(_image),
                               ),
-                            )
-                          ],
-                        ),
-                ),
+                            ),
+                          )),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
@@ -142,6 +129,7 @@ class _AddUserProPicState extends State<AddUserProPic> {
           ))),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          showLoading(context, true);
           UserProfile signupProfile;
           uploadUserProPicImage(currentUserID, _image).then((_imgSrc) {
             print('_imgSrc: $_imgSrc');
@@ -157,9 +145,10 @@ class _AddUserProPicState extends State<AddUserProPic> {
                 emailId: widget.uEmailId,
                 posts: []);
             print(signupProfile.userID);
-            userToFirebase(signupProfile);
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+            userToFirebase(signupProfile, context);
+            // showLoading(context, false);
+            showCompletedDialog(
+                context, '    User Profile successfully created!');
           });
         },
         backgroundColor: Colors.white,

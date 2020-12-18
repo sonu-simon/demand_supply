@@ -3,17 +3,20 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import '../../data.dart';
 
-class UserLocation extends StatefulWidget {
-  @override
-  _UserLocationState createState() => _UserLocationState();
-}
-
-class _UserLocationState extends State<UserLocation> {
-  final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
-
+class UserLocationPage extends StatefulWidget {
   String uName;
   String uWhatsappNumber;
   String uEmailId;
+
+  UserLocationPage({this.uName, this.uWhatsappNumber, this.uEmailId});
+
+  @override
+  _UserLocationPageState createState() => _UserLocationPageState();
+}
+
+class _UserLocationPageState extends State<UserLocationPage> {
+  final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
+
   String uLocality;
   String uDistrict;
   String uPoliceStation;
@@ -155,9 +158,9 @@ class _UserLocationState extends State<UserLocation> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => AddUserProPic(
-                          uEmailId: uEmailId,
-                          uName: uName,
-                          uWhatsappNumber: uWhatsappNumber,
+                          uEmailId: widget.uEmailId,
+                          uName: widget.uName,
+                          uWhatsappNumber: widget.uWhatsappNumber,
                           uLocality: uLocality,
                           uDistrict: uDistrict,
                           uPoliceStation: uPoliceStation,

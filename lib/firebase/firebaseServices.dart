@@ -1,10 +1,11 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:demand_supply/screens/login/otpPage.dart';
 import 'package:demand_supply/screens/signup/signupPage.dart';
 
 import '../providerData.dart';
-import '../screens/homepage.dart';
+import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -41,8 +42,6 @@ setupFirebaseAuth(BuildContext context) {
     if (user == null) {
       print('User is currently signed out!');
       firebaseProvider.mUserLoginState(false);
-
-      Navigator.canPop(context);
     } else {
       print('User is signed in!');
       currentUserID = user.uid;
@@ -51,9 +50,11 @@ setupFirebaseAuth(BuildContext context) {
   });
 }
 
-authSignOut() {
+authSignOut(BuildContext context) {
   print('signing out');
   auth.signOut();
+  Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => LoginScreen()));
 }
 
 loginWithPhoneNumber(String phoneNumber, BuildContext context) async {

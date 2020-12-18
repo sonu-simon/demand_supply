@@ -201,7 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(myProfile.phoneNumber),
                         Text(myProfile.locality),
-                        Text(myProfile.emailId),
+                        // Text(myProfile.emailId),
                       ],
                     ),
                   ),

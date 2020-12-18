@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class FirebaseProvider with ChangeNotifier {
   bool isFirebaseStateInitialized = false;
   bool userLoginState = false;
+  bool isLoading = false;
 
   get getFirebaseState => isFirebaseStateInitialized;
   get getUserLoginState => userLoginState;
+  get getLoadingState => isLoading;
 
   mFirebaseState(bool value) {
     isFirebaseStateInitialized = value;
@@ -16,6 +18,11 @@ class FirebaseProvider with ChangeNotifier {
   mUserLoginState(bool value) {
     userLoginState = value;
     print('notifyListener userLoginState: $userLoginState');
+    notifyListeners();
+  }
+
+  mLoadingState(bool value) {
+    isLoading = value;
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
+import 'package:ars_progress_dialog/dialog.dart';
 import 'package:demand_supply/providerData.dart';
-import 'package:demand_supply/screens/homePage.dart';
+import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -80,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(30)),
                       onPressed: () =>
                           loginWithPhoneNumber(uPhoneNumber, context),
-                      onLongPress: () => authSignOut(),
+                      onLongPress: () => authSignOut(context),
                       child: Text(
                         "Generate OTP",
                         style: TextStyle(color: Colors.white),
@@ -94,15 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {
-                        checkIfUserProfileExists(
-                            'lLqaFarvzPeQRg1HIzGIwb5vqxg1');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                      },
-                      onLongPress: () => authSignOut(),
+                      onPressed: () {},
+                      onLongPress: () => authSignOut(context),
                       child: Text(
                         "NEXT",
                         style: TextStyle(color: Colors.white),

@@ -5,7 +5,7 @@ import 'package:demand_supply/screens/signup/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:demand_supply/screens/homePage.dart';
+import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:flutter/services.dart';
 
 String _smsCode;
@@ -79,6 +79,7 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
                 child: TextFormField(
+                  autofocus: true,
                   keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value == null)
