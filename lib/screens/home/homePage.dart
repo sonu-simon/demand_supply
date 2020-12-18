@@ -1,16 +1,14 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
-import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/postsByCategroyPage.dart';
-import 'package:demand_supply/screens/searchPage.dart';
+import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,14 +34,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("DEMAND&SUPPLY"),
+        title: Text("DEMAND & SUPPLY"),
         centerTitle: true,
         actions: [
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SearchPageScreen()));
+                  MaterialPageRoute(builder: (context) => SearchPage()));
             },
           )
         ],

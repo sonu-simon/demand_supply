@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
 
-import '../home/homePage.dart';
-
 class AddUserProPic extends StatefulWidget {
   final String uName;
   final String uWhatsappNumber;

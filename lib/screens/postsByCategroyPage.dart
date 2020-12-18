@@ -21,7 +21,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
 
     retrievePostsFromFirebaseByDistrictFilterByCategory(
             uDistrict: widget.qDistrict, category: widget.qCategory)
-        .then((value) {
+        .then((_) {
       setState(() {
         print('after retrieval setState()');
       });
@@ -72,13 +72,21 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                               child: Stack(children: [
                                 //image
                                 Center(
-                                  child: Image(
-                                    image: NetworkImage(
-                                        postsInDistrictFilterByCategory[index]
-                                            .imageUrl),
-                                    alignment: Alignment.center,
-                                    repeat: ImageRepeat.noRepeat,
-                                  ),
+                                  child: postsInDistrictFilterByCategory[index]
+                                              .imageUrl !=
+                                          null
+                                      ? Image(
+                                          image: NetworkImage(
+                                              postsInDistrictFilterByCategory[
+                                                      index]
+                                                  .imageUrl),
+                                          alignment: Alignment.center,
+                                          repeat: ImageRepeat.noRepeat,
+                                        )
+                                      : Text(
+                                          'No image available',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
                                 ),
                                 //text
                                 Column(

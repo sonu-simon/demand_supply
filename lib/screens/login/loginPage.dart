@@ -1,6 +1,4 @@
-import 'package:ars_progress_dialog/dialog.dart';
 import 'package:demand_supply/providerData.dart';
-import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -95,7 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {},
+                      onPressed: () {
+                        advancedSearchForPostsByTitle('hhh');
+                      },
                       onLongPress: () => authSignOut(context),
                       child: Text(
                         "NEXT",

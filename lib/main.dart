@@ -1,10 +1,6 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
-import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
-import 'package:demand_supply/screens/signup/signupPage.dart';
-import 'package:demand_supply/screens/signup/userLocationPage.dart';
-import 'package:demand_supply/screens/trial/1.dart';
 
 import 'package:flutter/material.dart';
 

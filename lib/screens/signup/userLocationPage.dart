@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../../data.dart';
 
 class UserLocationPage extends StatefulWidget {
-  String uName;
-  String uWhatsappNumber;
-  String uEmailId;
+  final String uName;
+  final String uWhatsappNumber;
+  final String uEmailId;
 
   UserLocationPage({this.uName, this.uWhatsappNumber, this.uEmailId});
 

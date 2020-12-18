@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demand_supply/models/userProfile.dart';
-import 'package:demand_supply/screens/dialogs.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -60,6 +59,7 @@ postToFirebase(Post post, BuildContext context) {
     'imageUrl': post.imageUrl,
     'isVerified': post.isVerified,
     'postDate': post.postDate,
+    'postInPathCollection': post.postPathInCollection,
     'uEmailId': post.uEmailId,
     'uUserID': post.uUserID,
     'uLocality': post.uLocality,
@@ -70,6 +70,12 @@ postToFirebase(Post post, BuildContext context) {
     'uProPicUrl': post.uProPicUrl,
     'uWhatsappNumber': post.uWhatsappNumber,
   });
+
+  FirebaseFirestore.instance
+      .collection('allPostTitlesById')
+      .doc('postID - title')
+      .update({post.title: post.postPathInCollection}).then(
+          (value) => print('postTitlesById is set'));
 }
 
 userToFirebase(UserProfile userProfile, BuildContext context) {
@@ -206,12 +212,56 @@ Future<bool> checkIfUserProfileExists(String qUserID) async {
   return exists;
 }
 
-advancedSearchInPosts(String qTitle) {
-  FirebaseFirestore.instance
-      .collectionGroup('posts')
-      .where('title', isEqualTo: 'new post')
+// advancedSearchInPosts(String qTitle) {
+//   FirebaseFirestore.instance
+//       .collectionGroup('posts')
+//       .where('title', isEqualTo: 'new post')
+//       .get()
+//       .then((querySnapshot) {
+//     print('do something here');
+//   });
+// }
+
+Future advancedSearchForPostsByTitle(String qTitle) async {
+  advancedSearchList = [];
+  await FirebaseFirestore.instance
+      .collection('allPostTitlesById')
+      .doc('postID - title')
       .get()
-      .then((querySnapshot) {
-    print('do something here');
+      .then((DocumentSnapshot documentSnapshot) {
+    documentSnapshot.data().forEach((key, value) {
+      if (key.toString().contains(qTitle)) {
+        print('key: $key - value: $value');
+        AdvancedSearchModel searchResult = AdvancedSearchModel(key, value);
+        advancedSearchList.add(searchResult);
+      }
+    });
   });
+}
+
+Future<Post> postByPostPath(String postPath) async {
+  Post postFromFirebase;
+  print(postPath);
+  await FirebaseFirestore.instance.doc(postPath).get().then((post) {
+    postFromFirebase = Post(
+      id: post.data()['id'],
+      title: post.data()['title'],
+      postDate: post.data()['postDate'],
+      category: post.data()['category'],
+      description: post.data()['description'],
+      imageUrl: post.data()['imageUrl'],
+      isVerified: post.data()['isVerified'],
+      uName: post.data()['uName'],
+      uPhoneNumber: post.data()['uPhoneNumber'],
+      uWhatsappNumber: post.data()['uWhatsappNumber'],
+      uProPicUrl: post.data()['uProPicUrl'],
+      uLocality: post.data()['uLocation'],
+      uDistrict: post.data()['uDistrict'],
+      uPoliceStation: post.data()['uPoliceStation'],
+      uEmailId: post.data()['uEmailId'],
+      uUserID: post.data()['uUserID'],
+    );
+  });
+  print('retrieved: ${postFromFirebase.id}');
+  return postFromFirebase;
 }

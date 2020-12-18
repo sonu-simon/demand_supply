@@ -1,8 +1,8 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/screens/profile/profilePage.dart';
-import 'package:demand_supply/screens/searchPage.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flutter/material.dart';
 
 class DrawerHomePage extends StatelessWidget {
@@ -34,9 +34,8 @@ class DrawerHomePage extends StatelessWidget {
           ListTile(
             title: DrawerTitleText('Advanced Search'),
             onTap: () {
-              advancedSearchInPosts('new post');
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => SearchPageScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchPage()));
             },
           ),
           Divider(),

@@ -1,5 +1,4 @@
 import 'package:demand_supply/firebase/firebaseData.dart';
-import 'package:demand_supply/screens/signup/adduserpropic.dart';
 import 'package:demand_supply/screens/signup/userLocationPage.dart';
 import 'package:flutter/material.dart';
 

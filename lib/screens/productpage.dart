@@ -14,9 +14,6 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_outlined),
-              onPressed: () => Navigator.pop(context)),
           title: Text(selectedPost.title),
         ),
         body: Container(

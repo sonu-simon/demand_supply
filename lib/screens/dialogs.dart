@@ -1,9 +1,6 @@
 import 'package:ars_progress_dialog/dialog.dart';
-import 'package:demand_supply/data.dart';
-import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 showErrorDialog(BuildContext context, String errorMsg) {
   showDialog(

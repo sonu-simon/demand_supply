@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../data.dart';
 import '../firebase/firebaseData.dart';
-import 'home/homePage.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -47,7 +46,7 @@ class _NewPostState extends State<NewPost> {
           color: Colors.blue,
         ),
         title: Text(
-          "NewPost",
+          "New Post",
           style: TextStyle(color: Colors.blue),
         ),
         actions: [
@@ -59,8 +58,9 @@ class _NewPostState extends State<NewPost> {
             onPressed: () {
               showLoading(context, true);
               Post newPost;
-              String tempPostId =
-                  currentUserID + '_' + DateTime.now().toString();
+              String tempPostId = currentUserID.substring(0, 12) +
+                  '_' +
+                  DateTime.now().toString().replaceAll('.', '_');
               uploadPostImage(currentUserID, tempPostId, _image)
                   .then((_imgSrc) {
                 print('_imgSrc: $_imgSrc');
@@ -69,7 +69,6 @@ class _NewPostState extends State<NewPost> {
                     title: title,
                     category: category,
                     imageUrl: _imgSrc,
-                    postDate: DateTime.now().toString(),
                     description: description,
                     userProfile: myProfile);
                 postToFirebase(newPost, context);

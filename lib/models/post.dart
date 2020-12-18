@@ -12,6 +12,7 @@ class Post {
   bool isVerified;
   UserProfile userProfile;
   String category;
+  String postPathInCollection;
 
   String uUserID;
   String uName;
@@ -24,14 +25,15 @@ class Post {
   String uEmailId;
 
   Post(
-      {@required this.id,
+      {this.id,
       @required this.title,
-      @required this.postDate,
+      this.postDate,
       @required this.description,
       @required this.imageUrl,
       this.isVerified,
       this.userProfile,
       @required this.category,
+      this.postPathInCollection,
       this.uUserID,
       this.uName,
       this.uProPicUrl,
@@ -41,6 +43,7 @@ class Post {
       this.uPoliceStation,
       this.uWhatsappNumber,
       this.uEmailId}) {
+    postDate = DateTime.now().toString();
     if (userProfile != null) {
       uUserID = userProfile.userID;
       uName = userProfile.name;
@@ -51,10 +54,17 @@ class Post {
       uPoliceStation = userProfile.policeStation;
       uWhatsappNumber = userProfile.whatsappNumber;
       uEmailId = userProfile.emailId;
+      postPathInCollection = 'posts/$uDistrict/posts/$id';
     }
   }
 }
 
+class AdvancedSearchModel {
+  String postPath;
+  String title;
+
+  AdvancedSearchModel(this.title, this.postPath);
+}
 // Post demoPost = Post(
 //     title: 'Title goes here',
 //     postDate: DateTime.now().toString(),
