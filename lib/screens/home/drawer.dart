@@ -20,9 +20,21 @@ class DrawerHomePage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.3,
             child: DrawerHeader(
               child: Center(
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(myProfile.proPicUrl),
-                  radius: MediaQuery.of(context).size.width * 0.13,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(myProfile.proPicUrl),
+                      radius: MediaQuery.of(context).size.width * 0.13,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        myProfile.name,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    )
+                  ],
                 ),
               ),
               decoration: BoxDecoration(
