@@ -27,7 +27,7 @@ class DrawerHomePage extends StatelessWidget {
                       radius: MediaQuery.of(context).size.width * 0.13,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 16.0),
                       child: Text(
                         myProfile.name,
                         style: TextStyle(fontSize: 20),

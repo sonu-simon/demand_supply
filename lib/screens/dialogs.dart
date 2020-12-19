@@ -12,7 +12,7 @@ showErrorDialog(BuildContext context, String errorMsg) {
       actions: [
         FlatButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('TRY AGAIN'),
+          child: Text('OK'),
         ),
       ],
     ),

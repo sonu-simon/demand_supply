@@ -1,9 +1,11 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/productpage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PostsByCategory extends StatefulWidget {
   final String qDistrict = myProfile.district;
@@ -144,8 +146,20 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                   children: [
                                     IconButton(
                                         icon: Icon(Icons.message),
-                                        onPressed: () {
-                                          print("WhatsApp");
+                                        onPressed: () async {
+                                          if (postsInDistrictFilterByCategory[
+                                                      index]
+                                                  .uWhatsappNumber !=
+                                              null) {
+                                            var whatsappUrl =
+                                                "whatsapp://send?phone=${postsInDistrictFilterByCategory[index].uWhatsappNumber}";
+                                            await canLaunch(whatsappUrl)
+                                                ? launch(whatsappUrl)
+                                                : print(
+                                                    "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
+                                          } else
+                                            showErrorDialog(context,
+                                                'Whatsapp contact not available');
                                         }),
                                     IconButton(
                                         icon: Icon(
@@ -153,7 +167,8 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                           color: Colors.green,
                                         ),
                                         onPressed: () {
-                                          print("Calling...");
+                                          launch(
+                                              "tel://${postsInDistrictFilterByCategory[index].uPhoneNumber}");
                                         }),
                                     Icon(
                                       Icons.assignment_turned_in_outlined,
