@@ -35,20 +35,11 @@ class _ProductPageState extends State<ProductPage> {
                         child: SizedBox(
                             height: MediaQuery.of(context).size.height * 0.3,
                             width: MediaQuery.of(context).size.width * 0.93,
-                            child: Text("data")
-                            // GSCarousel(
-                            //   images: productimages,
-
-                            //   indicatorSize: const Size.square(8.0),
-                            //   indicatorActiveSize: const Size(18.0, 8.0),
-                            //   indicatorColor: Colors.white,
-                            //   indicatorActiveColor: Colors.redAccent,
-                            //   autoPlayDuration: Duration(seconds: 3),
-                            //   animationCurve: Curves.easeIn,
-                            //   contentMode: BoxFit.cover,
-                            //   // indicatorBackgroundColor: Colors.greenAccent,
-                            // ),
-                            )),
+                            child: FittedBox(
+                                fit: BoxFit.fitHeight,
+                                child: Image(
+                                  image: NetworkImage(selectedPost.imageUrl),
+                                )))),
                   ),
                 ),
                 //text
@@ -68,7 +59,7 @@ class _ProductPageState extends State<ProductPage> {
                       elevation: 5,
                       shadowColor: Colors.grey,
                       child: Container(
-                        width: MediaQuery.of(context).size.width / 4,
+                        width: MediaQuery.of(context).size.width / 5,
                         // height: MediaQuery.of(context).size.height * 0.07,
                         child: IconButton(
                             icon: Icon(Icons.message),
@@ -83,7 +74,7 @@ class _ProductPageState extends State<ProductPage> {
                       elevation: 5,
                       shadowColor: Colors.grey,
                       child: Container(
-                        width: MediaQuery.of(context).size.width / 4,
+                        width: MediaQuery.of(context).size.width / 5,
                         // height: MediaQuery.of(context).size.height * 0.07,
                         child: IconButton(
                             icon: Icon(
@@ -100,13 +91,40 @@ class _ProductPageState extends State<ProductPage> {
                       elevation: 5,
                       shadowColor: Colors.grey,
                       child: Container(
-                        width: MediaQuery.of(context).size.width / 4,
+                        width: MediaQuery.of(context).size.width / 5,
                         // height: MediaQuery.of(context).size.height * 0.07,
                         child: IconButton(
                           icon: Icon(
-                            Icons.assignment_turned_in_outlined,
-                            color: Colors.red,
+                            Icons.person,
                           ),
+                          onPressed: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => ProductPage(
+                            //             postsInDistrictFilterByCategory[
+                            //                 index]))
+                            // );
+                          },
+                        ),
+                      ),
+                    ),
+                    Card(
+                      elevation: 5,
+                      shadowColor: Colors.grey,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 5,
+                        // height: MediaQuery.of(context).size.height * 0.07,
+                        child: IconButton(
+                          icon: selectedPost.isVerified != null
+                              ? Icon(
+                                  Icons.verified_user_outlined,
+                                  color: Colors.green,
+                                )
+                              : Icon(
+                                  Icons.verified_user_outlined,
+                                  color: Colors.red,
+                                ),
                           onPressed: () {},
                         ),
                       ),
@@ -143,25 +161,34 @@ class _ProductPageState extends State<ProductPage> {
                       shadowColor: Colors.grey,
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.28,
-                        child: Center(
-                          child:
-                              Text("What the product is quantity quality etc"),
+                        // height: MediaQuery.of(context).size.height * 0.28,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: selectedPost.description == null
+                              ? Text("Description is given as null")
+                              : Text(
+                                  selectedPost.description,
+                                  textAlign: TextAlign.justify,
+                                ),
                         ),
                       ),
                     ),
                     back: Card(
-                      elevation: 5,
-                      shadowColor: Colors.grey,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.28,
-                        child: Center(
-                          child: Text(
-                              "where it is and anyither demands if der is"),
-                        ),
-                      ),
-                    ))
+                        elevation: 5,
+                        shadowColor: Colors.grey,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          // height: MediaQuery.of(context).size.height * 0.28,
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: selectedPost.description == null
+                                ? Text("Description is given as null")
+                                : Text(
+                                    selectedPost.description,
+                                    textAlign: TextAlign.justify,
+                                  ),
+                          ),
+                        )))
               ],
             ),
           ),
