@@ -165,7 +165,7 @@ class _ProductPageState extends State<ProductPage> {
                         child: Padding(
                           padding: EdgeInsets.all(10),
                           child: selectedPost.description == null
-                              ? Text("Description is given as null")
+                              ? Text("Description is not given")
                               : Text(
                                   selectedPost.description,
                                   textAlign: TextAlign.justify,
@@ -182,7 +182,7 @@ class _ProductPageState extends State<ProductPage> {
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: selectedPost.description == null
-                                ? Text("Description is given as null")
+                                ? Text("Description is not given")
                                 : Text(
                                     selectedPost.description,
                                     textAlign: TextAlign.justify,

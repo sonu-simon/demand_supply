@@ -1,5 +1,6 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseServices.dart';
+import 'package:demand_supply/screens/adminPage.dart';
 import 'package:demand_supply/screens/profile/profilePage.dart';
 import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class DrawerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isadmin = false;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -67,6 +69,27 @@ class DrawerHomePage extends StatelessWidget {
               // ...
             },
           ),
+          Divider(),
+          isadmin
+              ? ListTile(
+                  title: DrawerTitleText('Admin'),
+                  onTap: () {
+                    //admin
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminPageScreen()),
+                    );
+                  },
+                )
+              : ListTile(
+                  enabled: false,
+                  title: DrawerTitleText('Admin'),
+                  onTap: () {
+                    //notadmin
+                    print("Not Admin");
+                  },
+                ),
           Divider(),
           //SignOut
           ListTile(
