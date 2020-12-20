@@ -180,8 +180,9 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProductScreen()));
+                                                  builder: (context) => ProductPage(
+                                                      postsInDistrictFilterByCategory[
+                                                          index])));
                                         })
                                   ],
                                 ),

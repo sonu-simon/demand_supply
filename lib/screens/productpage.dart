@@ -1,17 +1,21 @@
 import 'package:demand_supply/main.dart';
+import 'package:demand_supply/models/post.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gscarousel/gscarousel.dart';
 
-class ProductScreen extends StatefulWidget {
+class ProductPage extends StatefulWidget {
+  final Post passedOnPost;
+  ProductPage(this.passedOnPost);
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  _ProductPageState createState() => _ProductPageState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
-  var selectedPost;
+class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
+    var selectedPost = widget.passedOnPost;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedPost.title),

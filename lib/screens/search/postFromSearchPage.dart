@@ -17,13 +17,7 @@ class _PostAdvSearchPageState extends State<PostAdvSearchPage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      showLoading(context, true);
-      postByPostPath(widget.postPath).then((post) {
-        postToShow = post;
-        showLoading(context, false);
-      });
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override

@@ -1,4 +1,6 @@
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/productpage.dart';
 import 'package:demand_supply/screens/search/postFromSearchPage.dart';
 import 'package:flutter/material.dart';
 
@@ -58,13 +60,17 @@ class _SearchPageState extends State<SearchPage> {
                 child: Material(
                   elevation: 2,
                   child: ListTile(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PostAdvSearchPage(
-                            advancedSearchList[index].postPath),
-                      ),
-                    ),
+                    onTap: () {
+                      showLoading(context, true);
+                      postByPostPath(advancedSearchList[index].postPath)
+                          .then((post) {
+                        showLoading(context, false);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductPage(post)));
+                      });
+                    },
                     title: Text(
                       advancedSearchList[index].title,
                       style: TextStyle(fontSize: 20),
