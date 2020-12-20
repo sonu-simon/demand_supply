@@ -85,6 +85,7 @@ userToFirebase(UserProfile userProfile, BuildContext context) {
     'name': userProfile.name,
     'proPicUrl': userProfile.proPicUrl,
     'phoneNumber': userProfile.phoneNumber,
+    'isAdmin': userProfile.isAdmin,
     'locality': userProfile.locality,
     'district': userProfile.locality,
     'policeStation': userProfile.policeStation,
@@ -196,19 +197,21 @@ Future retrieveUserProfileFromFirebase(String qUserID) async {
   });
 }
 
-Future<bool> checkIfUserProfileExists(String qUserID) async {
+Future<bool> checkIfUserProfileExistsAndAdmin(String qUserID) async {
   bool exists;
   await FirebaseFirestore.instance
       .collection('users')
       .doc(qUserID)
       .get()
       .then((userDoc) {
-    if (userDoc.exists)
+    if (userDoc.exists) {
       exists = true;
-    else
+      myProfileIsAdmin = userDoc.data()['isAdmin'];
+    } else
       exists = false;
   });
   print('userExists? = $exists');
+  print('isUserAdmin? = $myProfileIsAdmin');
   return exists;
 }
 

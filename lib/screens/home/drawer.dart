@@ -12,7 +12,6 @@ class DrawerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isadmin = false;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -70,26 +69,20 @@ class DrawerHomePage extends StatelessWidget {
             },
           ),
           Divider(),
-          isadmin
-              ? ListTile(
-                  title: DrawerTitleText('Admin'),
-                  onTap: () {
-                    //admin
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AdminPageScreen()),
-                    );
-                  },
-                )
-              : ListTile(
-                  enabled: false,
-                  title: DrawerTitleText('Admin'),
-                  onTap: () {
-                    //notadmin
-                    print("Not Admin");
-                  },
-                ),
+
+          Visibility(
+            visible: myProfileIsAdmin,
+            child: ListTile(
+              title: DrawerTitleText('Admin'),
+              onTap: () {
+                //admin
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AdminPageScreen()),
+                );
+              },
+            ),
+          ),
           Divider(),
           //SignOut
           ListTile(

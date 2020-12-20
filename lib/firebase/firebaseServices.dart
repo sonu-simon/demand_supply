@@ -1,3 +1,4 @@
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
@@ -101,7 +102,9 @@ splashScreenLogic(BuildContext context) {
   if (auth.currentUser == null)
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  else
+  else {
+    checkIfUserProfileExistsAndAdmin(auth.currentUser.uid);
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => HomePage()));
+  }
 }

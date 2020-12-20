@@ -172,3 +172,5 @@ List<String> listofCategories = [
 UserProfile myProfile;
 
 List<AdvancedSearchModel> advancedSearchList = [];
+
+bool myProfileIsAdmin;

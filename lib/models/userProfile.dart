@@ -12,6 +12,7 @@ class UserProfile {
   String whatsappNumber;
   String emailId;
   List<String> posts;
+  bool isAdmin;
 
   UserProfile(
       {@required this.userID,
@@ -21,6 +22,7 @@ class UserProfile {
       @required this.locality,
       @required this.district,
       @required this.policeStation,
+      @required this.isAdmin,
       this.whatsappNumber,
       this.emailId,
       this.posts});
@@ -43,6 +45,7 @@ class UserProfile {
 UserProfile demoUser = UserProfile(
   userID: 'lLqaFarvzPeQRg1HIzGIwb5vqxg1',
   name: 'userName',
+  isAdmin: true,
   phoneNumber: '+91' + '9061254110',
   whatsappNumber: '+91' + '9061254110',
   proPicUrl: 'https://www.linkedin.com/feed/',

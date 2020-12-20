@@ -15,7 +15,7 @@ codeSentFunction(String verificationId, int resendToken, BuildContext context) {
 
   auth.signInWithCredential(phoneAuthCredential).then((_) async {
     if (auth.currentUser != null) {
-      if (await checkIfUserProfileExists(auth.currentUser.uid))
+      if (await checkIfUserProfileExistsAndAdmin(auth.currentUser.uid))
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       else

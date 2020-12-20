@@ -6,7 +6,12 @@ class AdminPageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        child: Text("Admin Priviledges"),
+        child: Center(
+          child: Text(
+            "Admin Priviledges",
+            style: TextStyle(fontSize: 28),
+          ),
+        ),
       ),
     );
   }
