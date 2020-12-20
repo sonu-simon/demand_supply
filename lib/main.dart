@@ -1,6 +1,7 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
+import 'package:demand_supply/screens/search/searchPage.dart';
 
 import 'package:flutter/material.dart';
 

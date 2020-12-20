@@ -2,7 +2,6 @@ import 'package:demand_supply/main.dart';
 import 'package:demand_supply/models/post.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:gscarousel/gscarousel.dart';
 
 class ProductPage extends StatefulWidget {
   final Post passedOnPost;
@@ -35,21 +34,22 @@ class _ProductPageState extends State<ProductPage> {
                     shadowColor: Colors.grey,
                     child: Container(
                         child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      width: MediaQuery.of(context).size.width * 0.93,
-                      child: GSCarousel(
-                        images: productimages,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            width: MediaQuery.of(context).size.width * 0.93,
+                            child: Text("data")
+                            // GSCarousel(
+                            //   images: productimages,
 
-                        indicatorSize: const Size.square(8.0),
-                        indicatorActiveSize: const Size(18.0, 8.0),
-                        indicatorColor: Colors.white,
-                        indicatorActiveColor: Colors.redAccent,
-                        autoPlayDuration: Duration(seconds: 3),
-                        animationCurve: Curves.easeIn,
-                        contentMode: BoxFit.cover,
-                        // indicatorBackgroundColor: Colors.greenAccent,
-                      ),
-                    )),
+                            //   indicatorSize: const Size.square(8.0),
+                            //   indicatorActiveSize: const Size(18.0, 8.0),
+                            //   indicatorColor: Colors.white,
+                            //   indicatorActiveColor: Colors.redAccent,
+                            //   autoPlayDuration: Duration(seconds: 3),
+                            //   animationCurve: Curves.easeIn,
+                            //   contentMode: BoxFit.cover,
+                            //   // indicatorBackgroundColor: Colors.greenAccent,
+                            // ),
+                            )),
                   ),
                 ),
                 //text
