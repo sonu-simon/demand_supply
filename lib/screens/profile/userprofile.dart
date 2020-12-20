@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProfilePage extends StatefulWidget {
+class UserProfilePage extends StatefulWidget {
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _UserProfilePageState createState() => _UserProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _UserProfilePageState extends State<UserProfilePage> {
   File _image;
 
   void openGallery() async {
@@ -104,37 +104,37 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 10,
             ),
             // /Contact
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     IconButton(
-            //         icon: Icon(Icons.message),
-            //         onPressed: () async {
-            //           var phone = myProfile.phoneNumber;
-            //           var whatsappUrl = "whatsapp://send?phone=$phone";
-            //           await canLaunch(whatsappUrl)
-            //               ? launch(whatsappUrl)
-            //               : print(
-            //                   "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
-            //         }),
-            //     IconButton(
-            //         icon: Icon(
-            //           Icons.call,
-            //           color: Colors.green,
-            //         ),
-            //         onPressed: () {
-            //           var phone = myProfile.phoneNumber;
-            //           launch("tel://$phone");
-            //         }),
-            //     Icon(
-            //       Icons.assignment_turned_in_outlined,
-            //       color: Colors.red,
-            //     )
-            //   ],
-            // ),
-            // SizedBox(
-            //   height: 10,
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                    icon: Icon(Icons.message),
+                    onPressed: () async {
+                      var phone = myProfile.phoneNumber;
+                      var whatsappUrl = "whatsapp://send?phone=$phone";
+                      await canLaunch(whatsappUrl)
+                          ? launch(whatsappUrl)
+                          : print(
+                              "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
+                    }),
+                IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      var phone = myProfile.phoneNumber;
+                      launch("tel://$phone");
+                    }),
+                Icon(
+                  Icons.assignment_turned_in_outlined,
+                  color: Colors.red,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
             ExpansionTile(
               title: Text("Details"),
               children: [
@@ -227,14 +227,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             leading: IconButton(
                               icon: Icon(Icons.delete_forever_outlined),
                               onPressed: () {
-                                // return deletePostDialog(context);
+                                return deletePostDialog(context);
                               },
                             ),
                             title: Text(" "),
                             trailing: IconButton(
                                 icon: Icon(Icons.edit),
                                 onPressed: () {
-                                  // return editPostDialog(context);
+                                  return editPostDialog(context);
                                 }),
                           );
                         })
