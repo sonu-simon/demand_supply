@@ -97,7 +97,7 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
   );
 }
 
-bool splashScreenLogic(BuildContext context) {
+splashScreenLogic(BuildContext context) {
   if (auth.currentUser == null)
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));

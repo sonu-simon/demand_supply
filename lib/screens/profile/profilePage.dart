@@ -5,7 +5,6 @@ import 'package:demand_supply/data.dart';
 import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

@@ -1,4 +1,3 @@
-import 'package:demand_supply/main.dart';
 import 'package:demand_supply/models/post.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';

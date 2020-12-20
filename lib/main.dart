@@ -1,11 +1,6 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
-import 'package:demand_supply/screens/login/loginPage.dart';
-<<<<<<< HEAD
 import 'package:demand_supply/screens/splashscreen.dart';
-=======
-import 'package:demand_supply/screens/search/searchPage.dart';
->>>>>>> d75e782848df88247509a9704c64749ab87f1da0
 
 import 'package:flutter/material.dart';
 
@@ -41,15 +36,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-List<NetworkImage> productimages = [
-  NetworkImage(
-      'https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg'),
-  NetworkImage('https://www.blibli.com/friends/assets/banner2.jpg'),
-  NetworkImage(
-      'https://www.static-src.com/siva/asset//06_2017/microsite-banner--1200x460.jpg'),
-  NetworkImage(
-      'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'),
-  NetworkImage(
-      'https://www.static-src.com/siva/asset//03_2017/brandedbabytoy-toy-header.jpg'),
-];
