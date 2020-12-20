@@ -55,20 +55,29 @@ class _HomePageState extends State<HomePage> {
           ),
           //notification from police
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.18,
-              color: Colors.green,
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.18,
+                color: Colors.grey[500],
+                child: Center(
+                  child: Text(
+                    'SOMETHING IMPORTANT',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
+                        color: Colors.white),
+                  ),
+                ),
+              )),
           SizedBox(
             height: 5,
           ),
           //social causes heading
-          Text(
-            "Find a cause to support",
-            textAlign: TextAlign.start,
-          ),
+          // Text(
+          //   "Find a cause to support",
+          //   textAlign: TextAlign.start,
+          // ),
           //socialcauses banner
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -267,18 +276,34 @@ Widget flipcard(BuildContext context, int index) {
       color: Colors.blueGrey,
       child: Container(
         height: MediaQuery.of(context).size.height * 0.13,
-        width: MediaQuery.of(context).size.height * 0.2,
-        color: Colors.blueGrey,
-        child: Text(index.toString()),
+        width: MediaQuery.of(context).size.height * 0.24,
+        color: Colors.blue[200],
+        child: Center(
+            child: Text(
+          'POSTER ${(index + 1).toString()}',
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
+              color: Colors.grey[700]),
+        )),
       ),
     ),
     back: Card(
-      color: Colors.grey,
+      color: Colors.blueGrey,
       child: Container(
         height: MediaQuery.of(context).size.height * 0.13,
-        width: MediaQuery.of(context).size.height * 0.2,
-        color: Colors.grey,
-        child: Text("back"),
+        width: MediaQuery.of(context).size.height * 0.24,
+        color: Colors.blue[400],
+        child: Center(
+            child: Text(
+          'DETAILS ${(index + 1).toString()}',
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
+              color: Colors.white),
+        )),
       ),
     ),
   );
