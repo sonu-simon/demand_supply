@@ -24,60 +24,91 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     advancedSearchList = [];
+    searchTerm = "";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent[200],
-        title: TextFormField(
-          decoration: InputDecoration(
-              suffixIcon: IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: searchFn,
-          )),
-          textInputAction: TextInputAction.search,
-          onFieldSubmitted: (value) {
-            searchTerm = value;
-            searchFn();
-            print('search term $value');
-          },
-        ),
+        backgroundColor: Colors.blue,
       ),
-      body: advancedSearchList.isEmpty
-          ? Center(
-              child: Text('No results found'),
-            )
-          : ListView.builder(
-              itemCount: advancedSearchList.length,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Material(
-                  elevation: 2,
-                  child: ListTile(
-                    onTap: () {
-                      showLoading(context, true);
-                      postByPostPath(advancedSearchList[index].postPath)
-                          .then((post) {
-                        showLoading(context, false);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductPage(post)));
-                      });
-                    },
-                    title: Text(
-                      advancedSearchList[index].title,
-                      style: TextStyle(fontSize: 20),
-                    ),
+      body: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            actions: [
+              IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                    size: 40,
                   ),
-                ),
+                  onPressed: searchFn)
+            ],
+            title: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: TextFormField(
+                style: TextStyle(fontSize: 20, color: Colors.black87),
+                autofocus: true,
+                maxLines: 1,
+                decoration: InputDecoration(
+                    focusColor: Colors.black,
+                    border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue)),
+                    hintText: "Search",
+                    hintStyle: TextStyle(fontSize: 20)),
+                initialValue: "",
+                textInputAction: TextInputAction.search,
+                onFieldSubmitted: (value) {
+                  searchTerm = value;
+                  searchFn();
+                  print('search term $value');
+                },
+                onChanged: ((String newValue) {
+                  // uName = newValue;
+                }),
               ),
             ),
+          ),
+          body: advancedSearchList.isEmpty
+              ? Center(
+                  child: Text('No results found'),
+                )
+              : ListView.separated(
+                  itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Material(
+                          elevation: 2,
+                          child: ListTile(
+                            onTap: () {
+                              showLoading(context, true);
+                              postByPostPath(advancedSearchList[index].postPath)
+                                  .then((post) {
+                                showLoading(context, false);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductPage(post)));
+                              });
+                            },
+                            title: Text(
+                              advancedSearchList[index].title,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ),
+                  separatorBuilder: (context, index) {
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
+                  itemCount: advancedSearchList.length)),
     );
   }
 }

@@ -1,7 +1,11 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
+<<<<<<< HEAD
 import 'package:demand_supply/screens/splashscreen.dart';
+=======
+import 'package:demand_supply/screens/search/searchPage.dart';
+>>>>>>> d75e782848df88247509a9704c64749ab87f1da0
 
 import 'package:flutter/material.dart';
 
@@ -29,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
