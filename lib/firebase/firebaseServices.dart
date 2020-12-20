@@ -1,4 +1,5 @@
 import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:demand_supply/screens/login/otpPage.dart';
 
@@ -55,6 +56,7 @@ authSignOut(BuildContext context) {
 }
 
 loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
+  showLoading(context, true);
   await auth.verifyPhoneNumber(
     phoneNumber: phoneNumber,
     verificationCompleted: (PhoneAuthCredential credential) async {
@@ -82,6 +84,7 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
         showErrorDialog(context, e.message);
     },
     codeSent: (String verificationId, int resendToken) {
+      showLoading(context, false);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -92,4 +95,13 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
       print('codeAutoRetrieval timed out');
     },
   );
+}
+
+bool splashScreenLogic(BuildContext context) {
+  if (auth.currentUser == null)
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  else
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
 }

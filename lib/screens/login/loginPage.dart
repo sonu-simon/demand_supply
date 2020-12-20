@@ -14,6 +14,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  void initState() {
+    super.initState();
+    uPhoneNumber = "";
+  }
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     final firebaseProvider = Provider.of<FirebaseProvider>(context);
@@ -25,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: height,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
                       height: height * 0.16,
@@ -55,19 +62,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(20),
-                              ),
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20),
                             ),
-                            filled: true,
-                            prefixIcon: Icon(
-                              Icons.phone_iphone,
-                              color: Colors.cyan,
+                          ),
+                          filled: true,
+                          prefixIcon: Icon(
+                            Icons.phone_iphone,
+                            color: Colors.cyan,
+                          ),
+                          hintStyle: new TextStyle(color: Colors.grey[800]),
+                          hintText: "10 digit phone number",
+                          fillColor: Colors.white70,
+                          suffixIcon: IconButton(
+                            icon: Padding(
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Icon(Icons.login_sharp),
                             ),
-                            hintStyle: new TextStyle(color: Colors.grey[800]),
-                            hintText: "10 digit phone number",
-                            fillColor: Colors.white70),
+                            onPressed: () =>
+                                loginWithPhoneNumber(uPhoneNumber, context),
+                          ),
+                        ),
                         onChanged: (value) {
                           //Process the input phone number
                           uPhoneNumber = '+91' + value;
@@ -90,35 +106,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: height * 0.005,
                     ),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {
-                        advancedSearchForPostsByTitle('hhh');
-                      },
-                      onLongPress: () => authSignOut(context),
-                      child: Text(
-                        "NEXT",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      elevation: 7.0,
-                      color: Colors.cyan,
-                    ),
+                    // RaisedButton(
+                    //   shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(30)),
+                    //   onPressed: () {
+                    //     advancedSearchForPostsByTitle('hhh');
+                    //   },
+                    //   onLongPress: () => authSignOut(context),
+                    //   child: Text(
+                    //     "NEXT",
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    //   elevation: 7.0,
+                    //   color: Colors.cyan,
+                    // ),
+                    // SizedBox(
+                    //   height: height * 0.005,
+                    // ),
+                    // Text("Need Help?"),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // Text(
+                    //   firebaseProvider.getUserLoginState
+                    //       ? "User Logged in!"
+                    //       : "Not logged in!",
+                    //   style: TextStyle(fontSize: 18),
+                    // )
                     SizedBox(
-                      height: height * 0.005,
-                    ),
-                    Text("Need Help?"),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      firebaseProvider.getUserLoginState
-                          ? "User Logged in!"
-                          : "Not logged in!",
-                      style: TextStyle(fontSize: 18),
+                      height: height * 0.2,
                     )
                   ],
                 ),

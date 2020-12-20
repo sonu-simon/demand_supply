@@ -1,6 +1,7 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
+import 'package:demand_supply/screens/splashscreen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

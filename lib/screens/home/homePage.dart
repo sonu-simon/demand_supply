@@ -3,7 +3,7 @@ import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/newpost.dart';
-import 'package:demand_supply/screens/postsByCategroyPage.dart';
+import 'package:demand_supply/screens/postsByCategoryPage.dart';
 import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';

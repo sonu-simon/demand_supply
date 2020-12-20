@@ -54,9 +54,6 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                height: height * 0.05,
-              ),
               Text(
                 "Enter OTP received on your phone",
                 style: TextStyle(
@@ -87,37 +84,52 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
                     return null;
                   },
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(20),
-                        ),
+                    border: OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(20),
                       ),
-                      filled: true,
-                      prefixIcon: Icon(
-                        Icons.phone_iphone,
-                        color: Colors.cyan,
+                    ),
+                    filled: true,
+                    prefixIcon: Icon(
+                      Icons.phone_iphone,
+                      color: Colors.cyan,
+                    ),
+                    hintStyle: new TextStyle(color: Colors.grey[800]),
+                    hintText: "One Time Password",
+                    fillColor: Colors.white70,
+                    suffixIcon: IconButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(right: 16),
+                        child: Icon(Icons.login_sharp),
                       ),
-                      hintStyle: new TextStyle(color: Colors.grey[800]),
-                      hintText: "One Time Password",
-                      fillColor: Colors.white70),
+                      onPressed: () => codeSentFunction(
+                          widget.verificationId, widget.resendToken, context),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.go,
+                  onFieldSubmitted: (_) => codeSentFunction(
+                      widget.verificationId, widget.resendToken, context),
                   onChanged: (value) {
                     //Process the input phone number
                     _smsCode = value;
                   },
                 ),
               ),
-              RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                onPressed: () => codeSentFunction(
-                    widget.verificationId, widget.resendToken, context),
-                child: Text(
-                  "Submit OTP",
-                  style: TextStyle(color: Colors.white),
-                ),
-                elevation: 7.0,
-                color: Colors.cyan,
-              ),
+              // RaisedButton(
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(30)),
+              //   onPressed: () => codeSentFunction(
+              //       widget.verificationId, widget.resendToken, context),
+              //   child: Text(
+              //     "Submit OTP",
+              //     style: TextStyle(color: Colors.white),
+              //   ),
+              //   elevation: 7.0,
+              //   color: Colors.cyan,
+              // ),
+              SizedBox(
+                height: height * 0.12,
+              )
             ],
           ),
         ),
