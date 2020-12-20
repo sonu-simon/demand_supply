@@ -53,8 +53,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             child: myProfile.proPicUrl == null
                                 ? CircleAvatar(
                                     radius: 60.0,
-                                    backgroundImage: NetworkImage(
-                                        "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png"))
+                                    backgroundImage:
+                                        NetworkImage(myProfile.proPicUrl))
                                 : CircleAvatar(
                                     radius: 60.0,
                                     backgroundImage:
@@ -135,79 +135,79 @@ class _UserProfilePageState extends State<UserProfilePage> {
             SizedBox(
               height: 10,
             ),
-            ExpansionTile(
-              title: Text("Details"),
-              children: [
-                ListTile(
-                  title: Text("Name"),
-                  trailing: IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              scrollable: true,
-                              title: Text('Details'),
-                              content: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Form(
-                                  child: Column(
-                                    children: <Widget>[
-                                      TextFormField(
-                                        decoration: InputDecoration(
-                                          labelText: 'Name',
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        decoration: InputDecoration(
-                                          labelText: 'Phone',
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        decoration: InputDecoration(
-                                          labelText: 'Email',
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        decoration: InputDecoration(
-                                          labelText: 'Locality',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              actions: [
-                                RaisedButton(
-                                    child: Text("Submit"),
-                                    onPressed: () {
-                                      // your code
-                                    })
-                              ],
-                            );
-                          });
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(myProfile.phoneNumber),
-                        Text(myProfile.locality),
-                        // Text(myProfile.emailId),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
+            // ExpansionTile(
+            //   title: Text("Details"),
+            //   children: [
+            //     ListTile(
+            //       title: Text("Name"),
+            //       trailing: IconButton(
+            //         icon: Icon(Icons.edit),
+            //         onPressed: () {
+            //           showDialog(
+            //               context: context,
+            //               builder: (BuildContext context) {
+            //                 return AlertDialog(
+            //                   scrollable: true,
+            //                   title: Text('Details'),
+            //                   content: Padding(
+            //                     padding: const EdgeInsets.all(8.0),
+            //                     child: Form(
+            //                       child: Column(
+            //                         children: <Widget>[
+            //                           TextFormField(
+            //                             decoration: InputDecoration(
+            //                               labelText: 'Name',
+            //                             ),
+            //                           ),
+            //                           TextFormField(
+            //                             keyboardType: TextInputType.number,
+            //                             decoration: InputDecoration(
+            //                               labelText: 'Phone',
+            //                             ),
+            //                           ),
+            //                           TextFormField(
+            //                             keyboardType:
+            //                                 TextInputType.emailAddress,
+            //                             decoration: InputDecoration(
+            //                               labelText: 'Email',
+            //                             ),
+            //                           ),
+            //                           TextFormField(
+            //                             decoration: InputDecoration(
+            //                               labelText: 'Locality',
+            //                             ),
+            //                           ),
+            //                         ],
+            //                       ),
+            //                     ),
+            //                   ),
+            //                   actions: [
+            //                     RaisedButton(
+            //                         child: Text("Submit"),
+            //                         onPressed: () {
+            //                           // your code
+            //                         })
+            //                   ],
+            //                 );
+            //               });
+            //         },
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Container(
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Text(myProfile.phoneNumber),
+            //             Text(myProfile.locality),
+            //             // Text(myProfile.emailId),
+            //           ],
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // ),
             SizedBox(
               height: 10,
             ),
@@ -224,18 +224,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         itemCount: myProfile.posts.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            leading: IconButton(
-                              icon: Icon(Icons.delete_forever_outlined),
-                              onPressed: () {
-                                return deletePostDialog(context);
-                              },
-                            ),
+                            // leading: IconButton(
+                            //   icon: Icon(Icons.delete_forever_outlined),
+                            //   onPressed: () {
+                            //     return deletePostDialog(context);
+                            //   },
+                            // ),
                             title: Text(" "),
-                            trailing: IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {
-                                  return editPostDialog(context);
-                                }),
+                            // trailing: IconButton(
+                            //     icon: Icon(Icons.edit),
+                            //     onPressed: () {
+                            //       return editPostDialog(context);
+                            //     }),
                           );
                         })
               ],
