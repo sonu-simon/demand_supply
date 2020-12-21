@@ -1,8 +1,8 @@
-import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:demand_supply/screens/login/otpPage.dart';
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 
 import '../providerData.dart';
 import 'package:flutter/material.dart';

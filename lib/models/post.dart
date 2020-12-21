@@ -12,7 +12,7 @@ class Post {
   bool isVerified;
   UserProfile userProfile;
   String category;
-  String postPathInCollection;
+  String postInPathCollection;
 
   String uUserID;
   String uName;
@@ -33,7 +33,7 @@ class Post {
       this.isVerified,
       this.userProfile,
       @required this.category,
-      this.postPathInCollection,
+      this.postInPathCollection,
       this.uUserID,
       this.uName,
       this.uProPicUrl,
@@ -54,7 +54,7 @@ class Post {
       uPoliceStation = userProfile.policeStation;
       uWhatsappNumber = userProfile.whatsappNumber;
       uEmailId = userProfile.emailId;
-      postPathInCollection = 'posts/$uDistrict/posts/$id';
+      postInPathCollection = 'posts/$uDistrict/posts/$id';
     }
   }
 }

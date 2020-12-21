@@ -1,11 +1,11 @@
 import 'package:demand_supply/data.dart';
-import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/newpost.dart';
-import 'package:demand_supply/screens/postsByCategoryPage.dart';
-import 'package:demand_supply/screens/search/searchPage.dart';
+import 'package:demand_supply/screens/home/postsByCategoryPage.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:demand_supply/screens/search/normalSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

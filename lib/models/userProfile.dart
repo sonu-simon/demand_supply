@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:flutter/material.dart';
+
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 
 class UserProfile {
   String userID;
@@ -11,6 +12,7 @@ class UserProfile {
   String policeStation;
   String whatsappNumber;
   String emailId;
+
   List<String> posts;
   bool isAdmin;
 

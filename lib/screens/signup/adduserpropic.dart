@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:demand_supply/firebase/firebaseData.dart';
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 
 class AddUserProPic extends StatefulWidget {
   final String uName;
@@ -132,6 +133,7 @@ class _AddUserProPicState extends State<AddUserProPic> {
           uploadUserProPicImage(currentUserID, _image).then((_imgSrc) {
             print('_imgSrc: $_imgSrc');
             signupProfile = UserProfile(
+                isAdmin: false,
                 userID: currentUserID,
                 name: widget.uName,
                 proPicUrl: _imgSrc,
@@ -143,7 +145,7 @@ class _AddUserProPicState extends State<AddUserProPic> {
                 emailId: widget.uEmailId,
                 posts: []);
             print(signupProfile.userID);
-            userToFirebase(signupProfile, context);
+            userToFirebase(signupProfile);
             // showLoading(context, false);
             showCompletedDialog(
                 context, '    User Profile successfully created!');

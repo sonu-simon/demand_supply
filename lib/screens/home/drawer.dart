@@ -1,6 +1,6 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseServices.dart';
-import 'package:demand_supply/screens/adminPage.dart';
+import 'package:demand_supply/screens/admin/adminPage.dart';
 import 'package:demand_supply/screens/profile/profilePage.dart';
 import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class DrawerHomePage extends StatelessWidget {
             title: DrawerTitleText('Advanced Search'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SearchPage()));
+                  MaterialPageRoute(builder: (context) => AdvSearchPage()));
             },
           ),
           Divider(),

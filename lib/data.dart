@@ -172,5 +172,8 @@ List<String> listofCategories = [
 UserProfile myProfile;
 
 List<AdvancedSearchModel> advancedSearchList = [];
+List<Post> postsInDistrictFilterByTitle = [];
 
 bool myProfileIsAdmin;
+
+List<Post> notVerifiedPostsForAdminByLocality = [];

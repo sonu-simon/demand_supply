@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../data.dart';
+import '../firebase/firebaseDataPosts.dart';
 import '../firebase/firebaseData.dart';
 
 class NewPost extends StatefulWidget {
@@ -69,9 +70,10 @@ class _NewPostState extends State<NewPost> {
                     title: title,
                     category: category,
                     imageUrl: _imgSrc,
+                    isVerified: false,
                     description: description,
                     userProfile: myProfile);
-                postToFirebase(newPost, context);
+                postToFirebase(newPost);
                 print('new post completed');
                 // showLoading(context, false);
                 showCompletedDialog(

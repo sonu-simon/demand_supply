@@ -1,19 +1,20 @@
 import 'package:demand_supply/data.dart';
-import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/productPage/productpage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 
-class AdvSearchPage extends StatefulWidget {
+class SearchPage extends StatefulWidget {
   @override
-  _AdvSearchPageState createState() => _AdvSearchPageState();
+  _SearchPageState createState() => _SearchPageState();
 }
 
-class _AdvSearchPageState extends State<AdvSearchPage> {
+class _SearchPageState extends State<SearchPage> {
   String searchTerm;
   searchFn() {
-    advancedSearchForPostsByTitle(searchTerm).then(
+    searchForPostsByTitleInDistrict(
+            uDistrict: myProfile.district, title: searchTerm)
+        .then(
       (_) => setState(() {
         print('search completed!');
       }),
@@ -23,7 +24,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
   @override
   void initState() {
     super.initState();
-    advancedSearchList = [];
+    postsInDistrictFilterByTitle = [];
     searchTerm = "";
   }
 
@@ -64,7 +65,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
           ),
         ),
       ),
-      body: advancedSearchList.isEmpty
+      body: postsInDistrictFilterByTitle.isEmpty
           ? Center(
               child: Text('No results found'),
             )
@@ -76,15 +77,11 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                       color: Colors.grey[100],
                       child: ListTile(
                         onTap: () {
-                          showLoading(context, true);
-                          postByPostPath(advancedSearchList[index].postPath)
-                              .then((post) {
-                            showLoading(context, false);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProductPage(post)));
-                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProductPage(
+                                      postsInDistrictFilterByTitle[index])));
                         },
                         title: Text(
                           advancedSearchList[index].title,
@@ -94,14 +91,14 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                     ),
                   ),
               separatorBuilder: (context, index) {
-                Padding(
+                return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Divider(
                     color: Colors.grey,
                   ),
                 );
               },
-              itemCount: advancedSearchList.length),
+              itemCount: postsInDistrictFilterByTitle.length),
     );
   }
 }
