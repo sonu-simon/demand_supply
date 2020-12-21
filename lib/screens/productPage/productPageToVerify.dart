@@ -2,6 +2,7 @@ import 'package:demand_supply/models/post.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:demand_supply/firebase/firebaseDataPosts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductPageToVerify extends StatefulWidget {
   final Post passedOnPost;
@@ -65,10 +66,13 @@ class _ProductPageToVerifyState extends State<ProductPageToVerify> {
                         // height: MediaQuery.of(context).size.height * 0.07,
                         child: IconButton(
                             icon: Icon(Icons.message),
-                            onPressed: () {
-                              print("WhatsApp");
-                              print(
-                                  '${selectedPost.userProfile.whatsappNumber}');
+                            onPressed: () async {
+                              var whatsappUrl =
+                                  "whatsapp://send?phone=${selectedPost.uWhatsappNumber}}";
+                              await canLaunch(whatsappUrl)
+                                  ? launch(whatsappUrl)
+                                  : print(
+                                      "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
                             }),
                       ),
                     ),
@@ -84,8 +88,8 @@ class _ProductPageToVerifyState extends State<ProductPageToVerify> {
                               color: Colors.green,
                             ),
                             onPressed: () {
-                              print("Calling...");
-                              print('${selectedPost.userProfile.phoneNumber}');
+                              var phone = selectedPost.uPhoneNumber;
+                              launch("tel://$phone");
                             }),
                       ),
                     ),
@@ -118,7 +122,7 @@ class _ProductPageToVerifyState extends State<ProductPageToVerify> {
                         width: MediaQuery.of(context).size.width / 5,
                         // height: MediaQuery.of(context).size.height * 0.07,
                         child: IconButton(
-                          icon: selectedPost.isVerified != null
+                          icon: selectedPost.isVerified
                               ? Icon(
                                   Icons.verified_user_outlined,
                                   color: Colors.green,
@@ -127,7 +131,9 @@ class _ProductPageToVerifyState extends State<ProductPageToVerify> {
                                   Icons.verified_user_outlined,
                                   color: Colors.red,
                                 ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print(selectedPost.isVerified);
+                          },
                         ),
                       ),
                     )
@@ -209,8 +215,8 @@ class _ProductPageToVerifyState extends State<ProductPageToVerify> {
                         ),
                       ),
                     ),
-                    onTap: () =>
-                        verifyPostByAdmin(selectedPost.postInPathCollection),
+                    onTap: () => verifyPostByAdmin(
+                        selectedPost.postInPathCollection, context),
                   ),
                 )
               ],

@@ -190,7 +190,12 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                             }),
                                         Icon(
                                           Icons.assignment_turned_in_outlined,
-                                          color: Colors.red,
+                                          color:
+                                              postsInDistrictFilterByCategory[
+                                                          index]
+                                                      .isVerified
+                                                  ? Colors.green
+                                                  : Colors.red,
                                         ),
                                         IconButton(
                                             icon: Icon(Icons.more),
