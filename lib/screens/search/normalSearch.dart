@@ -84,7 +84,7 @@ class _SearchPageState extends State<SearchPage> {
                                       postsInDistrictFilterByTitle[index])));
                         },
                         title: Text(
-                          advancedSearchList[index].title,
+                          postsInDistrictFilterByTitle[index].title,
                           style: TextStyle(fontSize: 20),
                         ),
                       ),

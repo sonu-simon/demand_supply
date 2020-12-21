@@ -52,19 +52,21 @@ Future retrieveUserProfileFromFirebase(String qUserID) async {
       .get()
       .then((userFromFirebase) {
     UserProfile toCurrentUser = UserProfile(
-        userID: userFromFirebase.data()['userID'],
-        name: userFromFirebase.data()['name'],
-        isAdmin: userFromFirebase.data()['isAdmin'],
-        proPicUrl: userFromFirebase.data()['proPicUrl'],
-        phoneNumber: userFromFirebase.data()['phoneNumber'],
-        locality: userFromFirebase.data()['locality'],
-        district: userFromFirebase.data()['district'],
-        policeStation: userFromFirebase.data()['policeStation'],
-        whatsappNumber: userFromFirebase.data()['whatsappNumber'],
-        emailId: userFromFirebase.data()['emailID']);
+      userID: userFromFirebase.data()['userID'],
+      name: userFromFirebase.data()['name'],
+      isAdmin: userFromFirebase.data()['isAdmin'],
+      proPicUrl: userFromFirebase.data()['proPicUrl'],
+      phoneNumber: userFromFirebase.data()['phoneNumber'],
+      locality: userFromFirebase.data()['locality'],
+      district: userFromFirebase.data()['district'],
+      policeStation: userFromFirebase.data()['policeStation'],
+      whatsappNumber: userFromFirebase.data()['whatsappNumber'],
+      emailId: userFromFirebase.data()['emailID'],
+    );
 
     myProfile = toCurrentUser;
     print('myProfile.userID: ${myProfile.userID}');
+    checkIfUserProfileExistsAndAdmin(qUserID);
   });
 }
 

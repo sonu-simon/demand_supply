@@ -128,11 +128,11 @@ Future searchForPostsByTitleInDistrict({String uDistrict, String title}) async {
       .collection('posts')
       .doc(uDistrict)
       .collection('posts')
-      .where('title', isEqualTo: title)
       .get()
       .then((QuerySnapshot querySnapshot) {
     print('entered .then() searchForPostsByTitleInDistrict()');
     querySnapshot.docs.forEach((post) {
+      print("this is: ${post.data()['title']}");
       Post postToAddList = Post(
         id: post.data()['id'],
         title: post.data()['title'],
@@ -151,9 +151,10 @@ Future searchForPostsByTitleInDistrict({String uDistrict, String title}) async {
         uEmailId: post.data()['uEmailId'],
         uUserID: post.data()['uUserID'],
       );
-
-      postsInDistrictFilterByTitle.add(postToAddList);
+      if (postToAddList.title.contains(title))
+        postsInDistrictFilterByTitle.add(postToAddList);
     });
+
     return print(postsInDistrictFilterByTitle);
   });
 }

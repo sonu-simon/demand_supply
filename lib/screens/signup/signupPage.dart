@@ -116,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               hintStyle: TextStyle(fontSize: 20)),
                           initialValue: "",
                           onChanged: ((String newValue) {
-                            uWhatsappNumber = newValue;
+                            uWhatsappNumber = '+91' + newValue;
                           }),
                         ),
                         SizedBox(
