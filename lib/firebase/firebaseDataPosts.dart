@@ -20,6 +20,7 @@ postToFirebase(Post post) {
     'postDate': post.postDate,
     'postInPathCollection': post.postInPathCollection,
     'uEmailId': post.uEmailId,
+    'uIsProfileVerified': post.uIsProfileVerified,
     'uUserID': post.uUserID,
     'uLocality': post.uLocality,
     'uDistrict': post.uDistrict,
@@ -35,6 +36,11 @@ postToFirebase(Post post) {
       .doc('postID - title')
       .update({post.title: post.postInPathCollection}).then(
           (value) => print('postTitlesById is set'));
+
+  FirebaseFirestore.instance
+      .collection('users')
+      .doc(post.uUserID)
+      .set({'hasPosted': true});
 }
 
 Future retrievePostsFromFirebaseByDistrictFilterByCategory(
@@ -58,6 +64,7 @@ Future retrievePostsFromFirebaseByDistrictFilterByCategory(
         description: post.data()['description'],
         imageUrl: post.data()['imageUrl'],
         isVerified: post.data()['isVerified'],
+        uIsProfileVerified: post.data()['uIsProfileVerified'],
         uName: post.data()['uName'],
         uPhoneNumber: post.data()['uPhoneNumber'],
         uWhatsappNumber: post.data()['uWhatsappNumber'],
@@ -108,6 +115,7 @@ Future<Post> postByPostPath(String postPath) async {
       isVerified: post.data()['isVerified'],
       postInPathCollection: post.data()['postInPathCollection'],
       uName: post.data()['uName'],
+      uIsProfileVerified: post.data()['uIsProfileVerified'],
       uPhoneNumber: post.data()['uPhoneNumber'],
       uWhatsappNumber: post.data()['uWhatsappNumber'],
       uProPicUrl: post.data()['uProPicUrl'],
@@ -142,6 +150,7 @@ Future searchForPostsByTitleInDistrict({String uDistrict, String title}) async {
         imageUrl: post.data()['imageUrl'],
         isVerified: post.data()['isVerified'],
         uName: post.data()['uName'],
+        uIsProfileVerified: post.data()['uIsProfileVerified'],
         uPhoneNumber: post.data()['uPhoneNumber'],
         uWhatsappNumber: post.data()['uWhatsappNumber'],
         uProPicUrl: post.data()['uProPicUrl'],

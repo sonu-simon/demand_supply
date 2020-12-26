@@ -1,4 +1,5 @@
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebasePoliceDB.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/productPage/productPageToVerify.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _ListUnverifiedPostsState extends State<ListUnverifiedPosts> {
     super.initState();
     notVerifiedPostsForAdminByLocality = [];
     searchFn();
+    getUsersToVerify();
   }
 
   @override

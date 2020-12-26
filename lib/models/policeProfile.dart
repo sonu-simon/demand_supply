@@ -1,11 +1,11 @@
 class PoliceProfile {
   String phoneNumber;
-  String locality;
+  List<String> localities;
   String userID;
 
   PoliceProfile({
     this.userID,
-    this.locality,
+    this.localities,
     this.phoneNumber,
   });
 }

@@ -1,5 +1,7 @@
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
+import 'package:demand_supply/models/policeProfile.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +11,17 @@ class GiveAdminPrivsPage extends StatefulWidget {
 }
 
 class _GiveAdminPrivsPageState extends State<GiveAdminPrivsPage> {
-  String toAdminPhoneNumber;
-  String toAdminLocality;
-
+  PoliceProfile policeProfileToFirebase = PoliceProfile();
   @override
   void initState() {
     super.initState();
-    toAdminPhoneNumber = "";
+    policeProfileToFirebase.phoneNumber = "";
+    retrieveListOfLocalities().then((_) {
+      setState(() {
+        print(
+            'setState after retrieve listOfLocalities() in giveAdminPrivsPage');
+      });
+    });
   }
 
   @override
@@ -47,7 +53,8 @@ class _GiveAdminPrivsPageState extends State<GiveAdminPrivsPage> {
                   hintText: "Select Locality from the list",
                   fillColor: Colors.white70,
                 ),
-                onChanged: (locality) => toAdminLocality = locality,
+                onChanged: (locality) =>
+                    policeProfileToFirebase.localities = [locality],
                 searchBoxDecoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
@@ -73,7 +80,8 @@ class _GiveAdminPrivsPageState extends State<GiveAdminPrivsPage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
             child: TextFormField(
-              onChanged: (value) => toAdminPhoneNumber = value,
+              onChanged: (value) =>
+                  policeProfileToFirebase.phoneNumber = '+91' + value,
               autofocus: true,
               keyboardType: TextInputType.phone,
               validator: (value) {
@@ -102,13 +110,13 @@ class _GiveAdminPrivsPageState extends State<GiveAdminPrivsPage> {
                     padding: const EdgeInsets.only(right: 16),
                     child: Icon(Icons.arrow_forward_ios),
                   ),
-                  onPressed: () => setAdminPrivs(
-                      '+91' + toAdminPhoneNumber, toAdminLocality, context),
+                  onPressed: () =>
+                      setAdminPrivs(policeProfileToFirebase, context),
                 ),
               ),
               textInputAction: TextInputAction.go,
-              onFieldSubmitted: (_) => setAdminPrivs(
-                  '+91' + toAdminPhoneNumber, toAdminLocality, context),
+              onFieldSubmitted: (_) =>
+                  setAdminPrivs(policeProfileToFirebase, context),
             ),
           ),
         ],

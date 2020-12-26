@@ -23,26 +23,29 @@ class Post {
   String uPoliceStation;
   String uWhatsappNumber;
   String uEmailId;
+  bool uIsProfileVerified;
 
-  Post(
-      {this.id,
-      @required this.title,
-      this.postDate,
-      @required this.description,
-      @required this.imageUrl,
-      this.isVerified,
-      this.userProfile,
-      @required this.category,
-      this.postInPathCollection,
-      this.uUserID,
-      this.uName,
-      this.uProPicUrl,
-      this.uPhoneNumber,
-      this.uLocality,
-      this.uDistrict,
-      this.uPoliceStation,
-      this.uWhatsappNumber,
-      this.uEmailId}) {
+  Post({
+    this.id,
+    @required this.title,
+    this.postDate,
+    @required this.description,
+    @required this.imageUrl,
+    this.isVerified,
+    this.userProfile,
+    @required this.category,
+    this.postInPathCollection,
+    this.uUserID,
+    this.uName,
+    this.uProPicUrl,
+    this.uPhoneNumber,
+    this.uLocality,
+    this.uDistrict,
+    this.uPoliceStation,
+    this.uWhatsappNumber,
+    this.uEmailId,
+    this.uIsProfileVerified,
+  }) {
     postDate = DateTime.now().toString();
     if (userProfile != null) {
       uUserID = userProfile.userID;
@@ -54,6 +57,7 @@ class Post {
       uPoliceStation = userProfile.policeStation;
       uWhatsappNumber = userProfile.whatsappNumber;
       uEmailId = userProfile.emailId;
+      uIsProfileVerified = userProfile.isProfileVerified;
       postInPathCollection = 'posts/$uDistrict/posts/$id';
     }
   }

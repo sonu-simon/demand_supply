@@ -1,12 +1,8 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demand_supply/models/userProfile.dart';
-import 'package:demand_supply/screens/dialogs.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../models/post.dart';
 import '../data.dart';
 
 Future<String> uploadPostImage(
@@ -55,7 +51,7 @@ addLocalityToFirestore(String locality) {
   });
 }
 
-retrieveListOfLocalities() async {
+Future retrieveListOfLocalities() async {
   DocumentSnapshot listOfLocalitiesSnapshot = await FirebaseFirestore.instance
       .collection('listOfLocalities')
       .doc('localityList')

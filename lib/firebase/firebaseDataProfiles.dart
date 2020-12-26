@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebasePoliceDB.dart';
+import 'package:demand_supply/models/policeProfile.dart';
 import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ userToFirebase(UserProfile userProfile) {
     'proPicUrl': userProfile.proPicUrl,
     'phoneNumber': userProfile.phoneNumber,
     'isAdmin': userProfile.isAdmin,
+    'hasPosted': userProfile.hasPosted,
     'locality': userProfile.locality,
     'district': userProfile.locality,
     'policeStation': userProfile.policeStation,
@@ -23,6 +26,7 @@ userToFirebase(UserProfile userProfile) {
   print('user added to firebase');
 }
 
+//never used, lot of changes in the data models since
 updateUserInFirebase(UserProfile userProfile) {
   FirebaseFirestore.instance
       .collection('users')
@@ -88,12 +92,11 @@ Future<bool> checkIfUserProfileExistsAndAdmin(String qUserID) async {
   return exists;
 }
 
-setAdminPrivs(
-    String _qPhoneNumber, String _locality, BuildContext context) async {
-  print(_qPhoneNumber);
+setAdminPrivs(PoliceProfile policeProfile, BuildContext context) async {
+  print(policeProfile.phoneNumber);
   await FirebaseFirestore.instance
       .collection('users')
-      .where('phoneNumber', isEqualTo: _qPhoneNumber)
+      .where('phoneNumber', isEqualTo: policeProfile.phoneNumber)
       .get()
       .then((userProfileSnapshot) async {
     if (userProfileSnapshot.docs.length == 0) {
@@ -101,18 +104,13 @@ setAdminPrivs(
     } else {
       showLoading(context, true);
       String toAdminID = userProfileSnapshot.docs.first.data()['userID'];
+      policeProfile.userID = toAdminID;
       await FirebaseFirestore.instance
           .collection('users')
           .doc(toAdminID)
           .update({'isAdmin': true});
-      await FirebaseFirestore.instance
-          .collection('policePersonnelRecords')
-          .doc(_qPhoneNumber)
-          .set({
-        'userID': toAdminID,
-        'phoneNumber': _qPhoneNumber,
-        'locality': _locality,
-      });
+      print('polcieProfileToFirebase.userID: ${policeProfile.userID}');
+      await policeToFirebase(policeProfile);
       showLoading(context, false);
     }
   });
