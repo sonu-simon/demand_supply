@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demand_supply/models/policeProfile.dart';
+import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -30,8 +31,9 @@ Future getLocalitiesForPolice(String qPhoneNumber, BuildContext context) async {
   return localitiesForPolice;
 }
 
-getUsersToVerify({List<String> listOfLocalitiesAssigned}) {
-  FirebaseFirestore.instance
+Future getUsersToVerify({List<String> listOfLocalitiesAssigned}) async {
+  List<UserProfile> listOfUserToVerify = [];
+  await FirebaseFirestore.instance
       .collection('users')
       .where('locality', whereIn: ['Agra', 'Basti'])
       .where('isProfileVerified', isEqualTo: false)
@@ -40,7 +42,21 @@ getUsersToVerify({List<String> listOfLocalitiesAssigned}) {
       .then((QuerySnapshot querySnapshot) {
         print('in getUsersToVerify() ${querySnapshot.docs.length}');
         querySnapshot.docs.forEach((userProfileToVerify) {
-          print(userProfileToVerify.data()['userID']);
+          UserProfile profileToAddToList = UserProfile(
+            userID: userProfileToVerify.data()['userID'],
+            name: userProfileToVerify.data()['name'],
+            isAdmin: userProfileToVerify.data()['isAdmin'],
+            proPicUrl: userProfileToVerify.data()['proPicUrl'],
+            phoneNumber: userProfileToVerify.data()['phoneNumber'],
+            locality: userProfileToVerify.data()['locality'],
+            district: userProfileToVerify.data()['district'],
+            policeStation: userProfileToVerify.data()['policeStation'],
+            whatsappNumber: userProfileToVerify.data()['whatsappNumber'],
+            emailId: userProfileToVerify.data()['emailID'],
+            isProfileVerified: userProfileToVerify.data()['isProfileVerified'],
+          );
+          listOfUserToVerify.add(profileToAddToList);
         });
+        return listOfUserToVerify;
       });
 }
