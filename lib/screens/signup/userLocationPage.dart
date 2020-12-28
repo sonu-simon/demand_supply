@@ -85,6 +85,13 @@ class _UserLocationPageState extends State<UserLocationPage> {
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(
                               showSearchBox: true,
+                              validator: (String value) {
+                                value = value.trim();
+                                if (value.isEmpty) {
+                                  return 'District is Required';
+                                }
+                                return null;
+                              },
                               onChanged: (locality) => uLocality = locality,
                               searchBoxDecoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -106,6 +113,13 @@ class _UserLocationPageState extends State<UserLocationPage> {
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(
                               showSearchBox: true,
+                              validator: (String value) {
+                                value = value.trim();
+                                if (value.isEmpty) {
+                                  return 'Locality is Required';
+                                }
+                                return null;
+                              },
                               onChanged: (locality) => uLocality = locality,
                               searchBoxDecoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -127,6 +141,13 @@ class _UserLocationPageState extends State<UserLocationPage> {
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(
                               showSearchBox: true,
+                              validator: (String value) {
+                                value = value.trim();
+                                if (value.isEmpty) {
+                                  return 'Police Station circle is Required';
+                                }
+                                return null;
+                              },
                               onChanged: (locality) => uLocality = locality,
                               searchBoxDecoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(

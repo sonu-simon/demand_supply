@@ -36,6 +36,7 @@ dependencies:
   image_picker: ^0.6.7+14
   firebase_storage: ^4.0.1
   dropdown_search: ^0.4.8
+  flutter_tagging: ^2.2.0+3
   ars_progress_dialog: 0.0.1
 
   # The following adds the Cupertino Icons font to your application.

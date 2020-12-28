@@ -1,6 +1,7 @@
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/providerData.dart';
 import 'package:demand_supply/screens/splashscreen.dart';
+import 'package:demand_supply/screens/trial/admin.dart';
 
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: AdminScreen(),
     );
   }
 }

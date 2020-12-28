@@ -115,6 +115,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               hintText: "WhatsApp Number",
                               hintStyle: TextStyle(fontSize: 20)),
                           initialValue: "",
+                          validator: (String value) {
+                            value = value.trim();
+                            if (value.isEmpty) {
+                              return 'Number is Required';
+                            }
+                            return null;
+                          },
                           onChanged: ((String newValue) {
                             uWhatsappNumber = '+91' + newValue;
                           }),
@@ -135,6 +142,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               hintText: "Email",
                               hintStyle: TextStyle(fontSize: 20)),
                           initialValue: "",
+                          validator: (String value) {
+                            value = value.trim();
+                            if (value.isEmpty) {
+                              return 'Email is Required';
+                            }
+                            return null;
+                          },
                           onChanged: ((String newValue) {
                             uEmailId = newValue;
                           }),
