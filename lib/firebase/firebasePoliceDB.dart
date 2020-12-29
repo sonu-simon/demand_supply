@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demand_supply/data.dart';
 import 'package:demand_supply/models/policeProfile.dart';
 import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/dialogs.dart';
@@ -15,48 +16,59 @@ Future policeToFirebase(PoliceProfile policeProfile) async {
   });
 }
 
-Future getLocalitiesForPolice(String qPhoneNumber, BuildContext context) async {
+Future<List<String>> getLocalitiesForPolice(
+    String qPhoneNumber, BuildContext context) async {
   List<String> localitiesForPolice;
   await FirebaseFirestore.instance
       .collection('policeDB')
-      .where('phoneNumber', isEqualTo: qPhoneNumber)
+      .where('phoneNumber', isEqualTo: '+918009345450')
       .get()
       .then((policeProfileSnapshot) {
     if (policeProfileSnapshot.docs.length == 0)
       showErrorDialog(context, 'This profile doesnt exist!');
     else
       localitiesForPolice =
-          policeProfileSnapshot.docs.first.data()['localities'];
+          List.castFrom(policeProfileSnapshot.docs.first.data()['localities']);
   });
   return localitiesForPolice;
 }
 
-Future getUsersToVerify({List<String> listOfLocalitiesAssigned}) async {
+Future<List<UserProfile>> getUsersToVerifyFromListOfLocalities(
+    List<String> listOfLocalitiesAssigned, BuildContext context) async {
   List<UserProfile> listOfUserToVerify = [];
+  if (listOfLocalitiesAssigned == null || listOfLocalitiesAssigned.length == 0)
+    showErrorDialog(context, 'You are not assigned any locality');
   await FirebaseFirestore.instance
       .collection('users')
-      .where('locality', whereIn: ['Agra', 'Basti'])
+      .where('locality', whereIn: listOfLocalitiesAssigned)
       .where('isProfileVerified', isEqualTo: false)
       .where('hasPosted', isEqualTo: true)
       .get()
       .then((QuerySnapshot querySnapshot) {
-        print('in getUsersToVerify() ${querySnapshot.docs.length}');
-        querySnapshot.docs.forEach((userProfileToVerify) {
-          UserProfile profileToAddToList = UserProfile(
-            userID: userProfileToVerify.data()['userID'],
-            name: userProfileToVerify.data()['name'],
-            isAdmin: userProfileToVerify.data()['isAdmin'],
-            proPicUrl: userProfileToVerify.data()['proPicUrl'],
-            phoneNumber: userProfileToVerify.data()['phoneNumber'],
-            locality: userProfileToVerify.data()['locality'],
-            district: userProfileToVerify.data()['district'],
-            policeStation: userProfileToVerify.data()['policeStation'],
-            whatsappNumber: userProfileToVerify.data()['whatsappNumber'],
-            emailId: userProfileToVerify.data()['emailID'],
-            isProfileVerified: userProfileToVerify.data()['isProfileVerified'],
-          );
-          listOfUserToVerify.add(profileToAddToList);
-        });
-        return listOfUserToVerify;
-      });
+    print('in getUsersToVerify() ${querySnapshot.docs.length}');
+    querySnapshot.docs.forEach((userProfileToVerify) {
+      UserProfile profileToAddToList = UserProfile(
+        userID: userProfileToVerify.data()['userID'],
+        name: userProfileToVerify.data()['name'],
+        isAdmin: userProfileToVerify.data()['isAdmin'],
+        proPicUrl: userProfileToVerify.data()['proPicUrl'],
+        phoneNumber: userProfileToVerify.data()['phoneNumber'],
+        locality: userProfileToVerify.data()['locality'],
+        district: userProfileToVerify.data()['district'],
+        policeStation: userProfileToVerify.data()['policeStation'],
+        whatsappNumber: userProfileToVerify.data()['whatsappNumber'],
+        emailId: userProfileToVerify.data()['emailID'],
+        isProfileVerified: userProfileToVerify.data()['isProfileVerified'],
+      );
+      listOfUserToVerify.add(profileToAddToList);
+    });
+  });
+  print(listOfUserToVerify);
+  return listOfUserToVerify;
+}
+
+getUsersToVerify(BuildContext context, String qPhoneNumber) async {
+  listOfUnverifiedUsers = await getLocalitiesForPolice(qPhoneNumber, context)
+      .then((listOfLocs) =>
+          getUsersToVerifyFromListOfLocalities(listOfLocs, context));
 }

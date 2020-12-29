@@ -177,3 +177,4 @@ List<Post> postsInDistrictFilterByTitle = [];
 bool myProfileIsAdmin;
 
 List<Post> notVerifiedPostsForAdminByLocality = [];
+List<UserProfile> listOfUnverifiedUsers;

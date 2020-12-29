@@ -1,80 +1,74 @@
-import 'dart:io';
 import 'dart:ui';
 
-import 'package:demand_supply/data.dart';
+import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UserProfilePage extends StatefulWidget {
+  final UserProfile passedProfile;
+  final bool isToVerify;
+  UserProfilePage(this.passedProfile, {this.isToVerify});
+
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  File _image;
-
-  void openGallery() async {
-    final picker = ImagePicker();
-    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      print('in .then()');
-      _image = File(pickedFile.path);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RaisedButton(
-                onPressed: () {},
-                color: Colors.red,
-                child: Container(
-                  height: 25,
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: Center(
-                      child: Text(
-                    "Decline",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+        bottomNavigationBar: widget.isToVerify
+            ? BottomAppBar(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {},
+                      color: Colors.red,
+                      child: Container(
+                        height: 25,
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Center(
+                            child: Text(
+                          "Decline",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        )),
+                      ),
                     ),
-                  )),
-                ),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                color: Colors.green,
-                child: Container(
-                  height: 25,
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: Center(
-                      child: Text(
-                    "Verify",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  )),
+                    RaisedButton(
+                      onPressed: () {},
+                      color: Colors.green,
+                      child: Container(
+                        height: 25,
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Center(
+                            child: Text(
+                          "Verify",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        )),
+                      ),
+                    )
+                  ],
                 ),
               )
-            ],
-          ),
-        ),
+            : Container(),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      image:
-                          DecorationImage(image: propic(), fit: BoxFit.cover)),
+                      image: DecorationImage(
+                          image: NetworkImage(widget.passedProfile.proPicUrl),
+                          fit: BoxFit.cover)),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                     child: Container(
@@ -88,19 +82,22 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
-                                onTap: () {
-                                  buildShowDialog(context);
-                                },
-                                child: myProfile.proPicUrl == null
-                                    ? CircleAvatar(
-                                        radius: 60.0,
-                                        backgroundImage:
-                                            NetworkImage(myProfile.proPicUrl))
-                                    : CircleAvatar(
-                                        radius: 60.0,
-                                        backgroundImage:
-                                            NetworkImage(myProfile.proPicUrl),
-                                      )),
+                              onTap: () {
+                                buildShowDialog(context);
+                              },
+                              child: widget.passedProfile.proPicUrl == null
+                                  ? CircleAvatar(
+                                      radius: 60.0,
+                                      backgroundImage: NetworkImage(
+                                          //TODO: do no proPic stuff
+                                          widget.passedProfile.proPicUrl),
+                                    )
+                                  : CircleAvatar(
+                                      radius: 60.0,
+                                      backgroundImage: NetworkImage(
+                                          widget.passedProfile.proPicUrl),
+                                    ),
+                            ),
                           ),
                         ),
                       ),
@@ -112,7 +109,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   height: 60,
                 ),
                 Text(
-                  myProfile.name,
+                  widget.passedProfile.name,
                   style: TextStyle(
                       fontSize: 25.0,
                       color: Colors.blueGrey,
@@ -123,7 +120,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   height: 10,
                 ),
                 Text(
-                  myProfile.locality,
+                  widget.passedProfile.locality,
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Colors.black45,
@@ -151,7 +148,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     IconButton(
                         icon: Icon(Icons.message),
                         onPressed: () async {
-                          var phone = myProfile.phoneNumber;
+                          var phone = widget.passedProfile.phoneNumber;
                           var whatsappUrl = "whatsapp://send?phone=$phone";
                           await canLaunch(whatsappUrl)
                               ? launch(whatsappUrl)
@@ -164,7 +161,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           color: Colors.green,
                         ),
                         onPressed: () {
-                          var phone = myProfile.phoneNumber;
+                          var phone = widget.passedProfile.phoneNumber;
                           launch("tel://$phone");
                         }),
                     Icon(
@@ -183,7 +180,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ExpansionTile(
                   title: Text("Your Posts"),
                   children: [
-                    myProfile.posts == null
+                    widget.passedProfile.posts == null
                         ? ListTile(
                             tileColor: Colors.grey,
                             title: Text("No posts Yet"),
@@ -191,7 +188,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         : ListView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: myProfile.posts.length,
+                            itemCount: widget.passedProfile.posts.length,
                             itemBuilder: (BuildContext context, int index) {
                               return ListTile(
                                 title: Text(" "),
@@ -227,62 +224,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                 builder: (context) => ViewProPic()));
                       },
                     ),
-                    ListTile(
-                      title: Text("Change Profile Picture"),
-                      onTap: () {
-                        openGallery();
-                      },
-                    )
                   ],
                 )),
           );
         });
-  }
-
-  NetworkImage propic() {
-    return NetworkImage(
-        "https://cdn1.iconfinder.com/data/icons/avatar-97/32/avatar-02-512.png");
-  }
-
-  Future editPostDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: Text("Alert"),
-              content: Text("Do you want to edit your post"),
-              actions: [
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(ctx).pop();
-                    },
-                    child: Text("Okay")),
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(ctx).pop();
-                    },
-                    child: Text("Cancel"))
-              ],
-            ));
-  }
-
-  Future deletePostDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: Text("Alert"),
-              content: Text("Are you sure you want to delete your post"),
-              actions: [
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(ctx).pop();
-                    },
-                    child: Text("Okay")),
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(ctx).pop();
-                    },
-                    child: Text("Cancel"))
-              ],
-            ));
   }
 }

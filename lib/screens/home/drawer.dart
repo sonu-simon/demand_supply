@@ -57,7 +57,7 @@ class DrawerHomePage extends StatelessWidget {
             title: DrawerTitleText('My Profile'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UserProfilePage()));
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
             },
           ),
           Divider(),

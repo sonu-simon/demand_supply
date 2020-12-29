@@ -1,3 +1,4 @@
+import 'package:demand_supply/models/post.dart';
 import 'package:flutter/material.dart';
 
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
@@ -13,7 +14,7 @@ class UserProfile {
   String whatsappNumber;
   String emailId;
 
-  List<String> posts;
+  List<AdvancedSearchModel> posts;
   bool isProfileVerified;
   bool isAdmin;
   bool hasPosted;
@@ -45,6 +46,10 @@ class UserProfile {
     emailId = userProfile.emailId;
 
     updateUserInFirebase(userProfile);
+  }
+
+  addPosts(AdvancedSearchModel postToAdd) {
+    posts.add(postToAdd);
   }
 }
 

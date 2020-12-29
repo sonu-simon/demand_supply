@@ -108,7 +108,8 @@ class _UserLocationPageState extends State<UserLocationPage> {
                         ),
                         SizedBox(
                           height: 10,
-                        ), //locality
+                        ),
+                        //locality
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(

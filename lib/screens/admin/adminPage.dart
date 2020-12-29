@@ -4,7 +4,7 @@ import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/models/policeProfile.dart';
-import 'package:demand_supply/screens/admin/listUnverifiedPosts.dart';
+import 'package:demand_supply/screens/admin/listUnverifiedUsers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 
@@ -39,11 +39,15 @@ class _AdminScreenState extends State<AdminScreen> {
     super.dispose();
   }
 
+  handleSetAdminPrivs(BuildContext context) {
+    setAdminPrivs(policeProfileToFirebase, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Tagging Demo'),
+        title: Text('Admin Portal'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,62 +56,23 @@ class _AdminScreenState extends State<AdminScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Material(
-                elevation: 4,
+                // color: Colors.amber,
+                elevation: 10,
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //ENTER PHONE NUMBER
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, left: 10, right: 10, bottom: 8),
-                        child: TextFormField(
-                          onChanged: (value) => policeProfileToFirebase
-                              .phoneNumber = '+91' + value,
-                          autofocus: true,
-                          keyboardType: TextInputType.phone,
-                          validator: (value) {
-                            if (value == null)
-                              return 'Enter a phone number to continue';
-                            else if (value.length != 10)
-                              return 'Please enter a valid phone number';
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(10),
-                              ),
-                            ),
-                            filled: true,
-                            prefixIcon: Icon(
-                              Icons.phone_iphone,
-                              color: Colors.cyan,
-                            ),
-                            hintStyle: new TextStyle(color: Colors.grey[800]),
-                            hintText: "Phone number to grant admin rights",
-                            fillColor: Colors.white70,
-                            suffixIcon: IconButton(
-                              icon: Padding(
-                                padding: const EdgeInsets.only(right: 16),
-                                child: Icon(Icons.arrow_forward_ios),
-                              ),
-                              onPressed: () => setAdminPrivs(
-                                  policeProfileToFirebase, context),
-                            ),
-                          ),
-                          textInputAction: TextInputAction.go,
-                          onFieldSubmitted: (_) =>
-                              setAdminPrivs(policeProfileToFirebase, context),
-                        ),
-                      ),
                       //Picture
-                      Card(
-                          elevation: 50,
-                          child: Center(
-                              child: Image.asset("asset/bg/admeen.png"))),
+                      // Card(
+                      //   elevation: 0,
+                      //   child: Center(
+                      //     child: Image.asset(
+                      //       "asset/bg/admeen.png",
+                      //       scale: 12,
+                      //     ),
+                      //   ),
+                      // ),
                       //SELECT LOCALITY
-
                       Column(
                         children: <Widget>[
                           Padding(
@@ -118,9 +83,9 @@ class _AdminScreenState extends State<AdminScreen> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   filled: true,
-                                  fillColor: Colors.lightBlue.withAlpha(30),
-                                  hintText: 'Search Tags',
-                                  labelText: 'Select Tags',
+                                  fillColor: Colors.lightBlue.withAlpha(20),
+                                  // hintText: 'Search Localities',
+                                  labelText: 'Select Localities',
                                 ),
                               ),
                               findSuggestions: LocalityService.getLocalities,
@@ -129,9 +94,9 @@ class _AdminScreenState extends State<AdminScreen> {
                                   locality: value,
                                 );
                               },
-                              onAdded: (locality) {
-                                return Locality();
-                              },
+                              // onAdded: (locality) {
+                              //   return Locality();
+                              // },
                               configureSuggestion: (loc) {
                                 return SuggestionConfiguration(
                                   title: Text(loc.locality),
@@ -166,9 +131,56 @@ class _AdminScreenState extends State<AdminScreen> {
                                   selectedLocalities.add(element.locality);
                                 });
                                 print(selectedLocalities);
+                                policeProfileToFirebase.localities =
+                                    selectedLocalities;
                               },
                             ),
                           ),
+                          //ENTER PHONE NUMBER
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 16.0, left: 10, right: 10, bottom: 8),
+                            child: TextFormField(
+                              onChanged: (value) => policeProfileToFirebase
+                                  .phoneNumber = '+91' + value,
+                              autofocus: false,
+                              keyboardType: TextInputType.phone,
+                              validator: (value) {
+                                if (value == null)
+                                  return 'Enter a phone number to continue';
+                                else if (value.length != 10)
+                                  return 'Please enter a valid phone number';
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(10),
+                                  ),
+                                ),
+                                filled: true,
+                                prefixIcon: Icon(
+                                  Icons.phone_iphone,
+                                  color: Colors.cyan,
+                                ),
+                                hintStyle:
+                                    new TextStyle(color: Colors.grey[800]),
+                                hintText: "Phone number to grant admin rights",
+                                fillColor: Colors.white70,
+                                suffixIcon: IconButton(
+                                  icon: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Icon(Icons.arrow_forward_ios),
+                                  ),
+                                  onPressed: () => handleSetAdminPrivs(context),
+                                ),
+                              ),
+                              textInputAction: TextInputAction.go,
+                              onFieldSubmitted: (_) =>
+                                  handleSetAdminPrivs(context),
+                            ),
+                          ),
+
                           SizedBox(
                             height: 20.0,
                           ),
@@ -182,13 +194,13 @@ class _AdminScreenState extends State<AdminScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Material(
-                elevation: 4,
+                elevation: 10,
                 child: ListTile(
-                  title: Text('Verify Posts'),
+                  title: Text('Verify Users'),
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ListUnverifiedPosts())),
+                          builder: (context) => ListUnverifiedUsers())),
                 ),
               ),
             )

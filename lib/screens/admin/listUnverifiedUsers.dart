@@ -1,34 +1,28 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebasePoliceDB.dart';
+import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/productPage/productPageToVerify.dart';
+import 'package:demand_supply/screens/profile/userprofile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 
-class ListUnverifiedPosts extends StatefulWidget {
+class ListUnverifiedUsers extends StatefulWidget {
   @override
-  _ListUnverifiedPostsState createState() => _ListUnverifiedPostsState();
+  _ListUnverifiedUsersState createState() => _ListUnverifiedUsersState();
 }
 
-class _ListUnverifiedPostsState extends State<ListUnverifiedPosts> {
-  searchFn() {
-    retrievePostsByVillageNotVerified(
-            uDistrict: myProfile.district, uLocality: myProfile.locality)
-        .then(
-      (_) => setState(() {
-        print(
-            'search completed! in ${myProfile.district} - ${myProfile.locality}');
-      }),
-    );
-  }
-
+class _ListUnverifiedUsersState extends State<ListUnverifiedUsers> {
   @override
   void initState() {
     super.initState();
-    notVerifiedPostsForAdminByLocality = [];
-    searchFn();
-    getUsersToVerify();
+    listOfUnverifiedUsers = [];
+    getUsersToVerify(context, myProfile.phoneNumber).then((_) {
+      setState(() {
+        print('usersFetch completed');
+      });
+    });
   }
 
   @override
@@ -42,8 +36,8 @@ class _ListUnverifiedPostsState extends State<ListUnverifiedPosts> {
                 icon: Icon(Icons.arrow_back, color: Colors.black),
                 onPressed: () => Navigator.pop(context)),
           ),
-          title: Text('Unverified Posts in Locality')),
-      body: notVerifiedPostsForAdminByLocality.isEmpty
+          title: Text('Unverified Users')),
+      body: listOfUnverifiedUsers.isEmpty
           ? Center(
               child: Text('No results found'),
             )
@@ -55,21 +49,17 @@ class _ListUnverifiedPostsState extends State<ListUnverifiedPosts> {
                       color: Colors.grey[100],
                       child: ListTile(
                         onTap: () {
-                          showLoading(context, true);
-                          postByPostPath(
-                                  notVerifiedPostsForAdminByLocality[index]
-                                      .postInPathCollection)
-                              .then((post) {
-                            showLoading(context, false);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProductPageToVerify(post)));
-                          });
+                          // showLoading(context, true);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserProfilePage(
+                                        listOfUnverifiedUsers[index],
+                                        isToVerify: true,
+                                      )));
                         },
                         title: Text(
-                          notVerifiedPostsForAdminByLocality[index].title,
+                          listOfUnverifiedUsers[index].name,
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -83,7 +73,7 @@ class _ListUnverifiedPostsState extends State<ListUnverifiedPosts> {
                   ),
                 );
               },
-              itemCount: notVerifiedPostsForAdminByLocality.length),
+              itemCount: listOfUnverifiedUsers.length),
     );
   }
 }
