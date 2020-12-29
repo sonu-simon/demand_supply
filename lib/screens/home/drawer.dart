@@ -78,7 +78,7 @@ class DrawerHomePage extends StatelessWidget {
                 //admin
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AdminPageScreen()),
+                  MaterialPageRoute(builder: (context) => AdminScreen()),
                 );
               },
             ),
