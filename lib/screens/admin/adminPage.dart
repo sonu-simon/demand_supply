@@ -5,7 +5,6 @@ import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/models/policeProfile.dart';
 import 'package:demand_supply/screens/admin/listUnverifiedPosts.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 

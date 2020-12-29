@@ -1,7 +1,8 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/screens/admin/adminPage.dart';
-import 'package:demand_supply/screens/profile/profilePage.dart';
+import 'package:demand_supply/screens/profile/myprofilePage.dart';
+import 'package:demand_supply/screens/profile/userprofile.dart';
 import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +57,7 @@ class DrawerHomePage extends StatelessWidget {
             title: DrawerTitleText('My Profile'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => UserProfilePage()));
             },
           ),
           Divider(),

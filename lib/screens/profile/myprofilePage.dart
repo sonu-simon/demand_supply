@@ -66,7 +66,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-
             SizedBox(
               height: 60,
             ),
@@ -103,95 +102,11 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 10,
             ),
-            // /Contact
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     IconButton(
-            //         icon: Icon(Icons.message),
-            //         onPressed: () async {
-            //           var phone = myProfile.phoneNumber;
-            //           var whatsappUrl = "whatsapp://send?phone=$phone";
-            //           await canLaunch(whatsappUrl)
-            //               ? launch(whatsappUrl)
-            //               : print(
-            //                   "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
-            //         }),
-            //     IconButton(
-            //         icon: Icon(
-            //           Icons.call,
-            //           color: Colors.green,
-            //         ),
-            //         onPressed: () {
-            //           var phone = myProfile.phoneNumber;
-            //           launch("tel://$phone");
-            //         }),
-            //     Icon(
-            //       Icons.assignment_turned_in_outlined,
-            //       color: Colors.red,
-            //     )
-            //   ],
-            // ),
-            // SizedBox(
-            //   height: 10,
-            // ),
             ExpansionTile(
               title: Text("Details"),
               children: [
                 ListTile(
                   title: Text("Name"),
-                  // trailing: IconButton(
-                  //   icon: Icon(Icons.edit),
-                  //   onPressed: () {
-                  //     showDialog(
-                  //         context: context,
-                  //         builder: (BuildContext context) {
-                  //           return AlertDialog(
-                  //             scrollable: true,
-                  //             title: Text('Details'),
-                  //             content: Padding(
-                  //               padding: const EdgeInsets.all(8.0),
-                  //               child: Form(
-                  //                 child: Column(
-                  //                   children: <Widget>[
-                  //                     TextFormField(
-                  //                       decoration: InputDecoration(
-                  //                         labelText: 'Name',
-                  //                       ),
-                  //                     ),
-                  //                     TextFormField(
-                  //                       keyboardType: TextInputType.number,
-                  //                       decoration: InputDecoration(
-                  //                         labelText: 'Phone',
-                  //                       ),
-                  //                     ),
-                  //                     TextFormField(
-                  //                       keyboardType:
-                  //                           TextInputType.emailAddress,
-                  //                       decoration: InputDecoration(
-                  //                         labelText: 'Email',
-                  //                       ),
-                  //                     ),
-                  //                     TextFormField(
-                  //                       decoration: InputDecoration(
-                  //                         labelText: 'Locality',
-                  //                       ),
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //             actions: [
-                  //               RaisedButton(
-                  //                   child: Text("Submit"),
-                  //                   onPressed: () {
-                  //                     // your code
-                  //                   })
-                  //             ],
-                  //           );
-                  //         });
-                  //   },
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -201,7 +116,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(myProfile.phoneNumber),
                         Text(myProfile.locality),
-                        // Text(myProfile.emailId),
                       ],
                     ),
                   ),
@@ -211,7 +125,6 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 10,
             ),
-
             ExpansionTile(
               title: Text("Your Posts"),
               children: [
@@ -221,21 +134,32 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: Text("No posts Yet"),
                       )
                     : ListView.builder(
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
                         itemCount: myProfile.posts.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            // leading: IconButton(
-                            //   icon: Icon(Icons.delete_forever_outlined),
-                            //   onPressed: () {
-                            //     // return deletePostDialog(context);
-                            //   },
-                            // ),
+                            onTap: () {
+                              //navigate to post logic
+                            },
                             title: Text(" "),
-                            // trailing: IconButton(
-                            //     icon: Icon(Icons.edit),
-                            //     onPressed: () {
-                            //       // return editPostDialog(context);
-                            //     }),
+                            trailing: Row(
+                              children: [
+                                //delete
+                                IconButton(
+                                  icon: Icon(Icons.delete_forever_outlined),
+                                  onPressed: () {
+                                    // return deletePostDialog(context);
+                                  },
+                                ),
+                                //edit
+                                IconButton(
+                                    icon: Icon(Icons.edit),
+                                    onPressed: () {
+                                      // return editPostDialog(context);
+                                    }),
+                              ],
+                            ),
                           );
                         })
               ],

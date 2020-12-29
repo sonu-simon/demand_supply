@@ -27,223 +27,185 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(image: propic(), fit: BoxFit.cover)),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              RaisedButton(
+                onPressed: () {},
+                color: Colors.red,
                 child: Container(
-                  width: double.infinity,
-                  height: 200,
-                  child: Container(
-                    alignment: Alignment(0.0, 2.5),
+                  height: 25,
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Center(
+                      child: Text(
+                    "Decline",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )),
+                ),
+              ),
+              RaisedButton(
+                onPressed: () {},
+                color: Colors.green,
+                child: Container(
+                  height: 25,
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Center(
+                      child: Text(
+                    "Verify",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )),
+                ),
+              )
+            ],
+          ),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      image:
+                          DecorationImage(image: propic(), fit: BoxFit.cover)),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                     child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                            onTap: () {
-                              buildShowDialog(context);
-                            },
-                            child: myProfile.proPicUrl == null
-                                ? CircleAvatar(
-                                    radius: 60.0,
-                                    backgroundImage:
-                                        NetworkImage(myProfile.proPicUrl))
-                                : CircleAvatar(
-                                    radius: 60.0,
-                                    backgroundImage:
-                                        NetworkImage(myProfile.proPicUrl),
-                                  )),
+                      width: double.infinity,
+                      height: 200,
+                      child: Container(
+                        alignment: Alignment(0.0, 2.5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.white),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                                onTap: () {
+                                  buildShowDialog(context);
+                                },
+                                child: myProfile.proPicUrl == null
+                                    ? CircleAvatar(
+                                        radius: 60.0,
+                                        backgroundImage:
+                                            NetworkImage(myProfile.proPicUrl))
+                                    : CircleAvatar(
+                                        radius: 60.0,
+                                        backgroundImage:
+                                            NetworkImage(myProfile.proPicUrl),
+                                      )),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
 
-            SizedBox(
-              height: 60,
-            ),
-            Text(
-              myProfile.name,
-              style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.blueGrey,
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.w400),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              myProfile.locality,
-              style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.black45,
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.w300),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Profile Designation",
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.black45,
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.w300),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            // /Contact
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                    icon: Icon(Icons.message),
-                    onPressed: () async {
-                      var phone = myProfile.phoneNumber;
-                      var whatsappUrl = "whatsapp://send?phone=$phone";
-                      await canLaunch(whatsappUrl)
-                          ? launch(whatsappUrl)
-                          : print(
-                              "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
-                    }),
-                IconButton(
-                    icon: Icon(
-                      Icons.call,
-                      color: Colors.green,
-                    ),
-                    onPressed: () {
-                      var phone = myProfile.phoneNumber;
-                      launch("tel://$phone");
-                    }),
-                Icon(
-                  Icons.assignment_turned_in_outlined,
-                  color: Colors.red,
+                SizedBox(
+                  height: 60,
+                ),
+                Text(
+                  myProfile.name,
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.blueGrey,
+                      letterSpacing: 2.0,
+                      fontWeight: FontWeight.w400),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  myProfile.locality,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black45,
+                      letterSpacing: 2.0,
+                      fontWeight: FontWeight.w300),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Profile Designation",
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.black45,
+                      letterSpacing: 2.0,
+                      fontWeight: FontWeight.w300),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                // /Contact
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.message),
+                        onPressed: () async {
+                          var phone = myProfile.phoneNumber;
+                          var whatsappUrl = "whatsapp://send?phone=$phone";
+                          await canLaunch(whatsappUrl)
+                              ? launch(whatsappUrl)
+                              : print(
+                                  "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
+                        }),
+                    IconButton(
+                        icon: Icon(
+                          Icons.call,
+                          color: Colors.green,
+                        ),
+                        onPressed: () {
+                          var phone = myProfile.phoneNumber;
+                          launch("tel://$phone");
+                        }),
+                    Icon(
+                      Icons.assignment_turned_in_outlined,
+                      color: Colors.red,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+
+                ExpansionTile(
+                  title: Text("Your Posts"),
+                  children: [
+                    myProfile.posts == null
+                        ? ListTile(
+                            tileColor: Colors.grey,
+                            title: Text("No posts Yet"),
+                          )
+                        : ListView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: myProfile.posts.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ListTile(
+                                title: Text(" "),
+                                onTap: () {
+                                  //navigate to post logic
+                                },
+                              );
+                            })
+                  ],
                 )
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            // ExpansionTile(
-            //   title: Text("Details"),
-            //   children: [
-            //     ListTile(
-            //       title: Text("Name"),
-            //       trailing: IconButton(
-            //         icon: Icon(Icons.edit),
-            //         onPressed: () {
-            //           showDialog(
-            //               context: context,
-            //               builder: (BuildContext context) {
-            //                 return AlertDialog(
-            //                   scrollable: true,
-            //                   title: Text('Details'),
-            //                   content: Padding(
-            //                     padding: const EdgeInsets.all(8.0),
-            //                     child: Form(
-            //                       child: Column(
-            //                         children: <Widget>[
-            //                           TextFormField(
-            //                             decoration: InputDecoration(
-            //                               labelText: 'Name',
-            //                             ),
-            //                           ),
-            //                           TextFormField(
-            //                             keyboardType: TextInputType.number,
-            //                             decoration: InputDecoration(
-            //                               labelText: 'Phone',
-            //                             ),
-            //                           ),
-            //                           TextFormField(
-            //                             keyboardType:
-            //                                 TextInputType.emailAddress,
-            //                             decoration: InputDecoration(
-            //                               labelText: 'Email',
-            //                             ),
-            //                           ),
-            //                           TextFormField(
-            //                             decoration: InputDecoration(
-            //                               labelText: 'Locality',
-            //                             ),
-            //                           ),
-            //                         ],
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   actions: [
-            //                     RaisedButton(
-            //                         child: Text("Submit"),
-            //                         onPressed: () {
-            //                           // your code
-            //                         })
-            //                   ],
-            //                 );
-            //               });
-            //         },
-            //       ),
-            //     ),
-            //     Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: Container(
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             Text(myProfile.phoneNumber),
-            //             Text(myProfile.locality),
-            //             // Text(myProfile.emailId),
-            //           ],
-            //         ),
-            //       ),
-            //     )
-            //   ],
-            // ),
-            SizedBox(
-              height: 10,
-            ),
-
-            ExpansionTile(
-              title: Text("Your Posts"),
-              children: [
-                myProfile.posts == null
-                    ? ListTile(
-                        tileColor: Colors.grey,
-                        title: Text("No posts Yet"),
-                      )
-                    : ListView.builder(
-                        itemCount: myProfile.posts.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            // leading: IconButton(
-                            //   icon: Icon(Icons.delete_forever_outlined),
-                            //   onPressed: () {
-                            //     return deletePostDialog(context);
-                            //   },
-                            // ),
-                            title: Text(" "),
-                            // trailing: IconButton(
-                            //     icon: Icon(Icons.edit),
-                            //     onPressed: () {
-                            //       return editPostDialog(context);
-                            //     }),
-                          );
-                        })
-              ],
-            )
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   Future buildShowDialog(BuildContext context) {
