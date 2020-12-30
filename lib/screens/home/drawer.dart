@@ -2,7 +2,6 @@ import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseServices.dart';
 import 'package:demand_supply/screens/admin/adminPage.dart';
 import 'package:demand_supply/screens/profile/myprofilePage.dart';
-import 'package:demand_supply/screens/profile/userprofile.dart';
 import 'package:demand_supply/screens/search/searchPage.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,9 @@ class DrawerHomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(myProfile.proPicUrl),
+                      backgroundImage: NetworkImage(myProfile.proPicUrl != null
+                          ? myProfile.proPicUrl
+                          : 'https://www.searchpng.com/wp-content/uploads/2019/02/Men-Profile-Image.png'),
                       radius: MediaQuery.of(context).size.width * 0.13,
                     ),
                     Padding(

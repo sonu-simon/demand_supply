@@ -40,7 +40,7 @@ postToFirebase(Post post) {
   FirebaseFirestore.instance
       .collection('users')
       .doc(post.uUserID)
-      .set({'hasPosted': true});
+      .update({'hasPosted': true, 'posts': myProfile.posts});
 }
 
 Future retrievePostsFromFirebaseByDistrictFilterByCategory(

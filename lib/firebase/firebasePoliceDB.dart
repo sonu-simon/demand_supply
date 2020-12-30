@@ -59,6 +59,7 @@ Future<List<UserProfile>> getUsersToVerifyFromListOfLocalities(
         whatsappNumber: userProfileToVerify.data()['whatsappNumber'],
         emailId: userProfileToVerify.data()['emailID'],
         isProfileVerified: userProfileToVerify.data()['isProfileVerified'],
+        posts: List.castFrom(userProfileToVerify.data()['posts']),
       );
       listOfUserToVerify.add(profileToAddToList);
     });

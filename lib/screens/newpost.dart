@@ -73,7 +73,11 @@ class _NewPostState extends State<NewPost> {
                     isVerified: false,
                     description: description,
                     userProfile: myProfile);
+                AdvancedSearchModel postToAddToUser = AdvancedSearchModel(
+                    newPost.title, newPost.postInPathCollection);
+                myProfile.addPosts(postToAddToUser);
                 postToFirebase(newPost);
+
                 print('new post completed');
                 // showLoading(context, false);
                 showCompletedDialog(

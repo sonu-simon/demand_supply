@@ -1,12 +1,7 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebasePoliceDB.dart';
-import 'package:demand_supply/models/userProfile.dart';
-import 'package:demand_supply/screens/dialogs.dart';
-import 'package:demand_supply/screens/productPage/productPageToVerify.dart';
 import 'package:demand_supply/screens/profile/userprofile.dart';
 import 'package:flutter/material.dart';
-
-import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 
 class ListUnverifiedUsers extends StatefulWidget {
   @override

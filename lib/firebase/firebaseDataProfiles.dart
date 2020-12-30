@@ -26,7 +26,7 @@ userToFirebase(UserProfile userProfile) {
   print('user added to firebase');
 }
 
-//never used, lot of changes in the data models since
+//never used yet, lot of changes in the data models since
 updateUserInFirebase(UserProfile userProfile) {
   FirebaseFirestore.instance
       .collection('users')
@@ -42,11 +42,6 @@ updateUserInFirebase(UserProfile userProfile) {
     'postDate': userProfile.whatsappNumber,
     'uEmailId': userProfile.emailId,
   });
-
-  // Scaffold.of(context).showSnackBar(SnackBar(
-  //   content: Text("User Profile updated!"),
-  //   duration: Duration(seconds: 2),
-  // ));
 }
 
 Future retrieveUserProfileFromFirebase(String qUserID) async {
@@ -66,6 +61,7 @@ Future retrieveUserProfileFromFirebase(String qUserID) async {
       policeStation: userFromFirebase.data()['policeStation'],
       whatsappNumber: userFromFirebase.data()['whatsappNumber'],
       emailId: userFromFirebase.data()['emailID'],
+      posts: List.castFrom(userFromFirebase.data()['posts']),
     );
 
     myProfile = toCurrentUser;

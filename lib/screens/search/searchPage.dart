@@ -94,7 +94,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                     ),
                   ),
               separatorBuilder: (context, index) {
-                Padding(
+                return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Divider(
                     color: Colors.grey,
