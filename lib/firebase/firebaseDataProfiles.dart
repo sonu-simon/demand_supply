@@ -14,6 +14,7 @@ userToFirebase(UserProfile userProfile) {
     'proPicUrl': userProfile.proPicUrl,
     'phoneNumber': userProfile.phoneNumber,
     'isAdmin': userProfile.isAdmin,
+    'isProfileVerified': userProfile.isProfileVerified,
     'hasPosted': userProfile.hasPosted,
     'locality': userProfile.locality,
     'district': userProfile.locality,
@@ -44,7 +45,7 @@ updateUserInFirebase(UserProfile userProfile) {
   });
 }
 
-Future retrieveUserProfileFromFirebase(String qUserID) async {
+Future retrieveMyUserProfileFromFirebase(String qUserID) async {
   await FirebaseFirestore.instance
       .collection('users')
       .doc(qUserID)
@@ -61,9 +62,9 @@ Future retrieveUserProfileFromFirebase(String qUserID) async {
       policeStation: userFromFirebase.data()['policeStation'],
       whatsappNumber: userFromFirebase.data()['whatsappNumber'],
       emailId: userFromFirebase.data()['emailID'],
-      posts: List.castFrom(userFromFirebase.data()['posts']),
+      mapPosts: userFromFirebase.data()['posts'],
     );
-
+    print(toCurrentUser.posts);
     myProfile = toCurrentUser;
     print('myProfile.userID: ${myProfile.userID}');
     checkIfUserProfileExistsAndAdmin(qUserID);

@@ -70,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               Form(
                   key: _formKey,
-                  autovalidateMode: AutovalidateMode.always,
+                  autovalidateMode: AutovalidateMode.disabled,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(

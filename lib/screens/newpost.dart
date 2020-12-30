@@ -76,6 +76,7 @@ class _NewPostState extends State<NewPost> {
                 AdvancedSearchModel postToAddToUser = AdvancedSearchModel(
                     newPost.title, newPost.postInPathCollection);
                 myProfile.addPosts(postToAddToUser);
+                print('myProfile.posts: ${myProfile.posts}');
                 postToFirebase(newPost);
 
                 print('new post completed');

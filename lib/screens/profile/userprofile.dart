@@ -1,6 +1,10 @@
 import 'dart:ui';
 
+import 'package:demand_supply/firebase/firebaseDataPosts.dart';
+import 'package:demand_supply/models/post.dart';
 import 'package:demand_supply/models/userProfile.dart';
+import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/productPage/productpage.dart';
 import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -178,7 +182,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
 
                 ExpansionTile(
-                  title: Text("Your Posts"),
+                  title: Text("Posts by user"),
                   children: [
                     widget.passedProfile.posts == null
                         ? ListTile(
@@ -190,11 +194,27 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             shrinkWrap: true,
                             itemCount: widget.passedProfile.posts.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                title: Text(" "),
-                                onTap: () {
-                                  //navigate to post logic
-                                },
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 6.0),
+                                child: ListTile(
+                                  title: Text(
+                                      widget.passedProfile.posts[index].title),
+                                  tileColor: Colors.blue[100],
+                                  onTap: () async {
+                                    //navigate to post logic
+                                    showLoading(context, true);
+                                    Post postToShow = await postByPostPath(
+                                        widget.passedProfile.posts[index]
+                                            .postPath);
+
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProductPage(postToShow)));
+                                  },
+                                ),
                               );
                             })
                   ],

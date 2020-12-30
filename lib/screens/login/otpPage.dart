@@ -56,6 +56,7 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
             children: <Widget>[
               Text(
                 "Enter OTP received on your phone",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.cyan,
                   fontSize: 24,

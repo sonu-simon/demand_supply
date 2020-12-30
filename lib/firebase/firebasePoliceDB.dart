@@ -21,7 +21,7 @@ Future<List<String>> getLocalitiesForPolice(
   List<String> localitiesForPolice;
   await FirebaseFirestore.instance
       .collection('policeDB')
-      .where('phoneNumber', isEqualTo: '+918009345450')
+      .where('phoneNumber', isEqualTo: qPhoneNumber)
       .get()
       .then((policeProfileSnapshot) {
     if (policeProfileSnapshot.docs.length == 0)
@@ -36,6 +36,8 @@ Future<List<String>> getLocalitiesForPolice(
 Future<List<UserProfile>> getUsersToVerifyFromListOfLocalities(
     List<String> listOfLocalitiesAssigned, BuildContext context) async {
   List<UserProfile> listOfUserToVerify = [];
+  print(listOfLocalitiesAssigned);
+
   if (listOfLocalitiesAssigned == null || listOfLocalitiesAssigned.length == 0)
     showErrorDialog(context, 'You are not assigned any locality');
   await FirebaseFirestore.instance
@@ -59,7 +61,7 @@ Future<List<UserProfile>> getUsersToVerifyFromListOfLocalities(
         whatsappNumber: userProfileToVerify.data()['whatsappNumber'],
         emailId: userProfileToVerify.data()['emailID'],
         isProfileVerified: userProfileToVerify.data()['isProfileVerified'],
-        posts: List.castFrom(userProfileToVerify.data()['posts']),
+        mapPosts: userProfileToVerify.data()['posts'],
       );
       listOfUserToVerify.add(profileToAddToList);
     });

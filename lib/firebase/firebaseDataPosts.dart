@@ -37,10 +37,12 @@ postToFirebase(Post post) {
       .update({post.title: post.postInPathCollection}).then(
           (value) => print('postTitlesById is set'));
 
-  FirebaseFirestore.instance
-      .collection('users')
-      .doc(post.uUserID)
-      .update({'hasPosted': true, 'posts': myProfile.posts});
+  FirebaseFirestore.instance.collection('users').doc(post.uUserID).update({
+    'hasPosted': true,
+    'posts': FieldValue.arrayUnion([
+      {post.title: post.postInPathCollection}
+    ])
+  });
 }
 
 Future retrievePostsFromFirebaseByDistrictFilterByCategory(

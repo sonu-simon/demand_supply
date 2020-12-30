@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showLoading(context, true);
       print('should have displayed by now');
-      retrieveUserProfileFromFirebase(currentUserID)
+      retrieveMyUserProfileFromFirebase(currentUserID)
           .then((_) => showLoading(context, false));
 
       // arsProgressDialog.dismiss();

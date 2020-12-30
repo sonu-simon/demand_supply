@@ -14,6 +14,7 @@ class UserProfile {
   String whatsappNumber;
   String emailId;
 
+  List<dynamic> mapPosts;
   List<AdvancedSearchModel> posts;
   bool isProfileVerified;
   bool isAdmin;
@@ -32,7 +33,18 @@ class UserProfile {
       this.hasPosted = false,
       this.whatsappNumber,
       this.emailId,
-      this.posts});
+      this.mapPosts,
+      this.posts}) {
+    if (mapPosts != null) {
+      posts = [];
+      mapPosts.forEach((element) {
+        element.forEach((key, value) {
+          AdvancedSearchModel searchResult = AdvancedSearchModel(key, value);
+          posts.add(searchResult);
+        });
+      });
+    }
+  }
 
   updateUserProfile(UserProfile userProfile, BuildContext context) {
     userID = userProfile.userID;
@@ -50,6 +62,7 @@ class UserProfile {
 
   addPosts(AdvancedSearchModel postToAdd) {
     posts.add(postToAdd);
+    print('added to myProfile');
   }
 }
 

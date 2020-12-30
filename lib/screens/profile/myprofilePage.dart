@@ -2,8 +2,11 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -20,6 +23,16 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       print('in .then()');
       _image = File(pickedFile.path);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      showLoading(context, true);
+      retrieveMyUserProfileFromFirebase(currentUserID)
+          .then((_) => showLoading(context, false));
     });
   }
 
@@ -138,27 +151,32 @@ class _ProfilePageState extends State<ProfilePage> {
                         shrinkWrap: true,
                         itemCount: myProfile.posts.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            onTap: () {
-                              //navigate to post logic
-                            },
-                            title: Text(" "),
-                            trailing: Row(
-                              children: [
-                                //delete
-                                IconButton(
-                                  icon: Icon(Icons.delete_forever_outlined),
-                                  onPressed: () {
-                                    // return deletePostDialog(context);
-                                  },
-                                ),
-                                //edit
-                                IconButton(
-                                    icon: Icon(Icons.edit),
-                                    onPressed: () {
-                                      // return editPostDialog(context);
-                                    }),
-                              ],
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 6.0),
+                            child: ListTile(
+                              onTap: () {
+                                //navigate to post logic
+                              },
+                              tileColor: Colors.blue[100],
+                              title: Text(myProfile.posts[index].title),
+                              // trailing: Row(
+                              //   children: [
+                              //     //delete
+                              //     IconButton(
+                              //       icon: Icon(Icons.delete_forever_outlined),
+                              //       onPressed: () {
+                              //         // return deletePostDialog(context);
+                              //       },
+                              //     ),
+                              //     //edit
+                              //     IconButton(
+                              //         icon: Icon(Icons.edit),
+                              //         onPressed: () {
+                              //           // return editPostDialog(context);
+                              //         }),
+                              //   ],
+                              // ),
                             ),
                           );
                         })
