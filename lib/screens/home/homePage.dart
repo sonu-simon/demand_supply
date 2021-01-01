@@ -1,4 +1,5 @@
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/drawer.dart';
@@ -23,8 +24,9 @@ class _HomePageState extends State<HomePage> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showLoading(context, true);
       print('should have displayed by now');
-      retrieveMyUserProfileFromFirebase(currentUserID)
-          .then((_) => showLoading(context, false));
+      retrieveMyUserProfileFromFirebase(currentUserID).then((_) =>
+          getPostsForHomepage(myProfile.district)
+              .then((_) => showLoading(context, false)));
 
       // arsProgressDialog.dismiss();
     });

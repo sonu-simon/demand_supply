@@ -171,29 +171,29 @@ Future searchForPostsByTitleInDistrict({String uDistrict, String title}) async {
   });
 }
 
-Future retrievePostsByVillageNotVerified(
-    {String uDistrict, String uLocality}) async {
-  notVerifiedPostsForAdminByLocality = [];
+Future getPostsForHomepage(String uDistrict) async {
   await FirebaseFirestore.instance
       .collection('posts')
       .doc(uDistrict)
       .collection('posts')
-      .where('uLocality', isEqualTo: uLocality)
-      .where('isVerified', isEqualTo: false)
+      .where('uIsProfileVerified', isEqualTo: 'Verified')
+      .orderBy('postDate')
+      .limit(20)
       .get()
-      .then((QuerySnapshot querySnapshot) {
-    print('entered .then() retrievePostsByVillageNotVerified()');
+      .then((querySnapshot) {
+    print('inside getPostsForHomePage()');
     querySnapshot.docs.forEach((post) {
+      print("this is: ${post.data()['title']}");
       Post postToAddList = Post(
         id: post.data()['id'],
         title: post.data()['title'],
         postDate: post.data()['postDate'],
         category: post.data()['category'],
-        postInPathCollection: post.data()['postInPathCollection'],
         description: post.data()['description'],
         imageUrl: post.data()['imageUrl'],
         isVerified: post.data()['isVerified'],
         uName: post.data()['uName'],
+        uIsProfileVerified: post.data()['uIsProfileVerified'],
         uPhoneNumber: post.data()['uPhoneNumber'],
         uWhatsappNumber: post.data()['uWhatsappNumber'],
         uProPicUrl: post.data()['uProPicUrl'],
@@ -203,30 +203,58 @@ Future retrievePostsByVillageNotVerified(
         uEmailId: post.data()['uEmailId'],
         uUserID: post.data()['uUserID'],
       );
-
-      notVerifiedPostsForAdminByLocality.add(postToAddList);
+      postsForHomePage.add(postToAddList);
     });
-    return print(notVerifiedPostsForAdminByLocality);
   });
+  return print(postsForHomePage);
 }
 
-Future verifyPostByAdmin(String postPath, BuildContext context) async {
-  print(postPath);
-  showLoading(context, true);
-  await FirebaseFirestore.instance
-      .doc(postPath)
-      .update({'isVerified': true}).then((_) {
-    showLoading(context, false);
-    Navigator.pop(context);
-  });
-}
-
-// advancedSearchInPosts(String qTitle) {
-//   FirebaseFirestore.instance
-//       .collectionGroup('posts')
-//       .where('title', isEqualTo: 'new post')
+// Future retrievePostsByVillageNotVerified(
+//     {String uDistrict, String uLocality}) async {
+//   notVerifiedPostsForAdminByLocality = [];
+//   await FirebaseFirestore.instance
+//       .collection('posts')
+//       .doc(uDistrict)
+//       .collection('posts')
+//       .where('uLocality', isEqualTo: uLocality)
+//       .where('isVerified', isEqualTo: false)
 //       .get()
-//       .then((querySnapshot) {
-//     print('do something here');
+//       .then((QuerySnapshot querySnapshot) {
+//     print('entered .then() retrievePostsByVillageNotVerified()');
+//     querySnapshot.docs.forEach((post) {
+//       Post postToAddList = Post(
+//         id: post.data()['id'],
+//         title: post.data()['title'],
+//         postDate: post.data()['postDate'],
+//         category: post.data()['category'],
+//         postInPathCollection: post.data()['postInPathCollection'],
+//         description: post.data()['description'],
+//         imageUrl: post.data()['imageUrl'],
+//         isVerified: post.data()['isVerified'],
+//         uName: post.data()['uName'],
+//         uPhoneNumber: post.data()['uPhoneNumber'],
+//         uWhatsappNumber: post.data()['uWhatsappNumber'],
+//         uProPicUrl: post.data()['uProPicUrl'],
+//         uLocality: post.data()['uLocation'],
+//         uDistrict: post.data()['uDistrict'],
+//         uPoliceStation: post.data()['uPoliceStation'],
+//         uEmailId: post.data()['uEmailId'],
+//         uUserID: post.data()['uUserID'],
+//       );
+
+//       notVerifiedPostsForAdminByLocality.add(postToAddList);
+//     });
+//     return print(notVerifiedPostsForAdminByLocality);
+//   });
+// }
+
+// Future verifyPostByAdmin(String postPath, BuildContext context) async {
+//   print(postPath);
+//   showLoading(context, true);
+//   await FirebaseFirestore.instance
+//       .doc(postPath)
+//       .update({'isVerified': true}).then((_) {
+//     showLoading(context, false);
+//     Navigator.pop(context);
 //   });
 // }

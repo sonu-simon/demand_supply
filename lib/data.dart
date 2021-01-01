@@ -173,6 +173,7 @@ UserProfile myProfile;
 
 List<AdvancedSearchModel> advancedSearchList = [];
 List<Post> postsInDistrictFilterByTitle = [];
+List<Post> postsForHomePage = [];
 
 bool myProfileIsAdmin;
 
