@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:demand_supply/firebase/firebaseDataPosts.dart';
+import 'package:demand_supply/firebase/firebasePoliceDB.dart';
 import 'package:demand_supply/models/post.dart';
 import 'package:demand_supply/models/userProfile.dart';
 import 'package:demand_supply/screens/dialogs.dart';
@@ -29,7 +30,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        dismissUserProfile(
+                            widget.passedProfile.userID, context);
+                      },
                       color: Colors.red,
                       child: Container(
                         height: 25,
@@ -45,7 +49,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       ),
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        verifyUserProfile(widget.passedProfile.userID,
+                            widget.passedProfile.district, context);
+                      },
                       color: Colors.green,
                       child: Container(
                         height: 25,

@@ -65,9 +65,11 @@ class _NewPostState extends State<NewPost> {
               uploadPostImage(currentUserID, tempPostId, _image)
                   .then((_imgSrc) {
                 print('_imgSrc: $_imgSrc');
+
                 newPost = Post(
                     id: tempPostId,
                     title: title,
+                    postDate: DateTime.now().toString(),
                     category: category,
                     imageUrl: _imgSrc,
                     isVerified: false,

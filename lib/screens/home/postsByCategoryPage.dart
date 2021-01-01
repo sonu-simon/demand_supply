@@ -66,6 +66,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                   shrinkWrap: true,
                   itemCount: postsInDistrictFilterByCategory.length,
                   itemBuilder: (context, index) {
+                    print(postsInDistrictFilterByCategory[index].postDate);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(

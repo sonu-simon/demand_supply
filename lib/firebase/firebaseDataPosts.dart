@@ -53,6 +53,7 @@ Future retrievePostsFromFirebaseByDistrictFilterByCategory(
       .doc(uDistrict)
       .collection('posts')
       .where('category', isEqualTo: category)
+      .orderBy('postDate')
       .get()
       .then((QuerySnapshot querySnapshot) {
     print(

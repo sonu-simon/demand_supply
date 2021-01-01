@@ -54,42 +54,42 @@ class _HomePageState extends State<HomePage> {
             height: MediaQuery.of(context).size.height * 0.01,
           ),
           //notification from police
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.18,
-                color: Colors.grey[500],
-                child: Center(
-                  child: Text(
-                    'SOMETHING IMPORTANT',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                        color: Colors.white),
-                  ),
-                ),
-              )),
-          SizedBox(
-            height: 5,
-          ),
+          // Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 10),
+          //     child: Container(
+          //       height: MediaQuery.of(context).size.height * 0.18,
+          //       color: Colors.grey[500],
+          //       child: Center(
+          //         child: Text(
+          //           'SOMETHING IMPORTANT',
+          //           style: TextStyle(
+          //               fontSize: 20,
+          //               fontWeight: FontWeight.bold,
+          //               letterSpacing: 2,
+          //               color: Colors.white),
+          //         ),
+          //       ),
+          //     )),
+          // SizedBox(
+          //   height: 5,
+          // ),
           //social causes heading
           // Text(
           //   "Find a cause to support",
           //   textAlign: TextAlign.start,
           // ),
           //socialcauses banner
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.15,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 6,
-                    itemBuilder: (BuildContext context, int index) {
-                      return flipcard(context, index);
-                    })),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: Container(
+          //       height: MediaQuery.of(context).size.height * 0.15,
+          //       child: ListView.builder(
+          //           scrollDirection: Axis.horizontal,
+          //           itemCount: 6,
+          //           itemBuilder: (BuildContext context, int index) {
+          //             return flipcard(context, index);
+          //           })),
+          // ),
           //categories
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),

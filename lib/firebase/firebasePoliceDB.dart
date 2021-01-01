@@ -43,7 +43,7 @@ Future<List<UserProfile>> getUsersToVerifyFromListOfLocalities(
   await FirebaseFirestore.instance
       .collection('users')
       .where('locality', whereIn: listOfLocalitiesAssigned)
-      .where('isProfileVerified', isEqualTo: false)
+      .where('isProfileVerified', isEqualTo: 'Pending')
       .where('hasPosted', isEqualTo: true)
       .get()
       .then((QuerySnapshot querySnapshot) {
@@ -74,4 +74,37 @@ getUsersToVerify(BuildContext context, String qPhoneNumber) async {
   listOfUnverifiedUsers = await getLocalitiesForPolice(qPhoneNumber, context)
       .then((listOfLocs) =>
           getUsersToVerifyFromListOfLocalities(listOfLocs, context));
+}
+
+Future verifyUserProfile(
+    String qUserID, String qDistrict, BuildContext context) async {
+  showLoading(context, true);
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(qUserID)
+      .update({'isProfileVerified': 'Verified'});
+  CollectionReference collectionReference = FirebaseFirestore.instance
+      .collection('posts')
+      .doc(qDistrict)
+      .collection('posts');
+  var response =
+      await collectionReference.where('uUserID', isEqualTo: qUserID).get();
+  var batch = FirebaseFirestore.instance.batch();
+  response.docs.forEach((doc) {
+    DocumentReference docRef = collectionReference.doc(doc.id);
+    batch.update(docRef, {'uIsProfileVerified': 'Verified'});
+  });
+  await batch.commit();
+  print('updated all posts of the user in the collection with verified');
+  showLoading(context, false);
+}
+
+Future dismissUserProfile(String qUserID, BuildContext context) async {
+  showLoading(context, true);
+
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(qUserID)
+      .update({'isProfileVerified': 'Dismissed'});
+  showLoading(context, false);
 }

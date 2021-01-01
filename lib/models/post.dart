@@ -23,7 +23,7 @@ class Post {
   String uPoliceStation;
   String uWhatsappNumber;
   String uEmailId;
-  bool uIsProfileVerified;
+  String uIsProfileVerified;
 
   Post({
     this.id,
@@ -46,7 +46,6 @@ class Post {
     this.uEmailId,
     this.uIsProfileVerified,
   }) {
-    postDate = DateTime.now().toString();
     if (userProfile != null) {
       uUserID = userProfile.userID;
       uName = userProfile.name;
@@ -69,11 +68,3 @@ class AdvancedSearchModel {
 
   AdvancedSearchModel(this.title, this.postPath);
 }
-// Post demoPost = Post(
-//     title: 'Title goes here',
-//     postDate: DateTime.now().toString(),
-//     description: 'The product description goes here...',
-//     imageUrl:
-//         'https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg',
-//     userProfile: demoUser,
-//     category: 'The NULL category');
