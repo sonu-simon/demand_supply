@@ -78,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       children: [
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.black87),
-                          autofocus: true,
+                          autofocus: false,
                           maxLines: 1,
                           maxLength: 50,
                           decoration: InputDecoration(
@@ -142,13 +142,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               hintText: "Email",
                               hintStyle: TextStyle(fontSize: 20)),
                           initialValue: "",
-                          validator: (String value) {
-                            value = value.trim();
-                            if (value.isEmpty) {
-                              return 'Email is Required';
-                            }
-                            return null;
-                          },
+                          // validator: (String value) {
+                          //   value = value.trim();
+                          //   if (value.isEmpty) {
+                          //     return 'Email is Required';
+                          //   }
+                          //   return null;
+                          // },
                           onChanged: ((String newValue) {
                             uEmailId = newValue;
                           }),

@@ -128,28 +128,32 @@ class _AddUserProPicState extends State<AddUserProPic> {
           ))),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showLoading(context, true);
-          UserProfile signupProfile;
-          uploadUserProPicImage(currentUserID, _image).then((_imgSrc) {
-            print('_imgSrc: $_imgSrc');
-            signupProfile = UserProfile(
-                isAdmin: false,
-                userID: currentUserID,
-                name: widget.uName,
-                proPicUrl: _imgSrc,
-                phoneNumber: uPhoneNumber,
-                locality: widget.uLocality,
-                district: widget.uDistrict,
-                policeStation: widget.uLocality,
-                whatsappNumber: widget.uWhatsappNumber,
-                emailId: widget.uEmailId,
-                posts: []);
-            print(signupProfile.userID);
-            userToFirebase(signupProfile);
-            // showLoading(context, false);
-            showCompletedDialog(
-                context, '    User Profile successfully created!');
-          });
+          if (_image == null)
+            showErrorDialog(context, 'Add a profile picture to continue!');
+          else {
+            showLoading(context, true);
+            UserProfile signupProfile;
+            uploadUserProPicImage(currentUserID, _image).then((_imgSrc) {
+              print('_imgSrc: $_imgSrc');
+              signupProfile = UserProfile(
+                  isAdmin: false,
+                  userID: currentUserID,
+                  name: widget.uName,
+                  proPicUrl: _imgSrc,
+                  phoneNumber: uPhoneNumber,
+                  locality: widget.uLocality,
+                  district: widget.uDistrict,
+                  policeStation: widget.uLocality,
+                  whatsappNumber: widget.uWhatsappNumber,
+                  emailId: widget.uEmailId,
+                  posts: []);
+              print(signupProfile.userID);
+              userToFirebase(signupProfile);
+              // showLoading(context, false);
+              showCompletedDialog(
+                  context, '    User Profile successfully created!');
+            });
+          }
         },
         backgroundColor: Colors.white,
         child: Center(

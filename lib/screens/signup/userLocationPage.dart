@@ -1,3 +1,4 @@
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/signup/adduserpropic.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -175,7 +176,9 @@ class _UserLocationPageState extends State<UserLocationPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (_formKey2.currentState.validate()) {
+          if (uDistrict == null || uLocality == null || uPoliceStation == null)
+            showErrorDialog(context, 'You can\'t miss out any fields here!');
+          else {
             Navigator.push(
                 context,
                 MaterialPageRoute(
