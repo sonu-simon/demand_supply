@@ -5,6 +5,7 @@ import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/home/postsByCategoryPage.dart';
+import 'package:demand_supply/screens/productPage/productpage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:demand_supply/screens/search/normalSearch.dart';
 import 'package:flutter/material.dart';
@@ -50,148 +51,174 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: DrawerHomePage(),
       //grids and ol
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          //notification from police
-          // Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 10),
-          //     child: Container(
-          //       height: MediaQuery.of(context).size.height * 0.18,
-          //       color: Colors.grey[500],
-          //       child: Center(
-          //         child: Text(
-          //           'SOMETHING IMPORTANT',
-          //           style: TextStyle(
-          //               fontSize: 20,
-          //               fontWeight: FontWeight.bold,
-          //               letterSpacing: 2,
-          //               color: Colors.white),
-          //         ),
-          //       ),
-          //     )),
-          // SizedBox(
-          //   height: 5,
-          // ),
-          //social causes heading
-          // Text(
-          //   "Find a cause to support",
-          //   textAlign: TextAlign.start,
-          // ),
-          //socialcauses banner
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 10),
-          //   child: Container(
-          //       height: MediaQuery.of(context).size.height * 0.15,
-          //       child: ListView.builder(
-          //           scrollDirection: Axis.horizontal,
-          //           itemCount: 6,
-          //           itemBuilder: (BuildContext context, int index) {
-          //             return flipcard(context, index);
-          //           })),
-          // ),
-          //categories
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Container(
-              // color: Colors.red,
-              height: MediaQuery.of(context).size.height * 0.28,
-              child: StaggeredGridView.count(
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 3,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 24,
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
-                children: [
-                  InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PostsByCategory(qCategory: 'Daily Needs')),
-                      )
-                    },
-                    child: category(
-                      "asset/icon/iconliving.png",
-                      Colors.greenAccent,
-                      "Daily Needs",
-                    ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              //categories
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Container(
+                  // color: Colors.red,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: StaggeredGridView.count(
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 24,
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
+                    children: [
+                      InkWell(
+                        onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PostsByCategory(qCategory: 'Daily Needs')),
+                          )
+                        },
+                        child: category(
+                          "asset/icon/iconliving.png",
+                          Colors.greenAccent,
+                          "Daily Needs",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PostsByCategory(qCategory: 'Medicine')),
+                          )
+                        },
+                        child: category("asset/icon/iconlivingmeds.png",
+                            Colors.greenAccent, "Medicine"),
+                      ),
+                      InkWell(
+                        onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PostsByCategory(qCategory: 'Counseling')),
+                          )
+                        },
+                        child: category("asset/icon/iconlivingcounsel.png",
+                            Colors.greenAccent, "Counseling"),
+                      ),
+                      InkWell(
+                        onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PostsByCategory(qCategory: 'Buy/Sell')),
+                          )
+                        },
+                        child: category("asset/icon/iconlivingbuysell.png",
+                            Colors.greenAccent, "Buy/Sell"),
+                      ),
+                      InkWell(
+                        onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PostsByCategory(qCategory: 'Travel')),
+                          )
+                        },
+                        child: category("asset/icon/iconlivingtravel.png",
+                            Colors.greenAccent, "Travel"),
+                      ),
+                      InkWell(
+                          onTap: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PostsByCategory(qCategory: 'Other')),
+                                )
+                              },
+                          child: category("asset/icon/iconlivingother.png",
+                              Colors.greenAccent, "Other")),
+                    ],
+                    staggeredTiles: [
+                      StaggeredTile.extent(1, 100),
+                      StaggeredTile.extent(1, 100),
+                      StaggeredTile.extent(1, 100),
+                      StaggeredTile.extent(1, 100),
+                      StaggeredTile.extent(1, 100),
+                      StaggeredTile.extent(1, 100)
+                    ],
                   ),
-                  InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PostsByCategory(qCategory: 'Medicine')),
-                      )
-                    },
-                    child: category("asset/icon/iconlivingmeds.png",
-                        Colors.greenAccent, "Medicine"),
-                  ),
-                  InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PostsByCategory(qCategory: 'Counseling')),
-                      )
-                    },
-                    child: category("asset/icon/iconlivingcounsel.png",
-                        Colors.greenAccent, "Counseling"),
-                  ),
-                  InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PostsByCategory(qCategory: 'Buy/Sell')),
-                      )
-                    },
-                    child: category("asset/icon/iconlivingbuysell.png",
-                        Colors.greenAccent, "Buy/Sell"),
-                  ),
-                  InkWell(
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PostsByCategory(qCategory: 'Travel')),
-                      )
-                    },
-                    child: category("asset/icon/iconlivingtravel.png",
-                        Colors.greenAccent, "Travel"),
-                  ),
-                  InkWell(
-                      onTap: () => {
-                            Navigator.push(
+                ),
+              ),
+              //posts
+              GridView.count(
+                crossAxisCount: 2,
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                children: List.generate(postsForHomePage.length, (index) {
+                  return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        child: InkWell(
+                          onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      PostsByCategory(qCategory: 'Other')),
-                            )
-                          },
-                      child: category("asset/icon/iconlivingother.png",
-                          Colors.greenAccent, "Other")),
-                ],
-                staggeredTiles: [
-                  StaggeredTile.extent(1, 100),
-                  StaggeredTile.extent(1, 100),
-                  StaggeredTile.extent(1, 100),
-                  StaggeredTile.extent(1, 100),
-                  StaggeredTile.extent(1, 100),
-                  StaggeredTile.extent(1, 100)
-                ],
-              ),
-            ),
+                                      ProductPage(postsForHomePage[index]))),
+                          child: Stack(
+                            children: [
+                              Card(
+                                color: Colors.grey[350],
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          image: NetworkImage(
+                                              postsForHomePage[index]
+                                                  .imageUrl))),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 14,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: Colors.white.withOpacity(0.5),
+                                  child: Center(
+                                    child: Text(
+                                      postsForHomePage[index]
+                                          .title
+                                          .toUpperCase(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              30),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ));
+                }),
+              )
+            ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
