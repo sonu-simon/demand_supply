@@ -6,6 +6,7 @@ import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/home/postsByCategoryPage.dart';
 import 'package:demand_supply/screens/productPage/productpage.dart';
+import 'package:demand_supply/screens/trial/product.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:demand_supply/screens/search/normalSearch.dart';
 import 'package:flutter/material.dart';
@@ -172,8 +173,8 @@ class _HomePageState extends State<HomePage> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProductPage(postsForHomePage[index]))),
+                                  builder: (context) => ProductPageTrial(
+                                      postsForHomePage[index]))),
                           child: Stack(
                             children: [
                               Card(
