@@ -3,8 +3,8 @@ import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/drawer.dart';
-import 'package:demand_supply/screens/newpost.dart';
 import 'package:demand_supply/screens/home/postsByCategoryPage.dart';
+import 'package:demand_supply/screens/post/newPost.dart';
 import 'package:demand_supply/screens/productPage/productpage.dart';
 import 'package:demand_supply/screens/trial/product.dart';
 import 'package:flip_card/flip_card.dart';
@@ -26,11 +26,14 @@ class _HomePageState extends State<HomePage> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       showLoading(context, true);
       print('should have displayed by now');
-      retrieveMyUserProfileFromFirebase(currentUserID).then((_) =>
-          getPostsForHomepage(myProfile.district)
-              .then((_) => showLoading(context, false)));
-
-      // arsProgressDialog.dismiss();
+      retrieveMyUserProfileFromFirebase(currentUserID).then((_) {
+        getPostsForHomepage(myProfile.district).then((_) {
+          setState(() {
+            print('successfully retrieved posts for homepage');
+          });
+        });
+        showLoading(context, false);
+      });
     });
   }
 
@@ -57,6 +60,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
@@ -66,13 +70,14 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Container(
                   // color: Colors.red,
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.34,
                   child: StaggeredGridView.count(
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 3,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 24,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 26),
+                    padding: EdgeInsets.only(
+                        left: 16, right: 16, top: 20, bottom: 0),
                     children: [
                       InkWell(
                         onTap: () => {
@@ -167,14 +172,17 @@ class _HomePageState extends State<HomePage> {
                 shrinkWrap: true,
                 children: List.generate(postsForHomePage.length, (index) {
                   return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 8),
                       child: Container(
                         child: InkWell(
                           onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductPageTrial(
-                                      postsForHomePage[index]))),
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductPageTrial(postsForHomePage[index]),
+                            ),
+                          ),
                           child: Stack(
                             children: [
                               Card(
@@ -182,6 +190,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   height: MediaQuery.of(context).size.height,
                                   decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
                                           fit: BoxFit.fitWidth,
                                           image: NetworkImage(
@@ -193,9 +202,9 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height / 14,
+                                      MediaQuery.of(context).size.height / 18,
                                   width: MediaQuery.of(context).size.width,
-                                  color: Colors.white.withOpacity(0.5),
+                                  color: Colors.white.withOpacity(0.6),
                                   child: Center(
                                     child: Text(
                                       postsForHomePage[index]
@@ -206,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .height /
-                                              30),
+                                              35),
                                     ),
                                   ),
                                 ),

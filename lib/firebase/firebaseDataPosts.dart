@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/models/post.dart';
-import 'package:demand_supply/screens/dialogs.dart';
-import 'package:flutter/cupertino.dart';
 
 postToFirebase(Post post) {
   FirebaseFirestore.instance

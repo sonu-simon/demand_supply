@@ -109,18 +109,15 @@ class _ProductPageTrialState extends State<ProductPageTrial> {
                             width: MediaQuery.of(context).size.width / 5,
                             // height: MediaQuery.of(context).size.height * 0.07,
                             child: IconButton(
-                              icon: if(selectedPost.uIsProfileVerified=="true"){Icon(
-                                      Icons.verified_user_outlined,
-                                      color: Colors.green,
-                                    )
-                              }
-                                  ? 
-                                  : Icon(
-                                      Icons.verified_user_outlined,
-                                      color: Colors.red,
-                                    ),
+                              icon: Icon(
+                                Icons.verified_user_outlined,
+                                color: (selectedPost.uIsProfileVerified ==
+                                        "Verified")
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
                               onPressed: () {
-                                print(selectedPost.isVerified);
+                                print(selectedPost.uIsProfileVerified);
                               },
                             ),
                           )
