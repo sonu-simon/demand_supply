@@ -190,12 +190,13 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   height: MediaQuery.of(context).size.height,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          fit: BoxFit.fitWidth,
-                                          image: NetworkImage(
-                                              postsForHomePage[index]
-                                                  .imageUrl))),
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fitWidth,
+                                      image: NetworkImage(
+                                          postsForHomePage[index].imageUrl),
+                                    ),
+                                  ),
                                 ),
                               ),
                               Align(
