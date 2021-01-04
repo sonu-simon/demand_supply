@@ -1,4 +1,6 @@
+import 'package:demand_supply/data.dart';
 import 'package:demand_supply/models/post.dart';
+import 'package:demand_supply/screens/post/editPost.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +13,18 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  bool isOwner = false;
+
+  isOwnerCheck() {
+    if (widget.passedOnPost.uUserID == myProfile.userID) isOwner = false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isOwnerCheck();
+  }
+
   @override
   Widget build(BuildContext context) {
     var selectedPost = widget.passedOnPost;
@@ -18,6 +32,19 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedPost.title),
+          actions: [
+            Visibility(
+              visible: isOwner,
+              child: IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditPost(selectedPost)),
+                ),
+              ),
+            )
+          ],
         ),
         body: Container(
           height: MediaQuery.of(context).size.height * 1,

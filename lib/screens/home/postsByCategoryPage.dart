@@ -1,7 +1,7 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 import 'package:demand_supply/screens/dialogs.dart';
-import 'package:demand_supply/screens/newpost.dart';
+import 'package:demand_supply/screens/post/newPost.dart';
 import 'package:demand_supply/screens/productPage/productpage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';

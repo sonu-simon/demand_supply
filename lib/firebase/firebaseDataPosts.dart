@@ -45,6 +45,34 @@ postToFirebase(Post post) {
   });
 }
 
+Future editPostInFirebase(Post post) async {
+  await FirebaseFirestore.instance
+      .collection('posts')
+      .doc(post.uDistrict)
+      .collection('posts')
+      .doc(post.id)
+      .update({
+    'id': post.id,
+    'title': post.title,
+    'category': post.category,
+    'description': post.description,
+    'imageUrl': post.imageUrl,
+    'isVerified': post.isVerified,
+    'postDate': post.postDate,
+    'postInPathCollection': post.postInPathCollection,
+    'uEmailId': post.uEmailId,
+    'uIsProfileVerified': post.uIsProfileVerified,
+    'uUserID': post.uUserID,
+    'uLocality': post.uLocality,
+    'uDistrict': post.uDistrict,
+    'uPoliceStation': post.uPoliceStation,
+    'uName': post.uName,
+    'uPhoneNumber': post.uPhoneNumber,
+    'uProPicUrl': post.uProPicUrl,
+    'uWhatsappNumber': post.uWhatsappNumber,
+  });
+}
+
 Future retrievePostsFromFirebaseByDistrictFilterByCategory(
     {String uDistrict, String category}) async {
   postsInDistrictFilterByCategory = [];

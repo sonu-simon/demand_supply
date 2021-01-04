@@ -7,16 +7,19 @@ import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-import '../data.dart';
-import '../firebase/firebaseDataPosts.dart';
-import '../firebase/firebaseData.dart';
+import '../../data.dart';
+import '../../firebase/firebaseDataPosts.dart';
+import '../../firebase/firebaseData.dart';
 
-class NewPost extends StatefulWidget {
+class EditPost extends StatefulWidget {
+  final Post initialPostData;
+
+  EditPost(this.initialPostData);
   @override
-  _NewPostState createState() => _NewPostState();
+  _EditPostState createState() => _EditPostState();
 }
 
-class _NewPostState extends State<NewPost> {
+class _EditPostState extends State<EditPost> {
   File _image;
   String title;
   String description;
@@ -47,7 +50,7 @@ class _NewPostState extends State<NewPost> {
           color: Colors.blue,
         ),
         title: Text(
-          "New Post",
+          "Edit Post",
           style: TextStyle(color: Colors.blue),
         ),
         actions: [
@@ -57,38 +60,46 @@ class _NewPostState extends State<NewPost> {
             splashColor: Colors.white,
             elevation: 0,
             onPressed: () {
-              showLoading(context, true);
-              Post newPost;
-              String tempPostId = currentUserID.substring(0, 12) +
-                  '_' +
-                  DateTime.now().toString().replaceAll('.', '_');
-              uploadPostImage(currentUserID, tempPostId, _image)
-                  .then((_imgSrc) {
-                print('_imgSrc: $_imgSrc');
+              if (_image == null ||
+                  title == null ||
+                  description == null ||
+                  category == null)
+                showErrorDialog(context,
+                    'All fields are mandatory! Please fill in the required details');
+              else {
+                showLoading(context, true);
 
-                newPost = Post(
-                    id: tempPostId,
-                    title: title,
-                    postDate: DateTime.now().toString(),
-                    category: category,
-                    imageUrl: _imgSrc,
-                    isVerified: false,
-                    description: description,
-                    userProfile: myProfile);
-                AdvancedSearchModel postToAddToUser = AdvancedSearchModel(
-                    newPost.title, newPost.postInPathCollection);
-                myProfile.addPosts(postToAddToUser);
-                print('myProfile.posts: ${myProfile.posts}');
-                postToFirebase(newPost);
+                Post newPost;
+                uploadPostImage(
+                        currentUserID, widget.initialPostData.id, _image)
+                    .then((_imgSrc) {
+                  print('_imgSrc: $_imgSrc');
 
-                print('new post completed');
-                // showLoading(context, false);
-                showCompletedDialog(
-                    context, '    New post created successfully!');
-              });
+                  newPost = Post(
+                      id: widget.initialPostData.id,
+                      title: title,
+                      postDate: widget.initialPostData.postDate,
+                      category: category,
+                      imageUrl: _imgSrc,
+                      isVerified: false,
+                      description: description,
+                      userProfile: myProfile);
+                  // AdvancedSearchModel postToAddToUser = AdvancedSearchModel(
+                  //     newPost.title, newPost.postInPathCollection);
+                  // myProfile.addPosts(postToAddToUser);
+                  // print('myProfile.posts: ${myProfile.posts}');
+                  // postToFirebase(newPost);
+                  editPostInFirebase(newPost);
+
+                  print('new post completed');
+                  // showLoading(context, false);
+                  showCompletedDialog(
+                      context, '    New post created successfully!');
+                });
+              }
             },
             child: Text(
-              "POST",
+              "SAVE",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           )
@@ -127,7 +138,8 @@ class _NewPostState extends State<NewPost> {
                             // height: MediaQuery.of(context).size.height / 4,
                             width: MediaQuery.of(context).size.width,
                             child: Image(
-                              image: AssetImage("asset/image/nill.jpg"),
+                              image:
+                                  NetworkImage(widget.initialPostData.imageUrl),
                             ),
                           ),
                   ),
@@ -141,6 +153,7 @@ class _NewPostState extends State<NewPost> {
                   autofocus: true,
                   maxLines: 1,
                   maxLength: 50,
+                  initialValue: widget.initialPostData.title,
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                           borderSide:
@@ -163,6 +176,7 @@ class _NewPostState extends State<NewPost> {
                   autofocus: true,
                   maxLines: 4,
                   maxLength: 170,
+                  initialValue: widget.initialPostData.description,
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                           borderSide:
@@ -187,7 +201,7 @@ class _NewPostState extends State<NewPost> {
                         borderRadius: BorderRadius.circular(10)),
                     // border: InputBorder.none,
                   ),
-                  hint: "Category",
+                  hint: widget.initialPostData.category,
                   autoFocusSearchBox: true,
                   showSelectedItem: true,
                   showClearButton: false,
