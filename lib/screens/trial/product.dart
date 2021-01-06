@@ -1,4 +1,7 @@
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/models/post.dart';
+import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/profile/userprofilePage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -95,13 +98,21 @@ class _ProductPageTrialState extends State<ProductPageTrial> {
                                 Icons.person,
                               ),
                               onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => ProductPage(
-                                //             postsInDistrictFilterByCategory[
-                                //                 index]))
-                                // );
+                                showLoading(context, true);
+                                retrieveUserProfileFromFirebase(
+                                        selectedPost.uUserID)
+                                    .then((profile) {
+                                  showLoading(context, false);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => UserProfilePage(
+                                        profile,
+                                        isToVerify: false,
+                                      ),
+                                    ),
+                                  );
+                                });
                               },
                             ),
                           ),
@@ -183,39 +194,41 @@ class _ProductPageTrialState extends State<ProductPageTrial> {
                       //Details
 
                       FlipCard(
-                          front: Card(
-                            elevation: 5,
-                            shadowColor: Colors.grey,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              // height: MediaQuery.of(context).size.height * 0.28,
-                              child: Padding(
-                                padding: EdgeInsets.all(10),
-                                child: selectedPost.description == null
-                                    ? Text("Description is not given")
-                                    : Text(
-                                        selectedPost.description,
-                                        textAlign: TextAlign.justify,
-                                      ),
-                              ),
+                        front: Card(
+                          elevation: 5,
+                          shadowColor: Colors.grey,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            // height: MediaQuery.of(context).size.height * 0.28,
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: selectedPost.description == null
+                                  ? Text("Description is not given")
+                                  : Text(
+                                      selectedPost.description,
+                                      textAlign: TextAlign.justify,
+                                    ),
                             ),
                           ),
-                          back: Card(
-                              elevation: 5,
-                              shadowColor: Colors.grey,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                // height: MediaQuery.of(context).size.height * 0.28,
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: selectedPost.description == null
-                                      ? Text("Description is not given")
-                                      : Text(
-                                          selectedPost.description,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                ),
-                              )))
+                        ),
+                        back: Card(
+                          elevation: 5,
+                          shadowColor: Colors.grey,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            // height: MediaQuery.of(context).size.height * 0.28,
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: selectedPost.description == null
+                                  ? Text("Description is not given")
+                                  : Text(
+                                      selectedPost.description,
+                                      textAlign: TextAlign.justify,
+                                    ),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

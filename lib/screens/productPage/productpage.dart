@@ -1,6 +1,10 @@
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/models/post.dart';
+import 'package:demand_supply/models/userProfile.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/post/editPost.dart';
+import 'package:demand_supply/screens/profile/userprofilePage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -129,13 +133,21 @@ class _ProductPageState extends State<ProductPage> {
                             Icons.person,
                           ),
                           onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => ProductPage(
-                            //             postsInDistrictFilterByCategory[
-                            //                 index]))
-                            // );
+                            showLoading(context, true);
+                            retrieveUserProfileFromFirebase(
+                                    selectedPost.uUserID)
+                                .then((profile) {
+                              showLoading(context, false);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UserProfilePage(
+                                    profile,
+                                    isToVerify: false,
+                                  ),
+                                ),
+                              );
+                            });
                           },
                         ),
                       ),
@@ -147,17 +159,15 @@ class _ProductPageState extends State<ProductPage> {
                         width: MediaQuery.of(context).size.width / 5,
                         // height: MediaQuery.of(context).size.height * 0.07,
                         child: IconButton(
-                          icon: selectedPost.isVerified
-                              ? Icon(
-                                  Icons.verified_user_outlined,
-                                  color: Colors.green,
-                                )
-                              : Icon(
-                                  Icons.verified_user_outlined,
-                                  color: Colors.red,
-                                ),
+                          icon: Icon(
+                            Icons.verified_user_outlined,
+                            color:
+                                (selectedPost.uIsProfileVerified == "Verified")
+                                    ? Colors.green
+                                    : Colors.red,
+                          ),
                           onPressed: () {
-                            print(selectedPost.isVerified);
+                            print(selectedPost.uIsProfileVerified);
                           },
                         ),
                       ),

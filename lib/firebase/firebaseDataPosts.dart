@@ -189,7 +189,7 @@ Future searchForPostsByTitleInDistrict({String uDistrict, String title}) async {
         uEmailId: post.data()['uEmailId'],
         uUserID: post.data()['uUserID'],
       );
-      if (postToAddList.title.contains(title))
+      if (postToAddList.title.toLowerCase().contains(title.toLowerCase()))
         postsInDistrictFilterByTitle.add(postToAddList);
     });
 

@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                   height:
                                       MediaQuery.of(context).size.height / 18,
                                   width: MediaQuery.of(context).size.width,
-                                  color: Colors.white.withOpacity(0.6),
+                                  color: Colors.white.withOpacity(0.7),
                                   child: Center(
                                     child: Text(
                                       postsForHomePage[index]

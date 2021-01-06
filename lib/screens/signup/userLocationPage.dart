@@ -72,7 +72,7 @@ class _UserLocationPageState extends State<UserLocationPage> {
               ),
               Form(
                   key: _formKey2,
-                  autovalidateMode: AutovalidateMode.always,
+                  autovalidateMode: AutovalidateMode.disabled,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
@@ -93,7 +93,10 @@ class _UserLocationPageState extends State<UserLocationPage> {
                               //   }
                               //   return null;
                               // },
-                              onChanged: (locality) => uLocality = locality,
+                              onChanged: (district) {
+                                uDistrict = district;
+                                print('$uDistrict $uLocality $uPoliceStation');
+                              },
                               searchBoxDecoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -122,7 +125,10 @@ class _UserLocationPageState extends State<UserLocationPage> {
                               //   }
                               //   return null;
                               // },
-                              onChanged: (locality) => uLocality = locality,
+                              onChanged: (locality) {
+                                uLocality = locality;
+                                print('$uDistrict $uLocality $uPoliceStation');
+                              },
                               searchBoxDecoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -150,7 +156,10 @@ class _UserLocationPageState extends State<UserLocationPage> {
                               //   }
                               //   return null;
                               // },
-                              onChanged: (locality) => uLocality = locality,
+                              onChanged: (policeStation) {
+                                uPoliceStation = policeStation;
+                                print('$uDistrict $uLocality $uPoliceStation');
+                              },
                               searchBoxDecoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -176,6 +185,7 @@ class _UserLocationPageState extends State<UserLocationPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          print('$uDistrict $uLocality $uPoliceStation');
           if (uDistrict == null || uLocality == null || uPoliceStation == null)
             showErrorDialog(context, 'You can\'t miss out any fields here!');
           else {
