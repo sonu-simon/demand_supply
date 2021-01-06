@@ -76,6 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        //Name
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.black87),
                           autofocus: false,
@@ -102,6 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
+                        //whatsapp
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.black87),
                           autofocus: false,
@@ -129,6 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
+                        //EMAIL
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.black87),
                           autofocus: false,

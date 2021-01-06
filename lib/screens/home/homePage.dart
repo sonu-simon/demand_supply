@@ -6,7 +6,6 @@ import 'package:demand_supply/screens/home/drawer.dart';
 import 'package:demand_supply/screens/home/postsByCategoryPage.dart';
 import 'package:demand_supply/screens/post/newPost.dart';
 import 'package:demand_supply/screens/productPage/productpage.dart';
-import 'package:demand_supply/screens/trial/product.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:demand_supply/screens/search/normalSearch.dart';
 import 'package:flutter/material.dart';
@@ -166,66 +165,69 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //posts
-              GridView.count(
-                crossAxisCount: 2,
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                children: List.generate(postsForHomePage.length, (index) {
-                  return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 8),
-                      child: Container(
-                        child: InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ProductPageTrial(postsForHomePage[index]),
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  children: List.generate(postsForHomePage.length, (index) {
+                    return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0, vertical: 8),
+                        child: Container(
+                          child: InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductPage(postsForHomePage[index]),
+                              ),
+                            ),
+                            child: Stack(
+                              children: [
+                                Card(
+                                  color: Colors.grey[350],
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        image: NetworkImage(
+                                            postsForHomePage[index].imageUrl),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              18,
+                                      width: MediaQuery.of(context).size.width,
+                                      color: Colors.white.withOpacity(0.7),
+                                      child: Center(
+                                        child: Text(
+                                          postsForHomePage[index]
+                                              .title
+                                              .toUpperCase(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  35),
+                                        ),
+                                      ),
+                                    ))
+                              ],
                             ),
                           ),
-                          child: Stack(
-                            children: [
-                              Card(
-                                color: Colors.grey[350],
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fitWidth,
-                                      image: NetworkImage(
-                                          postsForHomePage[index].imageUrl),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height / 18,
-                                  width: MediaQuery.of(context).size.width,
-                                  color: Colors.white.withOpacity(0.7),
-                                  child: Center(
-                                    child: Text(
-                                      postsForHomePage[index]
-                                          .title
-                                          .toUpperCase(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              35),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ));
-                }),
+                        ));
+                  }),
+                ),
               )
             ],
           ),

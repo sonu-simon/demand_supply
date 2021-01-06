@@ -63,15 +63,15 @@ class _AdminScreenState extends State<AdminScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       //Picture
-                      // Card(
-                      //   elevation: 0,
-                      //   child: Center(
-                      //     child: Image.asset(
-                      //       "asset/bg/admeen.png",
-                      //       scale: 12,
-                      //     ),
-                      //   ),
-                      // ),
+                      Card(
+                        elevation: 0,
+                        child: Center(
+                          child: Image.asset(
+                            "asset/bg/admin.png",
+                            // scale: 12,
+                          ),
+                        ),
+                      ),
                       //SELECT LOCALITY
                       Column(
                         children: <Widget>[
