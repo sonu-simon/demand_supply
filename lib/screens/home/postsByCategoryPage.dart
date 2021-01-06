@@ -137,6 +137,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                       Text(
                                         postsInDistrictFilterByCategory[index]
                                             .description,
+                                        maxLines: 3,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)

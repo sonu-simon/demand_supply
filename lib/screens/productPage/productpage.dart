@@ -19,7 +19,7 @@ class _ProductPageState extends State<ProductPage> {
   bool isOwner = false;
 
   isOwnerCheck() {
-    if (widget.passedOnPost.uUserID == myProfile.userID) isOwner = false;
+    if (widget.passedOnPost.uUserID == myProfile.userID) isOwner = true;
   }
 
   @override
@@ -64,20 +64,19 @@ class _ProductPageState extends State<ProductPage> {
                       //product images
                       Center(
                         child: Container(
-                            padding: const EdgeInsets.all(10),
-                            child: SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                                width: MediaQuery.of(context).size.width * 0.93,
-                                child: FittedBox(
-                                    fit: BoxFit.fitHeight,
-                                    child: Image(
-                                      image:
-                                          NetworkImage(selectedPost.imageUrl),
-                                    )))),
+                          padding: const EdgeInsets.all(10),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            width: MediaQuery.of(context).size.width * 0.93,
+                            child: Image(
+                              image: NetworkImage(selectedPost.imageUrl),
+                            ),
+                          ),
+                        ),
                       ),
                       //tags
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           SizedBox(
                             width: 10,
@@ -86,30 +85,28 @@ class _ProductPageState extends State<ProductPage> {
                               ? Container(
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      color: Colors.blue[100],
-                                      borderRadius: BorderRadius.circular(
-                                          MediaQuery.of(context).size.height *
-                                              0.05)),
+                                    shape: BoxShape.rectangle,
+                                    // color: Colors.blue[100],
+                                    borderRadius: BorderRadius.circular(
+                                        MediaQuery.of(context).size.height *
+                                            0.05),
+                                  ),
                                   child: SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.03,
-                                      child: FittedBox(
-                                          fit: BoxFit.fitHeight,
-                                          child: Image.asset(
-                                              "asset/image/verified.png"))))
+                                      child: Image.asset(
+                                          "asset/image/verified.png")))
                               : Container(
                                   child: Text(" "),
                                 ),
-                          SizedBox(
-                            width: 10,
-                          ),
                           Container(
                               padding: const EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
-                                  color: Colors.blue[100],
+                                  color: Colors.blue[300],
                                   borderRadius: BorderRadius.circular(
                                       MediaQuery.of(context).size.height *
                                           0.05)),
