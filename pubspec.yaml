@@ -27,6 +27,7 @@ dependencies:
   flutter_tagging: ^2.2.0+3
   ars_progress_dialog: 0.0.1
   cupertino_icons: ^1.0.0
+  flutter_tags: ^0.4.9+1
 
 dev_dependencies:
   flutter_test:
