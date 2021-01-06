@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
               ),
               //posts
               Padding(
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 16),
                 child: GridView.count(
                   crossAxisCount: 2,
                   physics: ScrollPhysics(),

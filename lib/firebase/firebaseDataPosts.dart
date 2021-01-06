@@ -198,6 +198,7 @@ Future searchForPostsByTitleInDistrict({String uDistrict, String title}) async {
 }
 
 Future getPostsForHomepage(String uDistrict) async {
+  postsForHomePage = [];
   await FirebaseFirestore.instance
       .collection('posts')
       .doc(uDistrict)

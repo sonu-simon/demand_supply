@@ -94,9 +94,9 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                   alignment: Alignment.bottomCenter,
                                   child: Container(
                                     height:
-                                        MediaQuery.of(context).size.height / 14,
+                                        MediaQuery.of(context).size.height / 16,
                                     width: MediaQuery.of(context).size.width,
-                                    color: Colors.white.withOpacity(0.5),
+                                    color: Colors.white.withOpacity(0.75),
                                     child: Center(
                                       child: Text(
                                         postsInDistrictFilterByCategory[index]

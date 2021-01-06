@@ -1,5 +1,7 @@
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
 import 'package:demand_supply/models/post.dart';
+import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/post/editPost.dart';
 import 'package:demand_supply/screens/profile/userprofilePage.dart';
 import 'package:flip_card/flip_card.dart';
@@ -183,12 +185,23 @@ class _ProductPageState extends State<ProductPage> {
                                 Icons.person,
                               ),
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
+                                showLoading(context, true);
+                                retrieveUserProfileFromFirebase(
+                                        selectedPost.uUserID)
+                                    .then(
+                                  (postProfile) {
+                                    showLoading(context, false);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
                                         builder: (context) => UserProfilePage(
-                                              selectedPost.userProfile,
-                                            )));
+                                          postProfile,
+                                          isToVerify: false,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                             ),
                           ),
