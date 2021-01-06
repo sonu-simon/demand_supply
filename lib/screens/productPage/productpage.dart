@@ -98,7 +98,7 @@ class _ProductPageState extends State<ProductPage> {
                                           child: Image.asset(
                                               "asset/image/verified.png"))))
                               : Container(
-                                  child: Text(""),
+                                  child: Text(" w"),
                                 ),
                           SizedBox(
                             width: 5,
@@ -107,14 +107,26 @@ class _ProductPageState extends State<ProductPage> {
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   borderRadius: BorderRadius.circular(
                                       MediaQuery.of(context).size.height *
                                           0.05)),
                               child: SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height * 0.03,
-                                  child: Text(selectedPost.uLocality)))
+                                  child: InkWell(
+                                    onTap: () => print(selectedPost.uLocality),
+                                    child: Text(
+                                      "Locality",
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.025,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )))
                         ],
                       ),
                       //text
