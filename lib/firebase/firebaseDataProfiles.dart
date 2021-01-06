@@ -71,6 +71,30 @@ Future retrieveMyUserProfileFromFirebase(String qUserID) async {
   });
 }
 
+Future<UserProfile> retrieveUserProfileFromFirebase(String qUserID) async {
+  UserProfile retrievedUser;
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(qUserID)
+      .get()
+      .then((userFromFirebase) {
+    retrievedUser = UserProfile(
+      userID: userFromFirebase.data()['userID'],
+      name: userFromFirebase.data()['name'],
+      isAdmin: userFromFirebase.data()['isAdmin'],
+      proPicUrl: userFromFirebase.data()['proPicUrl'],
+      phoneNumber: userFromFirebase.data()['phoneNumber'],
+      locality: userFromFirebase.data()['locality'],
+      district: userFromFirebase.data()['district'],
+      policeStation: userFromFirebase.data()['policeStation'],
+      whatsappNumber: userFromFirebase.data()['whatsappNumber'],
+      emailId: userFromFirebase.data()['emailID'],
+      mapPosts: userFromFirebase.data()['posts'],
+    );
+  });
+  return retrievedUser;
+}
+
 Future<bool> checkIfUserProfileExistsAndAdmin(String qUserID) async {
   bool exists;
   await FirebaseFirestore.instance

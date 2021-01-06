@@ -22,55 +22,56 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
+    print('here');
     return Scaffold(
-        bottomNavigationBar: widget.isToVerify
-            ? BottomAppBar(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    RaisedButton(
-                      onPressed: () {
-                        dismissUserProfile(
-                            widget.passedProfile.userID, context);
-                      },
-                      color: Colors.red,
-                      child: Container(
-                        height: 25,
-                        width: MediaQuery.of(context).size.width / 3,
-                        child: Center(
-                            child: Text(
-                          "Decline",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        )),
+        bottomNavigationBar: Visibility(
+          visible: widget.isToVerify,
+          child: BottomAppBar(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  onPressed: () {
+                    dismissUserProfile(widget.passedProfile.userID, context);
+                  },
+                  color: Colors.red,
+                  child: Container(
+                    height: 25,
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Center(
+                        child: Text(
+                      "Decline",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
                       ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        verifyUserProfile(widget.passedProfile.userID,
-                            widget.passedProfile.district, context);
-                      },
-                      color: Colors.green,
-                      child: Container(
-                        height: 25,
-                        width: MediaQuery.of(context).size.width / 3,
-                        child: Center(
-                            child: Text(
-                          "Verify",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        )),
-                      ),
-                    )
-                  ],
+                    )),
+                  ),
                 ),
-              )
-            : Container(),
+                RaisedButton(
+                  onPressed: () {
+                    verifyUserProfile(widget.passedProfile.userID,
+                        widget.passedProfile.district, context);
+                  },
+                  color: Colors.green,
+                  child: Container(
+                    height: 25,
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Center(
+                        child: Text(
+                      "Verify",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    )),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(

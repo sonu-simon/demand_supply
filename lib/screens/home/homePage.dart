@@ -201,27 +201,27 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    height:
-                                        MediaQuery.of(context).size.height / 18,
-                                    width: MediaQuery.of(context).size.width,
-                                    color: Colors.white.withOpacity(0.6),
-                                    child: Center(
-                                      child: Text(
-                                        postsForHomePage[index]
-                                            .title
-                                            .toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                35),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              18,
+                                      width: MediaQuery.of(context).size.width,
+                                      color: Colors.white.withOpacity(0.7),
+                                      child: Center(
+                                        child: Text(
+                                          postsForHomePage[index]
+                                              .title
+                                              .toUpperCase(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  35),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                )
+                                    ))
                               ],
                             ),
                           ),
