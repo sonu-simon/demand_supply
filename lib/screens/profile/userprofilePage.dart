@@ -97,18 +97,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
                               onTap: () {
                                 buildShowDialog(context);
                               },
-                              child: widget.passedProfile.proPicUrl == null
+                              child: widget.passedProfile.proPicUrl != null
                                   ? CircleAvatar(
                                       radius: 60.0,
                                       backgroundImage: NetworkImage(
-                                          //TODO: do no proPic stuff
-                                          widget.passedProfile.proPicUrl),
-                                    )
+                                          widget.passedProfile.proPicUrl))
                                   : CircleAvatar(
                                       radius: 60.0,
-                                      backgroundImage: NetworkImage(
-                                          widget.passedProfile.proPicUrl),
-                                    ),
+                                      backgroundImage:
+                                          AssetImage("asset/image/propic.png")),
                             ),
                           ),
                         ),

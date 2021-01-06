@@ -116,18 +116,6 @@ class _EnterOtpScreenState extends State<EnterOtpScreen> {
                   },
                 ),
               ),
-              // RaisedButton(
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(30)),
-              //   onPressed: () => codeSentFunction(
-              //       widget.verificationId, widget.resendToken, context),
-              //   child: Text(
-              //     "Submit OTP",
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              //   elevation: 7.0,
-              //   color: Colors.cyan,
-              // ),
               SizedBox(
                 height: height * 0.12,
               )

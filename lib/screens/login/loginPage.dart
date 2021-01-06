@@ -105,36 +105,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: height * 0.005,
                     ),
-                    // RaisedButton(
-                    //   shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(30)),
-                    //   onPressed: () {
-                    //     advancedSearchForPostsByTitle('hhh');
-                    //   },
-                    //   onLongPress: () => authSignOut(context),
-                    //   child: Text(
-                    //     "NEXT",
-                    //     style: TextStyle(color: Colors.white),
-                    //   ),
-                    //   elevation: 7.0,
-                    //   color: Colors.cyan,
-                    // ),
-                    // SizedBox(
-                    //   height: height * 0.005,
-                    // ),
-                    // Text("Need Help?"),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    // SizedBox(
-                    //   height: 10,
-                    // ),
-                    // Text(
-                    //   firebaseProvider.getUserLoginState
-                    //       ? "User Logged in!"
-                    //       : "Not logged in!",
-                    //   style: TextStyle(fontSize: 18),
-                    // )
                     SizedBox(
                       height: height * 0.2,
                     )

@@ -1,9 +1,9 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/models/post.dart';
 import 'package:demand_supply/screens/post/editPost.dart';
+import 'package:demand_supply/screens/profile/userprofilePage.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tags/flutter_tags.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductPage extends StatefulWidget {
@@ -78,14 +78,14 @@ class _ProductPageState extends State<ProductPage> {
                       Row(
                         children: [
                           SizedBox(
-                            width: 5,
+                            width: 10,
                           ),
                           (selectedPost.uIsProfileVerified == "Verified")
                               ? Container(
-                                  padding: const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
                                       shape: BoxShape.rectangle,
-                                      color: Colors.black,
+                                      color: Colors.blue[100],
                                       borderRadius: BorderRadius.circular(
                                           MediaQuery.of(context).size.height *
                                               0.05)),
@@ -98,34 +98,39 @@ class _ProductPageState extends State<ProductPage> {
                                           child: Image.asset(
                                               "asset/image/verified.png"))))
                               : Container(
-                                  child: Text(" w"),
+                                  child: Text(" "),
                                 ),
                           SizedBox(
-                            width: 5,
+                            width: 10,
                           ),
                           Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
-                                  color: Colors.black,
+                                  color: Colors.blue[100],
                                   borderRadius: BorderRadius.circular(
                                       MediaQuery.of(context).size.height *
                                           0.05)),
                               child: SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height * 0.03,
-                                  child: InkWell(
-                                    onTap: () => print(selectedPost.uLocality),
-                                    child: Text(
-                                      "Locality",
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.025,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        selectedPost.uLocality,
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.026,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   )))
                         ],
                       ),
@@ -178,34 +183,15 @@ class _ProductPageState extends State<ProductPage> {
                                 Icons.person,
                               ),
                               onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => ProductPage(
-                                //             postsInDistrictFilterByCategory[
-                                //                 index]))
-                                // );
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UserProfilePage(
+                                              selectedPost.userProfile,
+                                            )));
                               },
                             ),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 5,
-                            // height: MediaQuery.of(context).size.height * 0.07,
-                            child: IconButton(
-                              icon: selectedPost.isVerified
-                                  ? Icon(
-                                      Icons.verified_user_outlined,
-                                      color: Colors.green,
-                                    )
-                                  : Icon(
-                                      Icons.verified_user_outlined,
-                                      color: Colors.red,
-                                    ),
-                              onPressed: () {
-                                print(selectedPost.isVerified);
-                              },
-                            ),
-                          )
                         ],
                       ),
                       SizedBox(
@@ -248,25 +234,30 @@ class _ProductPageState extends State<ProductPage> {
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
                       //category
-                      Card(
-                        elevation: 5,
-                        shadowColor: Colors.grey,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          child: Center(
-                            child: Text(
-                              "Category: ${selectedPost.category}",
-                              style: TextStyle(fontSize: 20),
-                            ),
+                      ListTile(
+                        // elevation: 5,
+                        // shadowColor: Colors.grey,
+                        // child: Container(
+                        //   width: MediaQuery.of(context).size.width * 0.9,
+                        //   height: MediaQuery.of(context).size.height * 0.07,
+                        //   child: Center(
+                        //     child: Text(
+                        //       "Category: ${selectedPost.category}",
+                        //       style: TextStyle(fontSize: 20),
+                        //     ),
+                        //   ),
+                        // ),
+                        title: Text(
+                          "Category: ${selectedPost.category}",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.01,
-                      ),
-                      //Details
 
+                      //Description
                       FlipCard(
                           front: Card(
                             elevation: 5,

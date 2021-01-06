@@ -31,37 +31,6 @@ class _UserLocationPageState extends State<UserLocationPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // SizedBox(
-              //   height: MediaQuery.of(context).size.height * 0.2,
-              //   //text above image
-              //   child: Column(
-              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: [
-              //       SizedBox(
-              //         height: 30,
-              //       ),
-              //       Text(
-              //         "Welcome",
-              //         style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //             color: Colors.blue,
-              //             fontSize: MediaQuery.of(context).size.height * 0.06,
-              //             letterSpacing: 4),
-              //       ),
-              //       SizedBox(height: 10),
-              //       Text(
-              //         "Enter details for creating your free account",
-              //         maxLines: 2,
-              //         style: TextStyle(
-              //           color: Colors.cyan,
-              //           fontSize: MediaQuery.of(context).size.height * 0.023,
-              //           letterSpacing: 4,
-              //         ),
-              //         textAlign: TextAlign.center,
-              //       )
-              //     ],
-              //   ),
-              // ),
               SizedBox(
                 height: 20,
               ),

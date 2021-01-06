@@ -23,12 +23,14 @@ class DrawerHomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(myProfile.proPicUrl != null
-                          ? myProfile.proPicUrl
-                          : 'https://www.searchpng.com/wp-content/uploads/2019/02/Men-Profile-Image.png'),
-                      radius: MediaQuery.of(context).size.width * 0.13,
-                    ),
+                    (myProfile.proPicUrl != null)
+                        ? CircleAvatar(
+                            radius: MediaQuery.of(context).size.width * 0.13,
+                            backgroundImage: NetworkImage(myProfile.proPicUrl))
+                        : CircleAvatar(
+                            radius: MediaQuery.of(context).size.width * 0.13,
+                            backgroundImage:
+                                AssetImage("asset/image/propic.png")),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: Text(

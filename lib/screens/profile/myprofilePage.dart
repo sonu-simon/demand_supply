@@ -39,7 +39,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(),
         body: SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -63,16 +62,16 @@ class _ProfilePageState extends State<ProfilePage> {
                             onTap: () {
                               buildShowDialog(context);
                             },
-                            child: myProfile.proPicUrl == null
+                            child: myProfile.proPicUrl != null
                                 ? CircleAvatar(
                                     radius: 60.0,
                                     backgroundImage:
-                                        NetworkImage(myProfile.proPicUrl))
+                                        NetworkImage(myProfile.proPicUrl),
+                                  )
                                 : CircleAvatar(
                                     radius: 60.0,
                                     backgroundImage:
-                                        NetworkImage(myProfile.proPicUrl),
-                                  )),
+                                        AssetImage("asset/image/propic.png"))),
                       ),
                     ),
                   ),
@@ -160,23 +159,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               },
                               tileColor: Colors.blue[100],
                               title: Text(myProfile.posts[index].title),
-                              // trailing: Row(
-                              //   children: [
-                              //     //delete
-                              //     IconButton(
-                              //       icon: Icon(Icons.delete_forever_outlined),
-                              //       onPressed: () {
-                              //         // return deletePostDialog(context);
-                              //       },
-                              //     ),
-                              //     //edit
-                              //     IconButton(
-                              //         icon: Icon(Icons.edit),
-                              //         onPressed: () {
-                              //           // return editPostDialog(context);
-                              //         }),
-                              //   ],
-                              // ),
                             ),
                           );
                         })
