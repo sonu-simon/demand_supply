@@ -55,13 +55,6 @@ class _UserLocationPageState extends State<UserLocationPage> {
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(
                               showSearchBox: true,
-                              // validator: (String value) {
-                              //   value = value.trim();
-                              //   if (value.isEmpty) {
-                              //     return 'District is Required';
-                              //   }
-                              //   return null;
-                              // },
                               onChanged: (district) {
                                 uDistrict = district;
                                 print('$uDistrict $uLocality $uPoliceStation');
@@ -71,7 +64,6 @@ class _UserLocationPageState extends State<UserLocationPage> {
                                       borderSide: BorderSide(
                                           color: Colors.grey, width: 1),
                                       borderRadius: BorderRadius.circular(10)),
-                                  // border: InputBorder.none,
                                   helperText: 'Select your district'),
                               hint: "Select your district",
                               autoFocusSearchBox: true,
@@ -87,13 +79,6 @@ class _UserLocationPageState extends State<UserLocationPage> {
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(
                               showSearchBox: true,
-                              // validator: (String value) {
-                              //   value = value.trim();
-                              //   if (value.isEmpty) {
-                              //     return 'Locality is Required';
-                              //   }
-                              //   return null;
-                              // },
                               onChanged: (locality) {
                                 uLocality = locality;
                                 print('$uDistrict $uLocality $uPoliceStation');
@@ -103,7 +88,6 @@ class _UserLocationPageState extends State<UserLocationPage> {
                                       borderSide: BorderSide(
                                           color: Colors.grey, width: 1),
                                       borderRadius: BorderRadius.circular(10)),
-                                  // border: InputBorder.none,
                                   helperText: 'Select your locality'),
                               hint: "Select your Locality",
                               autoFocusSearchBox: true,
@@ -113,18 +97,12 @@ class _UserLocationPageState extends State<UserLocationPage> {
                         ),
                         SizedBox(
                           height: 10,
-                        ), //policeStation
+                        ),
+                        //policeStation
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: DropdownSearch<String>(
                               showSearchBox: true,
-                              // validator: (String value) {
-                              //   value = value.trim();
-                              //   if (value.isEmpty) {
-                              //     return 'Police Station circle is Required';
-                              //   }
-                              //   return null;
-                              // },
                               onChanged: (policeStation) {
                                 uPoliceStation = policeStation;
                                 print('$uDistrict $uLocality $uPoliceStation');
