@@ -26,6 +26,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
     super.initState();
     advancedSearchList = [];
     searchTerm = "";
+    advancedSearchByFilters();
   }
 
   bool boolval = false;

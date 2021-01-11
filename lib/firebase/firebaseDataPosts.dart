@@ -236,6 +236,19 @@ Future getPostsForHomepage(String uDistrict) async {
   return print(postsForHomePage);
 }
 
+Future advancedSearchByFilters() async {
+  await FirebaseFirestore.instance
+      .collectionGroup('posts')
+      .where('uLocality', isEqualTo: 'Amripur')
+      .where('uPoliceStation', isEqualTo: '')
+      .get()
+      .then((collectionGroupSnapshot) {
+    collectionGroupSnapshot.docs.forEach((element) {
+      print(element.data());
+    });
+  });
+}
+
 // Future retrievePostsByVillageNotVerified(
 //     {String uDistrict, String uLocality}) async {
 //   notVerifiedPostsForAdminByLocality = [];

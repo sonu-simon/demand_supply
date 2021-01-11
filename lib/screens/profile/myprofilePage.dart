@@ -155,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 horizontal: 12.0, vertical: 6.0),
                             child: ListTile(
                               onTap: () {
-                                //navigate to post logic
+                                //TODO: avigate to post logic
                               },
                               tileColor: Colors.blue[100],
                               title: Text(myProfile.posts[index].title),
