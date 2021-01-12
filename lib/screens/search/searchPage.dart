@@ -26,7 +26,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
     super.initState();
     advancedSearchList = [];
     searchTerm = "";
-    advancedSearchByFilters();
+    // advancedSearchByFilters();
   }
 
   bool boolval = false;
@@ -76,7 +76,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ExpansionTile(
-                  title: Text("Advanced Search"),
+                  title: Text("Filter Results"),
                   children: [
                     //Search By Post
                     Padding(
@@ -300,43 +300,46 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                         child: Text('No results found'),
                       ),
                     )
-                  : ListView.separated(
-                      physics: ScrollPhysics(),
-                      itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Material(
-                              elevation: 3,
-                              color: Colors.grey[100],
-                              child: ListTile(
-                                onTap: () {
-                                  showLoading(context, true);
-                                  postByPostPath(
-                                          advancedSearchList[index].postPath)
-                                      .then((post) {
-                                    showLoading(context, false);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProductPage(post)));
-                                  });
-                                },
-                                title: Text(
-                                  advancedSearchList[index].title,
-                                  style: TextStyle(fontSize: 20),
+                  : Container(
+                      height: MediaQuery.of(context).size.height,
+                      child: ListView.separated(
+                          physics: ScrollPhysics(),
+                          itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Material(
+                                  elevation: 3,
+                                  color: Colors.grey[100],
+                                  child: ListTile(
+                                    onTap: () {
+                                      showLoading(context, true);
+                                      postByPostPath(advancedSearchList[index]
+                                              .postPath)
+                                          .then((post) {
+                                        showLoading(context, false);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductPage(post)));
+                                      });
+                                    },
+                                    title: Text(
+                                      advancedSearchList[index].title,
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                      separatorBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(
-                            color: Colors.grey,
-                          ),
-                        );
-                      },
-                      itemCount: advancedSearchList.length),
+                          separatorBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Divider(
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                          itemCount: advancedSearchList.length),
+                    ),
             ],
           ),
         ),

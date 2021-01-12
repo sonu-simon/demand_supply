@@ -113,16 +113,19 @@ Future retrievePostsFromFirebaseByDistrictFilterByCategory(
 
 Future advancedSearchForPostsByTitle(String qTitle) async {
   advancedSearchList = [];
+  postsInAdvancedSearch = [];
   await FirebaseFirestore.instance
       .collection('allPostTitlesById')
       .doc('postID - title')
       .get()
       .then((DocumentSnapshot documentSnapshot) {
-    documentSnapshot.data().forEach((key, value) {
+    documentSnapshot.data().forEach((key, value) async {
       if (key.toString().contains(qTitle)) {
         print('key: $key - value: $value');
         AdvancedSearchModel searchResult = AdvancedSearchModel(key, value);
         advancedSearchList.add(searchResult);
+        postsInAdvancedSearch.add(await postByPostPath(value));
+        print(postsInAdvancedSearch);
       }
     });
   });
@@ -236,18 +239,21 @@ Future getPostsForHomepage(String uDistrict) async {
   return print(postsForHomePage);
 }
 
-Future advancedSearchByFilters() async {
-  await FirebaseFirestore.instance
-      .collectionGroup('posts')
-      .where('uLocality', isEqualTo: 'Amripur')
-      .where('uPoliceStation', isEqualTo: '')
-      .get()
-      .then((collectionGroupSnapshot) {
-    collectionGroupSnapshot.docs.forEach((element) {
-      print(element.data());
-    });
-  });
-}
+// Future advancedSearchByFilters() async {
+//   await FirebaseFirestore.instance
+//       .collectionGroup('posts')
+//       .where('uLocality', isEqualTo: 'Amripur')
+//       .where('uPoliceStation', isEqualTo: 'Amripur')
+//       .where('category', isEqualTo: 'Buy/Sell')
+//       .where('uDistrict', isEqualTo: 'Amripur')
+//       .where('uIsProfileVerified', isEqualTo: true)
+//       .get()
+//       .then((collectionGroupSnapshot) {
+//     collectionGroupSnapshot.docs.forEach((element) {
+//       print(element.data());
+//     });
+//   });
+// }
 
 // Future retrievePostsByVillageNotVerified(
 //     {String uDistrict, String uLocality}) async {

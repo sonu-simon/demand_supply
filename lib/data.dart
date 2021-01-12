@@ -172,6 +172,7 @@ List<String> listofCategories = [
 UserProfile myProfile;
 
 List<AdvancedSearchModel> advancedSearchList = [];
+List<Post> postsInAdvancedSearch = [];
 List<Post> postsInDistrictFilterByTitle = [];
 List<Post> postsForHomePage = [];
 
