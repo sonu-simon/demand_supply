@@ -35,149 +35,159 @@ class _FilteredResultsPageState extends State<FilteredResultsPage> {
             ? Center(
                 child: Text("No posts available here !"),
               )
-            : GridView.count(
-                crossAxisCount: 2,
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                children: List.generate(
-                    postsInAdvancedSearchFiltersApplied.length, (index) {
-                  return Container(
-                    child: InkWell(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductPage(
-                                  postsInAdvancedSearchFiltersApplied[index]))),
-                      child: FlipCard(
-                        front: Stack(
-                          children: [
-                            Card(
-                              color: Colors.grey[350],
-                              child: Container(
-                                height: MediaQuery.of(context).size.height,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        image: NetworkImage(
-                                            postsInAdvancedSearchFiltersApplied[
-                                                    index]
-                                                .imageUrl))),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: MediaQuery.of(context).size.height / 16,
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.white.withOpacity(0.75),
-                                child: Center(
-                                  child: Text(
-                                    postsInAdvancedSearchFiltersApplied[index]
-                                        .title
-                                        .toUpperCase(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                30),
-                                  ),
+            : Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  children: List.generate(
+                      postsInAdvancedSearchFiltersApplied.length, (index) {
+                    return Container(
+                      child: InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductPage(
+                                    postsInAdvancedSearchFiltersApplied[
+                                        index]))),
+                        child: FlipCard(
+                          front: Stack(
+                            children: [
+                              Card(
+                                color: Colors.grey[350],
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: NetworkImage(
+                                              postsInAdvancedSearchFiltersApplied[
+                                                      index]
+                                                  .imageUrl))),
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                        back: Card(
-                          child: Container(
-                            color: Colors.grey[200],
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    postsInAdvancedSearchFiltersApplied[index]
-                                        .title
-                                        .toUpperCase(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 16,
+                                  width: MediaQuery.of(context).size.width,
+                                  color: Colors.white.withOpacity(0.75),
+                                  child: Center(
+                                    child: Text(
+                                      postsInAdvancedSearchFiltersApplied[index]
+                                          .title
+                                          .toUpperCase(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
                                         fontSize:
                                             MediaQuery.of(context).size.height /
-                                                30),
-                                  ),
-                                  Text(
-                                    postsInAdvancedSearchFiltersApplied[index]
-                                        .description,
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                35),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      IconButton(
-                                          icon: Icon(Icons.message),
-                                          onPressed: () async {
-                                            if (postsInAdvancedSearchFiltersApplied[
-                                                        index]
-                                                    .uWhatsappNumber !=
-                                                null) {
-                                              var whatsappUrl =
-                                                  "whatsapp://send?phone=${postsInAdvancedSearchFiltersApplied[index].uWhatsappNumber}";
-                                              await canLaunch(whatsappUrl)
-                                                  ? launch(whatsappUrl)
-                                                  : print(
-                                                      "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
-                                            } else
-                                              showErrorDialog(context,
-                                                  'Whatsapp contact not available');
-                                          }),
-                                      IconButton(
-                                          icon: Icon(
-                                            Icons.call,
-                                            color: Colors.green,
-                                          ),
-                                          onPressed: () {
-                                            launch(
-                                                "tel://${postsInAdvancedSearchFiltersApplied[index].uPhoneNumber}");
-                                          }),
-                                      Icon(
-                                        Icons.assignment_turned_in_outlined,
-                                        color:
-                                            (postsInAdvancedSearchFiltersApplied[
-                                                            index]
-                                                        .uIsProfileVerified ==
-                                                    "Verified")
-                                                ? Colors.green
-                                                : Colors.red,
+                                                40,
                                       ),
-                                      IconButton(
-                                          icon:
-                                              Icon(Icons.open_in_new_outlined),
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductPage(
-                                                            postsInAdvancedSearchFiltersApplied[
-                                                                index])));
-                                          })
-                                    ],
+                                    ),
                                   ),
-                                ],
+                                ),
+                              )
+                            ],
+                          ),
+                          back: Card(
+                            child: Container(
+                              color: Colors.grey[200],
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      postsInAdvancedSearchFiltersApplied[index]
+                                          .title
+                                          .toUpperCase(),
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              32),
+                                    ),
+                                    Text(
+                                      postsInAdvancedSearchFiltersApplied[index]
+                                          .description,
+                                      maxLines: 3,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              35),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        IconButton(
+                                            icon: Icon(Icons.message),
+                                            onPressed: () async {
+                                              if (postsInAdvancedSearchFiltersApplied[
+                                                          index]
+                                                      .uWhatsappNumber !=
+                                                  null) {
+                                                var whatsappUrl =
+                                                    "whatsapp://send?phone=${postsInAdvancedSearchFiltersApplied[index].uWhatsappNumber}";
+                                                await canLaunch(whatsappUrl)
+                                                    ? launch(whatsappUrl)
+                                                    : print(
+                                                        "open whatsapp app link or do a snackbar with notification that there is no whatsapp installed");
+                                              } else
+                                                showErrorDialog(context,
+                                                    'Whatsapp contact not available');
+                                            }),
+                                        IconButton(
+                                            icon: Icon(
+                                              Icons.call,
+                                              color: Colors.green,
+                                            ),
+                                            onPressed: () {
+                                              launch(
+                                                  "tel://${postsInAdvancedSearchFiltersApplied[index].uPhoneNumber}");
+                                            }),
+                                        Icon(
+                                          Icons.assignment_turned_in_outlined,
+                                          color:
+                                              (postsInAdvancedSearchFiltersApplied[
+                                                              index]
+                                                          .uIsProfileVerified ==
+                                                      "Verified")
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                        ),
+                                        IconButton(
+                                            icon: Icon(
+                                                Icons.open_in_new_outlined),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ProductPage(
+                                                              postsInAdvancedSearchFiltersApplied[
+                                                                  index])));
+                                            })
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ));
   }
 }
