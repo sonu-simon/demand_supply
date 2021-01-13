@@ -1,6 +1,7 @@
 import 'package:demand_supply/data.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/productPage/productpage.dart';
+import 'package:demand_supply/screens/search/filteredResults.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,16 @@ class AdvSearchPage extends StatefulWidget {
 }
 
 class _AdvSearchPageState extends State<AdvSearchPage> {
-  String searchTerm;
+  String searchTitle;
+
+  String filterLocality;
+  String filterPoliceStation;
+  String filterDistrict;
+  String filterCategory;
+  String filterVerified;
+
   searchFn() {
-    advancedSearchForPostsByTitle(searchTerm).then(
+    advancedSearchForPostsByTitle(searchTitle).then(
       (_) => setState(() {
         print('search completed!');
       }),
@@ -25,7 +33,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
   void initState() {
     super.initState();
     advancedSearchList = [];
-    searchTerm = "";
+    searchTitle = "";
     // advancedSearchByFilters();
   }
 
@@ -60,7 +68,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
             initialValue: "",
             textInputAction: TextInputAction.search,
             onFieldSubmitted: (value) {
-              searchTerm = value;
+              searchTitle = value;
               searchFn();
               print('search term $value');
             },
@@ -78,216 +86,138 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                 child: ExpansionTile(
                   title: Text("Filter Results"),
                   children: [
-                    //Search By Post
+                    //postcategory
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      child: ExpansionTile(
-                        title: Text("Search By User"),
-                        children: [
-                          //Title
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: TextFormField(
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.black87),
-                              autofocus: false,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                  focusColor: Colors.black,
-                                  border: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.blue)),
-                                  hintText: "Post Title",
-                                  hintStyle: TextStyle(fontSize: 20)),
-                              initialValue: "",
-                              validator: (String value) {
-                                value = value.trim();
-                                if (value.isEmpty) {
-                                  return 'Type title of post';
-                                }
-                                return null;
-                              },
-                              onChanged: ((String newValue) {
-                                print("Name");
-                              }),
-                            ),
-                          ),
-                          //postcategory
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: DropdownSearch<String>(
-                                showSearchBox: true,
-                                onChanged: (category) {
-                                  print('category change');
-                                },
-                                searchBoxDecoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    helperText: 'Select your target category'),
-                                hint: "Select your target category",
-                                autoFocusSearchBox: true,
-                                showSelectedItem: true,
-                                showClearButton: true,
-                                items: listofCategories),
-                          ),
-                          //postdistrict
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: DropdownSearch<String>(
-                                showSearchBox: true,
-                                onChanged: (district) {
-                                  print('district change');
-                                },
-                                searchBoxDecoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    helperText: 'Select your target district'),
-                                hint: "Select your target district",
-                                autoFocusSearchBox: true,
-                                showSelectedItem: true,
-                                showClearButton: true,
-                                items: listOfDistricts),
-                          ),
-                        ],
+                          horizontal: 40, vertical: 10),
+                      child: DropdownSearch<String>(
+                          showSearchBox: true,
+                          onChanged: (category) {
+                            filterCategory = category;
+                          },
+                          searchBoxDecoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              helperText: 'Select your target category'),
+                          hint: "Select your target category",
+                          autoFocusSearchBox: true,
+                          showSelectedItem: true,
+                          showClearButton: true,
+                          items: listofCategories),
+                    ),
+                    //userpolice station
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 10),
+                      child: DropdownSearch<String>(
+                          showSearchBox: true,
+                          onChanged: (policeStation) {
+                            filterPoliceStation = policeStation;
+                          },
+                          searchBoxDecoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              // border: InputBorder.none,
+                              helperText: 'Police Station'),
+                          hint: "Police Station",
+                          autoFocusSearchBox: true,
+                          showSelectedItem: true,
+                          showClearButton: true,
+                          items: listOfPoliceStaions),
+                    ),
+                    //userlocality
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 10),
+                      child: DropdownSearch<String>(
+                          showSearchBox: true,
+                          onChanged: (locality) {
+                            filterLocality = locality;
+                          },
+                          searchBoxDecoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              // border: InputBorder.none,
+                              helperText: 'Select your locality'),
+                          hint: "Select your Locality",
+                          autoFocusSearchBox: true,
+                          showSelectedItem: true,
+                          showClearButton: true,
+                          items: listOfLocalities),
+                    ),
+                    //userdistrict
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 10),
+                      child: DropdownSearch<String>(
+                          showSearchBox: true,
+                          onChanged: (district) {
+                            filterDistrict = district;
+                          },
+                          searchBoxDecoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              helperText: 'Select your district'),
+                          hint: "Select your district",
+                          autoFocusSearchBox: true,
+                          showSelectedItem: true,
+                          showClearButton: true,
+                          items: listOfDistricts),
+                    ),
+                    //verified user
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
+                      child: CheckboxListTile(
+                        value: boolval,
+                        onChanged: (bool val) {
+                          val == true
+                              ? setState(() {
+                                  boolval = true;
+                                  filterVerified = 'Verified';
+                                })
+                              : setState(() {
+                                  boolval = false;
+                                  filterVerified = 'Pending';
+                                });
+                        },
+                        title: Text("Verified Users only"),
                       ),
                     ),
-                    //Search By User
+                    //Apply Filter button
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      child: ExpansionTile(
-                        title: Text("Search By User"),
-                        children: [
-                          //username
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: TextFormField(
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.black87),
-                              autofocus: false,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                  focusColor: Colors.black,
-                                  border: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.blue)),
-                                  hintText: "Name",
-                                  hintStyle: TextStyle(fontSize: 20)),
-                              initialValue: "",
-                              validator: (String value) {
-                                value = value.trim();
-                                if (value.isEmpty) {
-                                  return 'Name is Required';
-                                }
-                                return null;
-                              },
-                              onChanged: ((String newValue) {
-                                print("Name");
-                              }),
-                            ),
-                          ),
-                          //userpolice station
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: DropdownSearch<String>(
-                                showSearchBox: true,
-                                onChanged: (policeStation) {
-                                  print("Station change");
-                                },
-                                searchBoxDecoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    // border: InputBorder.none,
-                                    helperText: 'Police Station'),
-                                hint: "Police Station",
-                                autoFocusSearchBox: true,
-                                showSelectedItem: true,
-                                showClearButton: true,
-                                items: listOfPoliceStaions),
-                          ),
-                          //userlocality
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: DropdownSearch<String>(
-                                showSearchBox: true,
-                                onChanged: (locality) {
-                                  print('locality change');
-                                },
-                                searchBoxDecoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    // border: InputBorder.none,
-                                    helperText: 'Select your locality'),
-                                hint: "Select your Locality",
-                                autoFocusSearchBox: true,
-                                showSelectedItem: true,
-                                showClearButton: true,
-                                items: listOfLocalities),
-                          ),
-                          //userdistrict
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 10),
-                            child: DropdownSearch<String>(
-                                showSearchBox: true,
-                                onChanged: (district) {
-                                  print('district change');
-                                },
-                                searchBoxDecoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    helperText: 'Select your district'),
-                                hint: "Select your district",
-                                autoFocusSearchBox: true,
-                                showSelectedItem: true,
-                                showClearButton: true,
-                                items: listOfDistricts),
-                          ),
-                          //verified user
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 10),
-                            child: CheckboxListTile(
-                              value: boolval,
-                              onChanged: (bool val) {
-                                val == true
-                                    ? setState(() {
-                                        boolval = true;
-                                        print("TRUE");
-                                      })
-                                    : setState(() {
-                                        boolval = false;
-                                        print("False");
-                                      });
-                              },
-                              title: Text("Verified Users"),
-                            ),
-                          )
-                        ],
+                      padding: const EdgeInsets.all(8.0),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        onPressed: () {
+                          print('applyFilter()');
+
+                          applyFilters(
+                              filterCategory: filterCategory,
+                              filterDistrict: filterDistrict,
+                              filterLocality: filterLocality,
+                              filterPoliceStation: filterPoliceStation,
+                              filterVerified: filterVerified);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FilteredResultsPage()));
+                        },
+                        child: Text(
+                          "Apply Filters",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        elevation: 7.0,
+                        color: Colors.cyan,
                       ),
                     ),
                   ],

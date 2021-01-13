@@ -131,6 +131,28 @@ Future advancedSearchForPostsByTitle(String qTitle) async {
   });
 }
 
+applyFilters(
+    {String filterLocality,
+    String filterPoliceStation,
+    String filterDistrict,
+    String filterCategory,
+    String filterVerified}) {
+  print(postsInAdvancedSearch.length);
+  print(filterDistrict);
+  postsInAdvancedSearchFiltersApplied = [];
+  postsInAdvancedSearch.forEach((post) {
+    print(post.uDistrict);
+    if ((filterLocality == post.uLocality || filterLocality == null) &&
+        (filterPoliceStation == post.uPoliceStation ||
+            filterPoliceStation == null) &&
+        (filterDistrict == post.uDistrict || filterDistrict == null) &&
+        (filterVerified == post.uIsProfileVerified || filterVerified == null) &&
+        (filterCategory == post.category || filterCategory == null))
+      postsInAdvancedSearchFiltersApplied.add(post);
+  });
+  print(postsInAdvancedSearchFiltersApplied);
+}
+
 Future<Post> postByPostPath(String postPath) async {
   Post postFromFirebase;
   print(postPath);

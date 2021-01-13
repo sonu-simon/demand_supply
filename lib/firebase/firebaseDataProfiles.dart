@@ -17,7 +17,7 @@ userToFirebase(UserProfile userProfile) {
     'isProfileVerified': userProfile.isProfileVerified,
     'hasPosted': userProfile.hasPosted,
     'locality': userProfile.locality,
-    'district': userProfile.locality,
+    'district': userProfile.district,
     'policeStation': userProfile.policeStation,
     'whatsappNumber': userProfile.whatsappNumber,
     'emailId': userProfile.emailId,

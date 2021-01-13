@@ -2,8 +2,11 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:demand_supply/data.dart';
+import 'package:demand_supply/firebase/firebaseDataPosts.dart';
 import 'package:demand_supply/firebase/firebaseDataProfiles.dart';
+import 'package:demand_supply/models/post.dart';
 import 'package:demand_supply/screens/dialogs.dart';
+import 'package:demand_supply/screens/productPage/productpage.dart';
 import 'package:demand_supply/screens/profile/viewpropic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -154,8 +157,17 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12.0, vertical: 6.0),
                             child: ListTile(
-                              onTap: () {
-                                //TODO: avigate to post logic
+                              onTap: () async {
+                                //navigate to post logic
+                                showLoading(context, true);
+                                Post postToShow = await postByPostPath(
+                                    myProfile.posts[index].postPath);
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductPage(postToShow)));
                               },
                               tileColor: Colors.blue[100],
                               title: Text(myProfile.posts[index].title),
