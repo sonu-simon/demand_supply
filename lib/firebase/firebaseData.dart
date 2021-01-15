@@ -51,11 +51,36 @@ addLocalityToFirestore(String locality) {
   });
 }
 
+Future retrieveLocationRelatedLists() async {
+  await retrieveListOfDistricts();
+  await retrieveListOfLocalities();
+  await retrieveListOfPoliceStations();
+}
+
 Future retrieveListOfLocalities() async {
   DocumentSnapshot listOfLocalitiesSnapshot = await FirebaseFirestore.instance
       .collection('listOfLocalities')
       .doc('localityList')
       .get();
   listOfLocalities = List.from(listOfLocalitiesSnapshot.data()['localities']);
+  print(listOfLocalities);
+}
+
+Future retrieveListOfDistricts() async {
+  DocumentSnapshot listOfLocalitiesSnapshot = await FirebaseFirestore.instance
+      .collection('listOfDistricts')
+      .doc('districtList')
+      .get();
+  listOfDistricts = List.from(listOfLocalitiesSnapshot.data()['localities']);
+  print(listOfLocalities);
+}
+
+Future retrieveListOfPoliceStations() async {
+  DocumentSnapshot listOfLocalitiesSnapshot = await FirebaseFirestore.instance
+      .collection('listOfPoliceStations')
+      .doc('policeStationList')
+      .get();
+  listOfPoliceStaions =
+      List.from(listOfLocalitiesSnapshot.data()['localities']);
   print(listOfLocalities);
 }

@@ -22,11 +22,25 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
   String filterVerified;
 
   searchFn() {
+    print('searchTitle: $searchTitle');
     advancedSearchForPostsByTitle(searchTitle).then(
       (_) => setState(() {
+        print('advancedSearchList: $advancedSearchList');
         print('search completed!');
       }),
     );
+  }
+
+  searchWithFilter() {
+    applyFilters(
+        filterCategory: filterCategory,
+        filterDistrict: filterDistrict,
+        filterLocality: filterLocality,
+        filterPoliceStation: filterPoliceStation,
+        filterVerified: filterVerified);
+    print('filtered list: $postsInAdvancedSearchFiltersApplied');
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => FilteredResultsPage()));
   }
 
   @override
@@ -65,7 +79,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                 focusColor: Colors.black,
                 hintText: "Search here",
                 hintStyle: TextStyle(fontSize: 20)),
-            initialValue: "",
+            initialValue: searchTitle,
             textInputAction: TextInputAction.search,
             onFieldSubmitted: (value) {
               searchTitle = value;
@@ -84,6 +98,9 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ExpansionTile(
+                  onExpansionChanged: (value) {
+                    if (value) searchFn();
+                  },
                   title: Text("Filter Results"),
                   children: [
                     //postcategory
@@ -198,20 +215,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
-                        onPressed: () {
-                          print('applyFilter()');
-
-                          applyFilters(
-                              filterCategory: filterCategory,
-                              filterDistrict: filterDistrict,
-                              filterLocality: filterLocality,
-                              filterPoliceStation: filterPoliceStation,
-                              filterVerified: filterVerified);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FilteredResultsPage()));
-                        },
+                        onPressed: searchWithFilter,
                         child: Text(
                           "Apply Filters",
                           style: TextStyle(color: Colors.white),

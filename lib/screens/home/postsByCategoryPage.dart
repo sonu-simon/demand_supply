@@ -82,12 +82,14 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                                   child: Container(
                                     height: MediaQuery.of(context).size.height,
                                     decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            image: NetworkImage(
-                                                postsInDistrictFilterByCategory[
-                                                        index]
-                                                    .imageUrl))),
+                                      image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        image: NetworkImage(
+                                            postsInDistrictFilterByCategory[
+                                                    index]
+                                                .imageUrl),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Align(
@@ -118,7 +120,7 @@ class _PostsByCategoryState extends State<PostsByCategory> {
                               child: Container(
                                 color: Colors.grey[200],
                                 child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,

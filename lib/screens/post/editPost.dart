@@ -24,6 +24,7 @@ class _EditPostState extends State<EditPost> {
   String title;
   String description;
   String category;
+  String _imageURL;
 
   void openGallery() async {
     final picker = ImagePicker();
@@ -37,6 +38,7 @@ class _EditPostState extends State<EditPost> {
   @override
   void initState() {
     super.initState();
+    _imageURL = widget.initialPostData.imageUrl;
   }
 
   @override
@@ -60,42 +62,51 @@ class _EditPostState extends State<EditPost> {
             splashColor: Colors.white,
             elevation: 0,
             onPressed: () {
-              if (_image == null ||
-                  title == null ||
-                  description == null ||
-                  category == null)
+              if (title == null || description == null || category == null)
                 showErrorDialog(context,
                     'All fields are mandatory! Please fill in the required details');
               else {
                 showLoading(context, true);
 
                 Post newPost;
-                uploadPostImage(
-                        currentUserID, widget.initialPostData.id, _image)
-                    .then((_imgSrc) {
-                  print('_imgSrc: $_imgSrc');
 
+                if (_image != null) {
+                  uploadPostImage(
+                          currentUserID, widget.initialPostData.id, _image)
+                      .then((_imgSrc) {
+                    print('_imgSrc: $_imgSrc');
+
+                    newPost = Post(
+                        id: widget.initialPostData.id,
+                        title: title,
+                        postDate: widget.initialPostData.postDate,
+                        category: category,
+                        imageUrl: _imgSrc,
+                        isVerified: false,
+                        description: description,
+                        userProfile: myProfile);
+
+                    editPostInFirebase(newPost);
+
+                    print('new post completed');
+                    showCompletedDialog(context, '  Post edited successfully!');
+                  });
+                } else {
                   newPost = Post(
                       id: widget.initialPostData.id,
                       title: title,
                       postDate: widget.initialPostData.postDate,
                       category: category,
-                      imageUrl: _imgSrc,
+                      imageUrl: _imageURL,
                       isVerified: false,
                       description: description,
                       userProfile: myProfile);
-                  // AdvancedSearchModel postToAddToUser = AdvancedSearchModel(
-                  //     newPost.title, newPost.postInPathCollection);
-                  // myProfile.addPosts(postToAddToUser);
-                  // print('myProfile.posts: ${myProfile.posts}');
-                  // postToFirebase(newPost);
+
                   editPostInFirebase(newPost);
 
                   print('new post completed');
-                  // showLoading(context, false);
-                  showCompletedDialog(
-                      context, '    New post created successfully!');
-                });
+                  showCompletedDialog(context, '  Post edited successfully!');
+                }
               }
             },
             child: Text(

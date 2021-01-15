@@ -120,12 +120,12 @@ Future advancedSearchForPostsByTitle(String qTitle) async {
       .get()
       .then((DocumentSnapshot documentSnapshot) {
     documentSnapshot.data().forEach((key, value) async {
-      if (key.toString().contains(qTitle)) {
+      if (key.toString().toLowerCase().contains(qTitle.toLowerCase())) {
         print('key: $key - value: $value');
         AdvancedSearchModel searchResult = AdvancedSearchModel(key, value);
         advancedSearchList.add(searchResult);
         postsInAdvancedSearch.add(await postByPostPath(value));
-        print(postsInAdvancedSearch);
+        print('before filters: $postsInAdvancedSearch');
       }
     });
   });
@@ -139,9 +139,11 @@ applyFilters(
     String filterVerified}) {
   print(postsInAdvancedSearch.length);
   print(filterDistrict);
+  print(filterVerified);
   postsInAdvancedSearchFiltersApplied = [];
   postsInAdvancedSearch.forEach((post) {
-    print(post.uDistrict);
+    print('districtFilter: ${post.uDistrict}');
+    print('verifiedFilter: ${post.uIsProfileVerified}');
     if ((filterLocality == post.uLocality || filterLocality == null) &&
         (filterPoliceStation == post.uPoliceStation ||
             filterPoliceStation == null) &&

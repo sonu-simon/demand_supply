@@ -20,7 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void initState() {
     super.initState();
-    retrieveListOfLocalities();
+    retrieveLocationRelatedLists();
   }
 
   @override

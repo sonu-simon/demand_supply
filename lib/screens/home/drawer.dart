@@ -64,15 +64,15 @@ class DrawerHomePage extends StatelessWidget {
             },
           ),
           Divider(),
-          //Setings
-          ListTile(
-            title: DrawerTitleText('Settings'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          Divider(),
+          // //Setings
+          // ListTile(
+          //   title: DrawerTitleText('Settings'),
+          //   onTap: () {
+          //     // Update the state of the app.
+          //     // ...
+          //   },
+          // ),
+          // Divider(),
 
           Visibility(
             visible: myProfileIsAdmin,

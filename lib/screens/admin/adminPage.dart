@@ -22,10 +22,10 @@ class _AdminScreenState extends State<AdminScreen> {
   void initState() {
     listofLocalititesModel = [];
     Future.delayed(Duration(seconds: 3))
-        .then((_) => retrieveListOfLocalities());
+        .then((_) => retrieveLocationRelatedLists());
     super.initState();
     policeProfileToFirebase.phoneNumber = "";
-    retrieveListOfLocalities().then((_) {
+    retrieveLocationRelatedLists().then((_) {
       setState(() {
         print(
             'setState after retrieve listOfLocalities() in giveAdminPrivsPage');
