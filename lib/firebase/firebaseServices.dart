@@ -1,3 +1,4 @@
+import 'package:demand_supply/firebase/firebaseData.dart';
 import 'package:demand_supply/screens/dialogs.dart';
 import 'package:demand_supply/screens/home/homePage.dart';
 import 'package:demand_supply/screens/login/loginPage.dart';
@@ -99,6 +100,7 @@ loginWithPhoneNumber(String phoneNumber, BuildContext context) async {
 }
 
 splashScreenLogic(BuildContext context) {
+  retrieveLocationRelatedLists();
   if (auth.currentUser == null)
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));

@@ -148,7 +148,10 @@ applyFilters(
         (filterPoliceStation == post.uPoliceStation ||
             filterPoliceStation == null) &&
         (filterDistrict == post.uDistrict || filterDistrict == null) &&
-        (filterVerified == post.uIsProfileVerified || filterVerified == null) &&
+        (filterVerified == post.uIsProfileVerified ||
+            filterVerified == null ||
+            (filterVerified == 'Pending' &&
+                post.uIsProfileVerified == 'Verified')) &&
         (filterCategory == post.category || filterCategory == null))
       postsInAdvancedSearchFiltersApplied.add(post);
   });

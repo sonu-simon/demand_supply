@@ -22,13 +22,15 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
   String filterVerified;
 
   searchFn() {
-    print('searchTitle: $searchTitle');
-    advancedSearchForPostsByTitle(searchTitle).then(
-      (_) => setState(() {
-        print('advancedSearchList: $advancedSearchList');
-        print('search completed!');
-      }),
-    );
+    if (searchTitle != null) {
+      print('searchTitle: $searchTitle');
+      advancedSearchForPostsByTitle(searchTitle).then(
+        (_) => setState(() {
+          print('advancedSearchList: $advancedSearchList');
+          print('search completed!');
+        }),
+      );
+    }
   }
 
   searchWithFilter() {
@@ -47,7 +49,7 @@ class _AdvSearchPageState extends State<AdvSearchPage> {
   void initState() {
     super.initState();
     advancedSearchList = [];
-    searchTitle = "";
+    // searchTitle = "";
     // advancedSearchByFilters();
   }
 

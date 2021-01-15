@@ -212,6 +212,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     Post postToShow = await postByPostPath(
                                         widget.passedProfile.posts[index]
                                             .postPath);
+                                    showLoading(context, false);
 
                                     Navigator.push(
                                         context,
