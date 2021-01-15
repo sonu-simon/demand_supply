@@ -71,7 +71,7 @@ Future retrieveListOfDistricts() async {
       .collection('listOfDistricts')
       .doc('districtList')
       .get();
-  listOfDistricts = List.from(listOfLocalitiesSnapshot.data()['localities']);
+  listOfDistricts = List.from(listOfLocalitiesSnapshot.data()['districts']);
   print(listOfLocalities);
 }
 
@@ -81,6 +81,6 @@ Future retrieveListOfPoliceStations() async {
       .doc('policeStationList')
       .get();
   listOfPoliceStaions =
-      List.from(listOfLocalitiesSnapshot.data()['localities']);
+      List.from(listOfLocalitiesSnapshot.data()['policeStations']);
   print(listOfLocalities);
 }

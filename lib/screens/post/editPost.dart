@@ -39,6 +39,9 @@ class _EditPostState extends State<EditPost> {
   void initState() {
     super.initState();
     _imageURL = widget.initialPostData.imageUrl;
+    category = widget.initialPostData.category;
+    description = widget.initialPostData.description;
+    title = widget.initialPostData.title;
   }
 
   @override

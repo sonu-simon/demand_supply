@@ -36,8 +36,10 @@ showCompletedDialog(BuildContext context, String msg) {
       ),
       actions: [
         FlatButton(
-          onPressed: () => Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage())),
+          onPressed: () => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+              (Route<dynamic> route) => route is HomePage),
           child: Text('PROCEED'),
         ),
       ],
