@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "530002960659",
+    "project_id": "farmcare-36556",
+    "storage_bucket": "farmcare-36556.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530002960659:android:9321296ba62746e385fae6",
+        "android_client_info": {
+          "package_name": "com.example.vaiga_farmcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530002960659-ng5s0viscno9ciep8cj5effkhcv3fdsc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vaiga_farmcare",
+            "certificate_hash": "d81c35f866d74b5152327e62d615f561a3fa845b"
+          }
+        },
+        {
+          "client_id": "530002960659-v11elh7cjmpcpfv75itkbiu2uhk4uuch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5_VuqJbPTcrLHfnOazQe6q6HNTHm2xHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530002960659-v11elh7cjmpcpfv75itkbiu2uhk4uuch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
